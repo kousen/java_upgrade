@@ -21,8 +21,8 @@ public class MemberDAOTests {
     @Test
     public void startWithS_sortByAlpha() {
         List<Member> members = allMembers.stream()
-                .filter(m -> m.getName().startsWith("S"))
-                .sorted()
+                // filter
+                // sort
                 .collect(Collectors.toList());
 
         members.forEach(System.out::println);
@@ -33,12 +33,6 @@ public class MemberDAOTests {
      */
     @Test
     public void starks_alphaByName() {
-        List<Member> members = allMembers.stream()
-                .filter(member -> member.getHouse().getName().equals("Stark"))
-                .sorted(Comparator.comparing(Member::getName))
-                .collect(Collectors.toList());
-
-        members.forEach(System.out::println);
     }
 
     /**
@@ -46,12 +40,6 @@ public class MemberDAOTests {
      */
     @Test
     public void salaryLessThan_sortByHouseName() {
-        List<Member> members = allMembers.stream()
-                .filter(member -> member.getSalary() < 80000)
-                .sorted(Comparator.comparing(Member::getHouseName))
-                .collect(Collectors.toList());
-
-        members.forEach(System.out::println);
     }
 
     /**
@@ -59,12 +47,6 @@ public class MemberDAOTests {
      */
     @Test
     public void sortByHouseName_sortByNameDesc() {
-        List<Member> members = allMembers.stream()
-                .sorted(Comparator.comparing(Member::getHouseName)
-                        .thenComparing(Member::getName))
-                .collect(Collectors.toList());
-
-        members.forEach(System.out::println);
     }
 
     /**
@@ -72,12 +54,6 @@ public class MemberDAOTests {
      */
     @Test
     public void starksByDob() {
-        List<Member> starks = allMembers.stream()
-                .filter(member -> member.getHouseName().equals("Stark"))
-                .sorted(Comparator.comparing(Member::getDob))
-                .collect(Collectors.toList());
-
-        starks.forEach(System.out::println);
     }
 
     /**
@@ -85,12 +61,6 @@ public class MemberDAOTests {
      */
     @Test
     public void kingsByNameDesc() {
-        List<Member> members = allMembers.stream()
-                .filter(member -> member.getTitle() == Title.KING)
-                .sorted(Comparator.comparing(Member::getName).reversed())
-                .collect(Collectors.toList());
-
-        members.forEach(System.out::println);
     }
 
     /**
@@ -98,13 +68,6 @@ public class MemberDAOTests {
      */
     @Test
     public void averageSalary() {
-        OptionalDouble optionalAverage = allMembers.stream()
-                .mapToDouble(Member::getSalary)
-                .average();
-
-        System.out.println(
-                NumberFormat.getCurrencyInstance().format(
-                        optionalAverage.orElse(0.0)));
     }
 
     /**
@@ -113,13 +76,6 @@ public class MemberDAOTests {
      */
     @Test
     public void namesSorted() {
-        List<String> names = allMembers.stream()
-                .filter(member -> member.getHouseName().equals("Stark"))
-                .map(Member::getName)
-                .sorted()
-                .collect(Collectors.toList());
-
-        names.forEach(System.out::println);
     }
 
     /**
@@ -127,10 +83,6 @@ public class MemberDAOTests {
      */
     @Test
     public void salariesGT100k() {
-        boolean b = allMembers.stream()
-                .allMatch(member -> member.getSalary() > 10000.0);
-
-        assertFalse(b);
     }
 
     /**
@@ -138,10 +90,6 @@ public class MemberDAOTests {
      */
     @Test
     public void greyjoys() {
-        boolean b = allMembers.stream()
-                .anyMatch(member -> member.getHouseName().equals("Greyjoy"));
-
-        assertFalse(b);
     }
 
     /**
@@ -149,11 +97,6 @@ public class MemberDAOTests {
      */
     @Test
     public void howManyLannisters() {
-        long lannisters = allMembers.stream()
-                .filter(member -> member.getHouseName().equals("Lannister"))
-                .count();
-
-        System.out.printf("There are %d members of House Lannister%n", lannisters);
     }
 
     /**
@@ -161,11 +104,6 @@ public class MemberDAOTests {
      */
     @Test
     public void threeLannisters() {
-        allMembers.stream()
-                .filter(member -> member.getHouseName().equals("Lannister"))
-                .limit(3)
-                .map(Member::getName)
-                .forEachOrdered(System.out::println);
     }
 
     /**
@@ -173,12 +111,6 @@ public class MemberDAOTests {
      */
     @Test
     public void lannisterNames() {
-        String names = allMembers.stream()
-                .filter(member -> member.getHouseName().equals("Lannister"))
-                .map(Member::getName)
-                .collect(Collectors.joining(","));
-
-        System.out.println(names);
     }
 
     /**
@@ -186,10 +118,6 @@ public class MemberDAOTests {
      */
     @Test
     public void highestSalary() {
-        Optional<Member> optional = allMembers.stream()
-                .max(Comparator.comparingDouble(Member::getSalary));
-
-        System.out.println(optional.orElse(null));
     }
 
     /**
@@ -198,15 +126,6 @@ public class MemberDAOTests {
      */
     @Test
     public void menVsWomen() {
-        Map<Boolean, List<Member>> map = allMembers.stream()
-                .collect(Collectors.partitioningBy(member ->
-                        member.getTitle() == Title.QUEEN ||
-                                member.getTitle() == Title.LADY));
-
-        map.forEach((k, v) -> {
-            System.out.println(k);
-            v.forEach(System.out::println);
-        });
     }
 
     /**
@@ -214,13 +133,6 @@ public class MemberDAOTests {
      */
     @Test
     public void membersByHouse() {
-        Map<House, List<Member>> map = allMembers.stream()
-                .collect(Collectors.groupingBy(Member::getHouse));
-
-        map.forEach((k, v) -> {
-            System.out.println(k);
-            v.forEach(System.out::println);
-        });
     }
 
     /**
@@ -229,11 +141,6 @@ public class MemberDAOTests {
      */
     @Test
     public void numberOfMembersByHouse() {
-        Map<House, Long> map = allMembers.stream()
-                .collect(Collectors.groupingBy(Member::getHouse,
-                        Collectors.counting()));
-
-        map.forEach((k, v) -> System.out.println(k + " has " + v + " members"));
     }
 
     /**
@@ -241,17 +148,5 @@ public class MemberDAOTests {
      */
     @Test
     public void houseStats() {
-        Map<House, DoubleSummaryStatistics> map = allMembers.stream()
-                .collect(Collectors.groupingBy(Member::getHouse,
-                        Collectors.summarizingDouble(Member::getSalary)));
-
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        System.out.printf("%13s %14s %15s %15s%n", "House", "Max", "Min", "Ave");
-        map.forEach((k, v) ->
-                System.out.printf("%15s %15s %15s %15s%n", k,
-                        nf.format(v.getMax()),
-                        nf.format(v.getMin()),
-                        nf.format(v.getAverage()))
-        );
     }
 }
