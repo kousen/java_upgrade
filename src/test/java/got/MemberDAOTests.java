@@ -1,16 +1,10 @@
-package streams;
+package got;
 
-import got.House;
-import got.InMemoryMemberDAO;
-import got.Member;
-import got.Title;
 import org.junit.Test;
 
-import java.text.NumberFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertFalse;
 
 public class MemberDAOTests {
     private Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
