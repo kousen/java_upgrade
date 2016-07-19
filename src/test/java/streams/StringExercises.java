@@ -32,28 +32,22 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_lambda() {
-        strings.sort((s1, s2) -> s1.length() - s2.length());
     }
 
     @Test
     public void stringLengthSort_methodCall() {
-        strings.sort((s1, s2) -> compareStrings(s1, s2));
     }
 
     @Test
     public void stringLengthSort_methodRef() {
-        strings.sort(StringExercises::compareStrings);
     }
 
     @Test
     public void stringLengthSort_comparingInt() {
-        strings.sort(Comparator.comparingInt(String::length));
     }
 
 
     private static int compareStrings(String s1, String s2) {
         return s1.length() - s2.length();
     }
-
-
 }
