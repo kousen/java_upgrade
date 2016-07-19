@@ -1,9 +1,5 @@
-package streams;
+package got;
 
-import got.House;
-import got.InMemoryMemberDAO;
-import got.Member;
-import got.Title;
 import org.junit.Test;
 
 import java.text.NumberFormat;
