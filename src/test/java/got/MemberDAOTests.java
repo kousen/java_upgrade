@@ -1,4 +1,4 @@
-package streams;
+package got;
 
 import got.House;
 import got.InMemoryMemberDAO;
