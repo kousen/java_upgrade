@@ -1,8 +1,5 @@
 package uberconf;
 
-/**
- * Created by Ken Kousen on 7/19/16.
- */
 public class UseRunnable {
 
     private static void sayHello() {
