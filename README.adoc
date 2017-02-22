@@ -3,3 +3,5 @@ Code and exercises for a Java 8 upgrade course
 Ken Kousen
 
 July, 2016
+
+Updated February, 2017
