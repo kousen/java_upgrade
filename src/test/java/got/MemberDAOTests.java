@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertFalse;
