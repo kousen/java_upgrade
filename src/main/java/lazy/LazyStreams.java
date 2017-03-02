@@ -1,5 +1,6 @@
 package lazy;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -17,12 +18,13 @@ public class LazyStreams {
     }
 
     public static void main(String[] args) {
-        // Find first even double between 200 and 400 divisble by 3
+        // multiply numbers between 100 and 200 by 2, then find first n divisible by 3
         int firstEvenDoubleDivBy3 = IntStream.range(100, 200)
                 .map(n -> n * 2)
                 .filter(n -> n % 3 == 0)
                 .findFirst().orElse(0);
         System.out.println(firstEvenDoubleDivBy3);
+
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)

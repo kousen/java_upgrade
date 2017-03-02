@@ -13,6 +13,12 @@ public class Golfer {
         this.last = last;
     }
 
+    public Golfer(Golfer golfer) {
+        this.score = golfer.score;
+        this.first = golfer.first;
+        this.last = golfer.last;
+    }
+
     public int getScore() {
         return score;
     }
