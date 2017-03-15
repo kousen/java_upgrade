@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class StringExercises {
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private List<String> strings = new ArrayList<>();
 
     @Before
@@ -35,6 +36,7 @@ public class StringExercises {
         strings.sort((s1, s2) -> s1.length() - s2.length());
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     @Test
     public void stringLengthSort_methodCall() {
         strings.sort((s1, s2) -> compareStrings(s1, s2));
