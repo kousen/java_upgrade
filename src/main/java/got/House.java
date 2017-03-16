@@ -1,8 +1,5 @@
 package got;
 
-/**
- * Created by Ken Kousen on 7/18/16.
- */
 public class House {
     private String name;
 
