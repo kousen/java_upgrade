@@ -3,6 +3,7 @@ package lambdas;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class FilenameFilterDemo {
@@ -26,10 +27,17 @@ public class FilenameFilterDemo {
         fileNames = directory.list((dir, name) -> name.endsWith(".java"));
         System.out.println(Arrays.asList(fileNames));
 
+
+        Consumer<String> consumer = System.out::println;
         Arrays.stream(fileNames)
-                .forEach(s -> System.out.println("The current strings is " + s));
+            .forEach(consumer);
+        Arrays.stream(fileNames)
+                .forEach(s -> System.out.println("The current filename is " + s));
 
         Arrays.stream(fileNames)
                 .forEach(System.out::println);
+
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(System.out::println);
     }
 }

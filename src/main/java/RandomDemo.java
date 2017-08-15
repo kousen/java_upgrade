@@ -17,6 +17,12 @@ public class RandomDemo {
                 .sum();
         System.out.println(sum);
 
+        sum = r.ints(10)
+                .filter(n -> n % 2 == 0)
+                .map(n -> n * 2)
+                .sum();
+        System.out.println(sum);
+
         System.out.println("Filtering integers:");
         OptionalInt first = IntStream.generate(() -> r.nextInt(10))
                 .peek(System.out::println)

@@ -13,7 +13,7 @@ public class LazyStreams {
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside divByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d%n", n);
         return n % 3 == 0;
     }
 
@@ -32,5 +32,9 @@ public class LazyStreams {
                 .filter(LazyStreams::modByThree)
                 .findFirst().orElse(0);
         System.out.printf("First even divisible by 3 is %d%n", firstEvenDoubleDivBy3);
+
+        IntStream intStream = IntStream.rangeClosed(100, 200);
+        System.out.println(intStream.findFirst());
+//        intStream.findFirst(); // throws exception; stream is closed
     }
 }
