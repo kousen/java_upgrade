@@ -111,7 +111,7 @@ public class FunctionalInterfacesTest {
     @Test
     public void filterWithPredicate() throws Exception {
         IntStream.of(3, 1, 4, 1, 5, 9)
-                .filter(n -> true)  // accept even nums only
+                .filter(n -> n % 2 == 0)  // accept even nums only
                 .forEach(n -> assertTrue(n % 2 == 0));
     }
 }

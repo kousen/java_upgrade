@@ -8,10 +8,10 @@ public class SummarizingDemo {
                 .summaryStatistics();
 
         System.out.println(stats);
-        System.out.println(stats.getCount());
-        System.out.println(stats.getMin());
-        System.out.println(stats.getAverage());
-        System.out.println(stats.getMax());
-        System.out.println(stats.getSum());
+        System.out.println("Count: " + stats.getCount());
+        System.out.println("Min:   " + stats.getMin());
+        System.out.println("Ave:   " + stats.getAverage());
+        System.out.println("Max:   " + stats.getMax());
+        System.out.println("Sum:   " + stats.getSum());
     }
 }
