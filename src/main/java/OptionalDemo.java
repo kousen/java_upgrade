@@ -7,16 +7,17 @@ import java.util.stream.Stream;
 public class OptionalDemo {
     public static void main(String[] args) {
         Optional<Integer> first = Stream.of(3, 1, 4, 1, 5, 9)
-                .filter(n -> n > 10)
+                //.filter(n -> n > 10)
                 .findFirst();
 
         System.out.println(first);
 
-        // System.out.println(first.isPresent() ? (int) first.get() : 0);
+        System.out.println(first.orElse(0));
 
         int defaultValue = 0;
         System.out.println(first.orElse(defaultValue));
         System.out.println(first.orElseGet(() -> defaultValue));
+        System.out.println(first.orElseThrow(() -> new IllegalArgumentException("Nope")));
         first.ifPresent(System.out::println);
 
 

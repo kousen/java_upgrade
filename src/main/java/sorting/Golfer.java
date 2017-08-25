@@ -23,10 +23,6 @@ public class Golfer {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public String getFirst() {
         return first;
     }
