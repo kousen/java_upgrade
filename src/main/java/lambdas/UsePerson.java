@@ -1,5 +1,6 @@
 package lambdas;
 
+import java.util.AbstractCollection;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,6 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new);
 
-        System.out.println(peopleArray);
+        System.out.println(Arrays.toString(peopleArray));
     }
 }
