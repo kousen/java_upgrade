@@ -12,7 +12,7 @@ public class OptionalDemo {
 
         System.out.println(first);
 
-        // System.out.println(first.isPresent() ? (int) first.get() : 0);
+        System.out.println(first.isPresent() ? (int) first.get() : 0);
 
         int defaultValue = 0;
         System.out.println(first.orElse(defaultValue));
@@ -22,12 +22,13 @@ public class OptionalDemo {
 
         List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
         Optional<String> s = strings.stream()
+                .filter(str -> str.length() > 1)
                 .findFirst();
 
         System.out.println(s.orElse("No string found; legal values are: " + strings));
         System.out.println(s.orElseGet(() -> "No string found; legal values are: " + strings));
-        System.out.println(s.orElseThrow(IllegalArgumentException::new)); // default constructor
-        System.out.println(s.orElseThrow(() -> new IllegalArgumentException("Not available")));
+//        System.out.println(s.orElseThrow(IllegalArgumentException::new)); // default constructor
+//        System.out.println(s.orElseThrow(() -> new IllegalArgumentException("Not available")));
         s.ifPresent(System.out::println);
     }
 }

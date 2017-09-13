@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
@@ -105,5 +106,15 @@ public class StringExercises {
         myStrings.stream()
                 .filter(nonNull.and(evens))
                 .forEach(System.out::println);
+    }
+
+    @Test
+    public void debuggingDemo() {
+        List<String> evens = Stream.of("this is a list of strings".split("\\s"))
+                .peek(System.out::println)
+                .filter(s -> s.length() % 2 == 0)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+        System.out.println(evens);
     }
 }

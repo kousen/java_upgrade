@@ -1,7 +1,8 @@
 package lazy;
 
-import java.util.Optional;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
@@ -13,7 +14,7 @@ public class LazyStreams {
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside divByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d%n", n);
         return n % 3 == 0;
     }
 
@@ -27,10 +28,25 @@ public class LazyStreams {
 
 
         // Demonstrate laziness using print statements
-        firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
+        OptionalInt first = IntStream.range(100, 2_000_000)
                 .map(LazyStreams::multByTwo)
                 .filter(LazyStreams::modByThree)
-                .findFirst().orElse(0);
-        System.out.printf("First even divisible by 3 is %d%n", firstEvenDoubleDivBy3);
+                .findFirst();
+        System.out.printf("First even divisible by 3 is %s%n", first);
+
+        List<Integer> evens = IntStream.range(1, 10)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .boxed()
+                .collect(Collectors.toList());
+        System.out.println(evens);
+
+        List<Integer> values = Collections.synchronizedList(new ArrayList<>());
+        IntStream.range(1, 10)
+                .parallel()
+                .filter(i -> i % 2 == 0)
+                .boxed()
+                .forEach(values::add);
+        System.out.println(values);
     }
 }

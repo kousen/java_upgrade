@@ -10,8 +10,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Comparator.comparingInt;
+import static org.junit.Assert.assertTrue;
 
 public class SortLocalDate {
+    private boolean isSorted(List<LocalDate> dates) {
+        dates.stream()
+                .reduce((prev, curr) -> {
+                    // System.out.println("prev=" + prev + ", curr=" + curr);
+                    assertTrue(prev.isBefore(curr) || prev.equals(curr));
+                    return curr;
+                });
+        return true;
+    }
+
+
     private List<LocalDate> localDates = Arrays.asList(
             LocalDate.of(2017, Month.JANUARY, 12),
             LocalDate.of(2017, Month.DECEMBER, 1),
@@ -24,6 +36,7 @@ public class SortLocalDate {
     public void sortDatesNaturalSort() {
         Collections.sort(localDates);
         System.out.println(localDates);
+        isSorted(localDates);
     }
 
     @Test
