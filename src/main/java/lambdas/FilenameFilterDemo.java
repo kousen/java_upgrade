@@ -27,7 +27,7 @@ public class FilenameFilterDemo {
         System.out.println(Arrays.asList(fileNames));
 
         Arrays.stream(fileNames)
-                .forEach(s -> System.out.println("The current strings is " + s));
+                .forEach(s -> System.out.println("The current filename is " + s));
 
         Arrays.stream(fileNames)
                 .forEach(System.out::println);
