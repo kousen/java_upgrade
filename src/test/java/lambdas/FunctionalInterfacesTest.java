@@ -59,7 +59,7 @@ public class FunctionalInterfacesTest {
     @Test
     public void implementSupplierUsingMethodReference() throws Exception {
         // Create a Supplier<Double> that calls Math.random()
-        Supplier<Double> supplier = Math::random;
+        Supplier<Double> supplier = () -> Math.random();
         assertTrue(supplier.get() >= 0.0);
         assertTrue(supplier.get() <= 1.0);
 
