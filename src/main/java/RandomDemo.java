@@ -1,5 +1,5 @@
-import java.util.OptionalInt;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomDemo {
@@ -22,6 +22,24 @@ public class RandomDemo {
                 .peek(System.out::println)
                 .filter(n -> n > 7)
                 .findFirst();
+
+        List<Integer> collect = IntStream.range(1, 10)
+                .filter(n -> n % 2 == 0)
+                .boxed()
+                .collect(Collectors.toList());
+        System.out.println(collect);
+
+        collect = IntStream.range(1, 10)
+                .filter(n -> n % 2 == 0)
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        System.out.println(collect);
+
+        int[] ints = IntStream.range(1, 10)
+                .filter(n -> n % 2 == 0)
+                .toArray();
+        Arrays.stream(ints)
+                .forEach(System.out::println);
+        System.out.println(Arrays.toString(ints));
 
     }
 }

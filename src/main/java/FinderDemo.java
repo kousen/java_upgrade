@@ -1,19 +1,31 @@
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class FinderDemo {
     public static void main(String[] args) {
         List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
-        HashSet<String> stringSet = new HashSet<>(strings);
 
         Optional<String> first = strings.stream()
-                .filter(s -> {
-                    System.out.println(Thread.currentThread().getName() + " with " + s);
-                    return s.length() == 2;
-                })
+                .filter(s -> s.length() % 2 == 0)
+                .sorted()
                 .findFirst();
         System.out.println(first);
+        first.ifPresent(s -> System.out.println("The contained string is " + s));
+
+        first = strings.stream()
+                .filter(s -> s.length() > 10)
+                .findFirst();
+        System.out.println(first);
+        first.ifPresent(System.out::println);
+
+        String str = strings.stream()
+                .filter(s -> s.length() % 10 == 0)
+                .findFirst().orElse("[none]");
+        System.out.println("The returned string is " + str);
+
+        String max = strings.stream()
+                // .filter(s -> s.length() > 10)
+                .max(Comparator.comparingInt(String::length)).orElse("(no elements in stream)");
+        System.out.println("The max element is " + max);
+
     }
 }
