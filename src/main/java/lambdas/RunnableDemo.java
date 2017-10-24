@@ -15,8 +15,11 @@ public class RunnableDemo {
         new Thread(() -> System.out.println("Inside expression lambda")).start();
 
         new Thread(() -> {
-            System.out.println("Inside expression lambda");
+            System.out.println("Inside block lambda");
         }).start();
+
+        Runnable runnable = () -> System.out.println("Inside a lambda assigned to a variable");
+        new Thread(runnable).start();
 
         new Thread(System.out::println).start();
 

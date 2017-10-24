@@ -2,13 +2,15 @@ package lambdas;
 
 import org.junit.Test;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
+import java.util.logging.Logger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FunctionalInterfacesTest {
 
@@ -26,35 +28,51 @@ public class FunctionalInterfacesTest {
     @SuppressWarnings("Convert2MethodRef")
     @Test
     public void implementConsumerUsingLambda() throws Exception {
+        Consumer<String> consumer = s -> System.out.println(s);
+        consumer.accept("Hello, World!");
     }
 
     @Test
     public void implementConsumerUsingMethodReference() throws Exception {
+        Consumer<String> consumer = System.out::println;
+        consumer.accept("Hello, World!");
     }
 
     @Test
     public void implementSupplierUsingAnonInnerClass() throws Exception {
+        Supplier<String> supplier = new Supplier<String>() {
+            @Override
+            public String get() {
+                return "Hello";
+            }
+        };
 
-        //        assertEquals("Hello", supplier.get());
+        assertEquals("Hello", supplier.get());
     }
 
     @Test
     public void implementSupplierUsingLambda() throws Exception {
+        Supplier<String> supplier = () -> "Hello";
+        assertEquals("Hello", supplier.get());
 
-//        assertEquals("Hello", supplier.get());
+        Logger logger = Logger.getLogger(FunctionalInterfacesTest.class.getName());
+        logger.info("The supplied value is Hello");
+        logger.info(() -> "The supplied value is Hello");
     }
 
     @Test
     public void implementSupplierUsingMethodReference() throws Exception {
         // Create a Supplier<Double> that calls Math.random()
+        Supplier<Double> supplier = Math::random;  // () -> Math.random()
 
-//        assertTrue(supplier.get() >= 0.0);
-//        assertTrue(supplier.get() <= 1.0);
+        assertTrue(supplier.get() >= 0.0);
+        assertTrue(supplier.get() < 1.0);
 
         // Create a DoubleSupplier that does the same
+        DoubleSupplier doubleSupplier = Math::random;
 
-//        assertTrue(doubleSupplier.getAsDouble() >= 0.0);
-//        assertTrue(doubleSupplier.getAsDouble() <= 1.0);
+        assertTrue(doubleSupplier.getAsDouble() >= 0.0);
+        assertTrue(doubleSupplier.getAsDouble() < 1.0);
     }
 
     @Test
