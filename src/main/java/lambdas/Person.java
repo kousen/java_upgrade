@@ -34,6 +34,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("Person(%s)", name);
+        return name;
     }
 }

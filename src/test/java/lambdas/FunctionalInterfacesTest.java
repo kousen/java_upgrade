@@ -2,12 +2,12 @@ package lambdas;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -75,6 +75,7 @@ public class FunctionalInterfacesTest {
         assertTrue(doubleSupplier.getAsDouble() < 1.0);
     }
 
+    @SuppressWarnings("SimplifyStreamApiCallChains")
     @Test
     public void constructorReference() throws Exception {
         List<String> stringList = Arrays.asList("a b c b c d".split(" "));
@@ -82,15 +83,19 @@ public class FunctionalInterfacesTest {
         assertEquals(6, stringList.size());
 
         // Add the strings to a Set
+        Set<String> strings = stringList.stream()
+                .collect(Collectors.toSet());
 
-//        assertEquals(4, strings.size());
-//        assertEquals(HashSet.class, strings.getClass());
+        assertEquals(4, strings.size());
+        assertEquals(HashSet.class, strings.getClass());
 
         // Add the strings to a TreeSet
+        SortedSet<String> sortedStrings = stringList.stream()
+                .collect(Collectors.toCollection(TreeSet::new));
 
-//        assertEquals(4, sortedStrings.size());
-//        assertEquals(TreeSet.class, sortedStrings.getClass());
-//        assertEquals("a", sortedStrings.first());
+        assertEquals(4, sortedStrings.size());
+        assertEquals(TreeSet.class, sortedStrings.getClass());
+        assertEquals("a", sortedStrings.first());
 
     }
 

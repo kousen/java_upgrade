@@ -13,7 +13,7 @@ public class LazyStreams {
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside divByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d%n", n);
         return n % 3 == 0;
     }
 

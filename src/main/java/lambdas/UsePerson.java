@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UsePerson {
     @SuppressWarnings({"UnusedAssignment", "Convert2MethodRef"})
@@ -23,8 +24,9 @@ public class UsePerson {
 
         System.out.println(people);
 
-        names.stream()
-                .map(name -> new Person(name)); // no data is actually processed
+        Stream<Person> personStream = names.stream()
+                .map(name -> new Person(name));// no data is actually processed
+        System.out.println(personStream);
 
         people = names.stream()
                 .map(Person::new)
@@ -36,6 +38,6 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new);
 
-        System.out.println(peopleArray);
+        System.out.println(Arrays.asList(peopleArray));
     }
 }
