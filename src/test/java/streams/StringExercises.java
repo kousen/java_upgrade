@@ -3,7 +3,10 @@ package streams;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.ToIntBiFunction;
+import java.util.stream.Collectors;
 
 @SuppressWarnings({"Java8ListSort", "ComparatorCombinators", "Convert2MethodRef"})
 public class StringExercises {
@@ -25,11 +28,14 @@ public class StringExercises {
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator
 
+        Collections.sort(strings, (s1, s2) -> s1.length() - s2.length());
         System.out.println(strings);
 
         // Use the "sorted" method on Stream
-
-//        System.out.println(sorted);
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> s2.length() - s1.length())
+                .collect(Collectors.toList());
+        System.out.println(sorted);
         System.out.println(strings);
     }
 
@@ -39,43 +45,67 @@ public class StringExercises {
 
     @Test  // Use a lambda that calls 'compareStrings' directly
     public void stringLengthSort_methodCall() {
-
-//        System.out.println(sorted);
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> compareStrings(s1, s2))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use a method ref to 'compareStrings'
     public void stringLengthSort_methodRef() {
-
-//        System.out.println(sorted);
+        List<String> sorted = strings.stream()
+                .sorted(StringExercises::compareStrings)
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
-
-//        System.out.println(sorted);
+        List<String> sorted = strings.stream()
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
+        LinkedList<String> collected = strings.stream()
+                .filter(s -> s.length() % 2 == 0)
+                .collect(Collectors.toCollection(LinkedList::new));
 
-//        System.out.println(collected);
-//        System.out.println(collected.getClass().getName());
+        System.out.println(collected);
+        System.out.println(collected.getClass().getName());
+        collected.forEach(System.out::println);
+
 //        collected.forEach(System.out::println);
+//        collected.stream().forEach(System.out::println);
 
         // Add the strings to a map of string to length
+        Map<String, Integer> map = strings.stream()
+                .collect(Collectors.toMap(s -> s, String::length));
 
-//        map.forEach((word,size) -> System.out.printf("The size of %s is %d%n", word, size));
+        map.forEach((word,size) -> System.out.printf("The size of %s is %d%n", word, size));
 
         List<String> myStrings = Arrays.asList("this", "is", null, "a", null,
                 "list", "of", null, "strings");
 
         // Filter out nulls, then print even-length strings
+        Map<String, Integer> map1 = myStrings.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toMap(Function.identity(), String::length));
+        map1.forEach((k,v) -> System.out.println(k + " : " + v));
 
         Predicate<String> nonNull = Objects::nonNull;
         Predicate<String> evens = s -> s.length() % 2 == 0;
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        myStrings.stream()
+                .filter(nonNull.and(evens))  // composition
+                // .filter(s -> s != null && s.length() % 2 == 0)
+                /// or .filter(Objects::nonNull).filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
     }
 }
