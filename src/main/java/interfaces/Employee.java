@@ -5,7 +5,7 @@ public interface Employee {
 
     String getLast();
 
-    void doWork();
+    void convertCaffeineToCodeForMoney();
 
     default String getName() {
         return String.format("%s %s", getFirst(), getLast());
