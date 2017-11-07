@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class FunctionalInterfacesTest {
 
     @Test
-    public void implementConsumerUsingAnonInnerClass() throws Exception {
+    public void implementConsumerUsingAnonInnerClass() {
         Consumer<String> consumer = new Consumer<String>() {
             @Override
             public void accept(String s) {
@@ -25,27 +25,37 @@ public class FunctionalInterfacesTest {
 
     @SuppressWarnings("Convert2MethodRef")
     @Test
-    public void implementConsumerUsingLambda() throws Exception {
+    public void implementConsumerUsingLambda() {
+        Consumer<String> consumer = s -> System.out.println(s);
+        consumer.accept("Hello, World!");
     }
 
     @Test
-    public void implementConsumerUsingMethodReference() throws Exception {
+    public void implementConsumerUsingMethodReference() {
+        Consumer<String> printer = System.out::println;
+        printer.accept("Hello, World!");
     }
 
     @Test
-    public void implementSupplierUsingAnonInnerClass() throws Exception {
+    public void implementSupplierUsingAnonInnerClass() {
+        Supplier<String> supplier = new Supplier<String>() {
+            @Override
+            public String get() {
+                return "Hello";
+            }
+        };
 
-        //        assertEquals("Hello", supplier.get());
+        assertEquals("Hello", supplier.get());
     }
 
     @Test
-    public void implementSupplierUsingLambda() throws Exception {
+    public void implementSupplierUsingLambda() {
 
 //        assertEquals("Hello", supplier.get());
     }
 
     @Test
-    public void implementSupplierUsingMethodReference() throws Exception {
+    public void implementSupplierUsingMethodReference() {
         // Create a Supplier<Double> that calls Math.random()
 
 //        assertTrue(supplier.get() >= 0.0);
@@ -58,7 +68,7 @@ public class FunctionalInterfacesTest {
     }
 
     @Test
-    public void constructorReference() throws Exception {
+    public void constructorReference() {
         List<String> stringList = Arrays.asList("a b c b c d".split(" "));
 
         assertEquals(6, stringList.size());
@@ -77,7 +87,7 @@ public class FunctionalInterfacesTest {
     }
 
     @Test
-    public void filterWithPredicate() throws Exception {
+    public void filterWithPredicate() {
 //        IntStream.of(3, 1, 4, 1, 5, 9)
 //                .filter(n -> true)  // accept even nums only
 //                .forEach(n -> assertTrue(n % 2 == 0));

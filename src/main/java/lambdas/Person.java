@@ -1,6 +1,6 @@
 package lambdas;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
 
     public Person() {}
@@ -35,5 +35,10 @@ public class Person {
     @Override
     public String toString() {
         return String.format("Person(%s)", name);
+    }
+
+    @Override
+    public int compareTo(Person p) {
+        return name.compareTo(p.name);
     }
 }
