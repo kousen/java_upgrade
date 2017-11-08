@@ -7,12 +7,13 @@ import java.util.stream.Stream;
 public class OptionalDemo {
     public static void main(String[] args) {
         Optional<Integer> first = Stream.of(3, 1, 4, 1, 5, 9)
-                .filter(n -> n > 10)
-                .findFirst();
+                //.filter(n -> n > 10)
+                //.parallel()  // Still returns 3 because of encounter order
+                .findFirst();  // findAny --> returns any value (for parallel)
 
         System.out.println(first);
 
-        // System.out.println(first.isPresent() ? (int) first.get() : 0);
+        System.out.println(first.isPresent() ? (int) first.get() : 0);
 
         int defaultValue = 0;
         System.out.println(first.orElse(defaultValue));
