@@ -15,7 +15,7 @@ public class RunnableDemo {
         new Thread(() -> System.out.println("Inside expression lambda")).start();
 
         new Thread(() -> {
-            System.out.println("Inside expression lambda");
+            System.out.println("Inside block lambda");
         }).start();
 
         new Thread(System.out::println).start();
