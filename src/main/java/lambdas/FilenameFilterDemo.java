@@ -26,10 +26,18 @@ public class FilenameFilterDemo {
         fileNames = directory.list((dir, name) -> name.endsWith(".java"));
         System.out.println(Arrays.asList(fileNames));
 
-        Arrays.stream(fileNames)
+        Arrays.stream(fileNames)  // Stream<String>
                 .forEach(s -> System.out.println("The current strings is " + s));
 
         Arrays.stream(fileNames)
                 .forEach(System.out::println);
+
+        Arrays.stream(directory.list())
+              .filter(s -> s.endsWith("java"))
+              .forEach(System.out::println);
+
+        Consumer<String> printer = System.out::println;
+        Arrays.stream(fileNames)
+              .forEach(printer);
     }
 }
