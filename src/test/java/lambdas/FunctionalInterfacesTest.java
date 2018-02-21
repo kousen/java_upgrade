@@ -26,35 +26,47 @@ public class FunctionalInterfacesTest {
     @SuppressWarnings("Convert2MethodRef")
     @Test
     public void implementConsumerUsingLambda() throws Exception {
+        Consumer<String> consumer = s -> System.out.println(s);
+        consumer.accept("Hello, World!");
     }
 
     @Test
     public void implementConsumerUsingMethodReference() throws Exception {
+        Consumer<String> consumer = System.out::println;
+        consumer.accept("Hello, World!");
     }
 
     @Test
     public void implementSupplierUsingAnonInnerClass() throws Exception {
-
-        //        assertEquals("Hello", supplier.get());
+        Supplier<String> supplier = new Supplier<String>() {
+            @Override
+            public String get() {
+                return "Hello";
+            }
+        };
+        assertEquals("Hello", supplier.get());
     }
 
     @Test
     public void implementSupplierUsingLambda() throws Exception {
-
-//        assertEquals("Hello", supplier.get());
+        Supplier<String> supplier = () -> "Hello";
+        assertEquals("Hello", supplier.get());
     }
 
     @Test
     public void implementSupplierUsingMethodReference() throws Exception {
         // Create a Supplier<Double> that calls Math.random()
+        // Supplier<Double> supplier = () -> Math.random();
+        Supplier<Double> supplier = Math::random;
 
-//        assertTrue(supplier.get() >= 0.0);
-//        assertTrue(supplier.get() <= 1.0);
+        assertTrue(supplier.get() >= 0.0);
+        assertTrue(supplier.get() <= 1.0);
 
         // Create a DoubleSupplier that does the same
+        DoubleSupplier doubleSupplier = Math::random;
 
-//        assertTrue(doubleSupplier.getAsDouble() >= 0.0);
-//        assertTrue(doubleSupplier.getAsDouble() <= 1.0);
+        assertTrue(doubleSupplier.getAsDouble() >= 0.0);
+        assertTrue(doubleSupplier.getAsDouble() <= 1.0);
     }
 
     @Test
