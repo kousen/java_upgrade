@@ -5,10 +5,14 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.Predicate;
 
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.naturalOrder;
+import static java.util.stream.Collectors.toList;
+
 @SuppressWarnings({"Java8ListSort", "ComparatorCombinators", "Convert2MethodRef"})
 public class StringExercises {
     private List<String> strings = Arrays.asList("this", "is", "a",
-            "list", "of", "strings");
+                                                 "list", "of", "strings");
 
     @Test
     public void stringLengthSort_InnerClass() {
@@ -24,12 +28,15 @@ public class StringExercises {
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator
-
+        Collections.sort(strings, (a, b) -> b.length() - a.length());
         System.out.println(strings);
 
         // Use the "sorted" method on Stream
+        List<String> sorted = strings.stream()
+                                      .sorted((str1, str2) -> str1.length() - str2.length())
+                                      .collect(toList());
 
-//        System.out.println(sorted);
+        System.out.println(sorted);
         System.out.println(strings);
     }
 
@@ -51,8 +58,11 @@ public class StringExercises {
 
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
-
-//        System.out.println(sorted);
+        List<String> sorted = strings.stream()
+                                      .sorted(comparingInt(String::length)
+                                            .thenComparing(naturalOrder()))
+                                      .collect(toList());
+        System.out.println(sorted);
     }
 
     @Test
@@ -69,7 +79,7 @@ public class StringExercises {
 //        map.forEach((word,size) -> System.out.printf("The size of %s is %d%n", word, size));
 
         List<String> myStrings = Arrays.asList("this", "is", null, "a", null,
-                "list", "of", null, "strings");
+                                               "list", "of", null, "strings");
 
         // Filter out nulls, then print even-length strings
 

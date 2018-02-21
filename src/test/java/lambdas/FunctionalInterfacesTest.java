@@ -76,22 +76,48 @@ public class FunctionalInterfacesTest {
         assertEquals(6, stringList.size());
 
         // Add the strings to a Set
+        Set<String> strings = stringList.stream()
+                                        .collect(Collectors.toSet());
 
-//        assertEquals(4, strings.size());
-//        assertEquals(HashSet.class, strings.getClass());
+        assertEquals(4, strings.size());
+        assertEquals(HashSet.class, strings.getClass());
 
         // Add the strings to a TreeSet
+        TreeSet<String> sortedStrings = strings.stream()
+                                               .collect(Collectors.toCollection(TreeSet::new));
 
-//        assertEquals(4, sortedStrings.size());
-//        assertEquals(TreeSet.class, sortedStrings.getClass());
-//        assertEquals("a", sortedStrings.first());
+        assertEquals(4, sortedStrings.size());
+        assertEquals(TreeSet.class, sortedStrings.getClass());
+        assertEquals("a", sortedStrings.first());
 
     }
 
     @Test
     public void filterWithPredicate() throws Exception {
-//        IntStream.of(3, 1, 4, 1, 5, 9)
-//                .filter(n -> true)  // accept even nums only
-//                .forEach(n -> assertTrue(n % 2 == 0));
+        IntStream.of(3, 1, 4, 1, 5, 9)
+                 .filter(n -> n % 2 == 0)  // accept even nums only
+                 .forEach(n -> assertTrue(n % 2 == 0));
+
+
+        List<String> strings = Arrays.asList("this", "is", null, "a", null,
+                                             "list", "of", "strings");
+
+        List<String> stringList = strings.stream()
+                                         .filter(Objects::nonNull)
+                                         .filter(s -> s.length() % 2 == 0)
+                                         .collect(Collectors.toList());
+        System.out.println(stringList);
+        stringList = strings.stream()
+                            .filter(s -> s != null && s.length() % 2 == 0)
+                            .collect(Collectors.toList());
+        System.out.println(stringList);
+
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+
+        stringList = strings.stream()
+                            .filter(nonNull.and(evenLength))
+                            .collect(Collectors.toList());
+        System.out.println(stringList);
     }
 }
