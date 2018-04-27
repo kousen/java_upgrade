@@ -1,7 +1,9 @@
-Code and exercises for a Java 8 upgrade course
+Code and exercises for a Java upgrade course,
+covering features from Java SE8, 9, and 10
 
 Ken Kousen
 
-July, 2016
 
-Updated February, 2017
+* Created July, 2016
+* Updated February, 2017
+* Updated April, 2018
