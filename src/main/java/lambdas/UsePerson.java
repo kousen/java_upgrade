@@ -24,6 +24,6 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new);
 
-        System.out.println(peopleArray);
+        System.out.println(Arrays.toString(peopleArray));
     }
 }
