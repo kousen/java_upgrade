@@ -37,8 +37,8 @@ public class FilenameFilterTest {
                 new File(directory.getAbsolutePath() + "/" + fileName).isFile();
 
         String[] fileNames = root.list(filter);
-        Arrays.stream(fileNames)
-              .map(fileName -> new File("src/main/java/" + fileName))
+        Arrays.stream(fileNames)  // Stream<String>
+              .map(fileName -> new File("src/main/java/" + fileName)) // Stream<File>
               .forEach(file -> assertTrue(file.isFile()));
     }
 
