@@ -14,7 +14,7 @@ public class FunctionalInterfacesTest {
 
     @Test
     public void implementConsumerUsingAnonInnerClass() throws Exception {
-        Consumer<String> consumer = new Consumer<>() {
+        Consumer<String> consumer = new Consumer<String>() {
             @Override
             public void accept(String s) {
                 System.out.println(s);
