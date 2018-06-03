@@ -17,7 +17,7 @@ public class SortStrings {
         System.out.println(strings);
 
         System.out.println("Sort by length using a Comparator impl anon inner class:");
-        Collections.sort(strings, new Comparator<>() {
+        Collections.sort(strings, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
