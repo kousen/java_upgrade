@@ -18,7 +18,7 @@ public class RunnableDemo {
             System.out.println("Inside block lambda");
         }).start();
 
-        Runnable runnable = () -> System.out.println("Inside a variable");
+        Runnable runnable = () -> System.out.println("Assigned to a variable");
         new Thread(runnable).start();
 
         new Thread(System.out::println).start();
