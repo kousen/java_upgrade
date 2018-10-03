@@ -6,8 +6,8 @@ repositories {
     jcenter()
 }
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 dependencies {
     testCompile 'junit:junit:4.12'

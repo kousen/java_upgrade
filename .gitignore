@@ -12,3 +12,6 @@ hs_err_pid*
 build/
 /bin/
 .idea/
+*.iml
+*.ipr
+
