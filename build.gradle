@@ -6,6 +6,9 @@ repositories {
     jcenter()
 }
 
+sourceCompatibility = '10'
+targetCompatibility = '10'
+
 dependencies {
     testCompile 'junit:junit:4.12'
 }
