@@ -8,8 +8,13 @@ repositories {
     jcenter()
 }
 
-sourceCompatibility = '10'
-targetCompatibility = '10'
+if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
+    sourceCompatibility = 10
+    targetCompatibility = 10
+} else {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 
 dependencies {
     testCompile 'junit:junit:4.12'

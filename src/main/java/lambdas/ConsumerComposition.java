@@ -3,11 +3,9 @@ package lambdas;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Flow;
 import java.util.function.Consumer;
 import java.util.function.ToIntFunction;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ConsumerComposition {
@@ -25,7 +23,10 @@ public class ConsumerComposition {
         letters.forEach(printer);
 
         // Java 9 and above only
-        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        // List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+
+        List<String> strings = Arrays.asList("this", "is", "a", "list",
+                                             "of", "strings");
 
 
         ToIntFunction<String> stringLength = String::length;
