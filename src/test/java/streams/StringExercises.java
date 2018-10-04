@@ -3,6 +3,7 @@ package streams;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -73,16 +74,31 @@ public class StringExercises {
         // Get only strings of even length
         // Add them to a LinkedList
 
-//        System.out.println(collected);
-//        System.out.println(collected.getClass().getName());
-//        collected.forEach(System.out::println);
+        LinkedList<String> collected = strings.stream()
+                                              .filter(s -> s.length() % 2 == 0)
+                                              .collect(Collectors.toCollection(LinkedList::new));
+
+        System.out.println(collected);
+        System.out.println(collected.getClass().getName());
+        collected.forEach(System.out::println);
 
         // Add the strings to a map of string to length
+        Map<String, Integer> map = strings.stream()
+                                          .collect(Collectors.toMap(Function.identity(),
+                                                                    String::length));
 
-//        map.forEach((word,size) -> System.out.printf("The size of %s is %d%n", word, size));
+        map.forEach((word,size) -> System.out.printf("The size of %s is %d%n", word, size));
 
         List<String> myStrings = Arrays.asList("this", "is", null, "a", null,
                                                "list", "of", null, "strings");
+
+        myStrings.stream()
+//                 .filter(s -> s != null)
+//                 .filter(s -> s.length() % 2 == 0)
+//                 .filter(s -> s != null && s.length() % 2 == 0)
+                 .filter(Objects::nonNull)
+                 .filter(s -> s.length() % 2 == 0)
+                 .forEach(System.out::println);
 
         // Filter out nulls, then print even-length strings
 
@@ -90,5 +106,8 @@ public class StringExercises {
         Predicate<String> evens = s -> s.length() % 2 == 0;
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        myStrings.stream()
+                 .filter(nonNull.and(evens))
+                 .forEach(System.out::println);
     }
 }
