@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 public class FileFilterDemo {
@@ -44,8 +45,8 @@ public class FileFilterDemo {
         }
 
         Logger log = Logger.getLogger(FileFilterDemo.class.getName());
-        Consumer<String> printer = s -> System.out.println(s);
-        Consumer<String> logger = s -> log.info(s);
+        Consumer<String> printer = x -> System.out.println("The value of x is " + x);
+        Consumer<String> logger = log::info;
 
         Consumer<String> printAndLog = printer.andThen(logger);
         List<String> strings = new ArrayList<>();
@@ -60,5 +61,9 @@ public class FileFilterDemo {
 
         strings.forEach(printAndLog);
         DoubleSupplier random = Math::random;
+
+        strings.stream()
+                .map(String::length)
+                .forEach(System.out::println);
     }
 }
