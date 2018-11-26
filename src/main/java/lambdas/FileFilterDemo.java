@@ -1,9 +1,12 @@
 package lambdas;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.DoubleSupplier;
+import java.util.logging.Logger;
 
 public class FileFilterDemo {
     public static void main(String[] args) {
@@ -39,5 +42,23 @@ public class FileFilterDemo {
         for (File f : files) {
             System.out.println(f);
         }
+
+        Logger log = Logger.getLogger(FileFilterDemo.class.getName());
+        Consumer<String> printer = s -> System.out.println(s);
+        Consumer<String> logger = s -> log.info(s);
+
+        Consumer<String> printAndLog = printer.andThen(logger);
+        List<String> strings = new ArrayList<>();
+        strings.add("this");
+        strings.add("is");
+        strings.add("a");
+        strings.add("list");
+        strings.add("of");
+        strings.add("strings");
+//        List.of("this", "is", "a", "list", "of", "strings")
+//                .forEach(printAndLog);
+
+        strings.forEach(printAndLog);
+        DoubleSupplier random = Math::random;
     }
 }
