@@ -10,8 +10,9 @@ public class UseProducts {
         List<Product> products = Arrays.asList(new Product("football", 10),
                 new Product("basketball", 12), new Product("baseball", 5));
 
-        List<String> names = products.stream()
-                .map(Product::getName)
+        List<String> names = products.stream()  // Stream<Product>
+                .map(Product::getName)          // Stream<String>
+                // .peek(System.out::println)
                 .collect(Collectors.toList());
 
         // complex string arg always gets formed!
