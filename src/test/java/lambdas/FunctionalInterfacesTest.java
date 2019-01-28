@@ -23,7 +23,6 @@ public class FunctionalInterfacesTest {
         consumer.accept("Hello, World!");
     }
 
-    @SuppressWarnings("Convert2MethodRef")
     @Test
     public void implementConsumerUsingLambda() throws Exception {
     }

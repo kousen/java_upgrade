@@ -28,18 +28,10 @@ public class SumEvens {
 
     @Test
     public void addEvenElementsUsingStreams() {
-        int sum = IntStream.of(3, 1, 4, 1, 5, 9, 2, 6, 5)
-                .filter(EVENS)
-                .sum();
-        assertEquals(12, sum);
     }
 
     @Test
     public void addOddElementsUsingStreams() {
-        int sum = IntStream.of(3, 1, 4, 1, 5, 9, 2, 6, 5)
-                .filter(ODDS)
-                .sum();
-        assertEquals(24, sum);
     }
 
 }
