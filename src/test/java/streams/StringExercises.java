@@ -2,7 +2,9 @@ package streams;
 
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -66,12 +68,40 @@ public class StringExercises {
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
+        LinkedList<String> evenLengthStrings = strings.stream()
+                .filter(s -> s.length() % 2 == 0)
+                .collect(Collectors.toCollection(LinkedList::new));
 
         // Add the strings to a map of string to length
+        Map<String, Integer> stringMap = strings.stream()
+                .collect(Collectors.toMap(Function.identity(), String::length));
+
+        stringMap.forEach((string, length) ->
+                System.out.printf("The length of '%s' is %d%n", string, length));
 
         // Filter out nulls, then print even-length strings
+        List<String> myStrings = Arrays.asList("this", null, "is", null, null,
+                "a", "list", null, "of", null, "strings");
+        myStrings.forEach(System.out::println);
+        System.out.println("------");
+
+        myStrings.stream()
+                .filter(s -> s != null && s.length() % 2 == 0)
+                .forEach(System.out::println);
+
+        myStrings.stream()
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNullPred = Objects::nonNull;
+        Predicate<String> evenLengths = s -> s.length() % 2 == 0;
+
+        myStrings.stream()
+                .filter(nonNullPred.and(evenLengths))
+                .forEach(System.out::println);
+
     }
 
 }
