@@ -19,7 +19,7 @@ public class ProductDAO {
 
     public Product getProductById(Integer id) {
         Optional<Product> optional = findById(id);
-        // Only create default product if there is not product with that id
+        // Create default product only if no product with that id
         return optional.orElseGet(() -> new Product(999, "No name", 0.00));
     }
 }
