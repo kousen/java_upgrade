@@ -91,8 +91,12 @@ public class StringExercises {
 
         List<String> evenLengths = stringsWithNulls.stream()
 //                .filter(s -> s != null && s.length() % 2 == 0)
+                .peek(x -> System.out.println("Before null check: " + x))
                 .filter(Objects::nonNull)
+                .peek(x -> System.out.println("After null check: " + x))
                 .filter(s -> s.length() % 2 == 0)
+                .peek(x -> System.out.println("After even filter: " + x))
+                .map(String::toUpperCase)
                 .collect(Collectors.toList());
         System.out.println(evenLengths);
 
@@ -107,6 +111,11 @@ public class StringExercises {
         Consumer<String> log = logger::info;
         Consumer<String> printer = System.out::println;
         stringsWithNulls.forEach(log.andThen(printer));
+
+        stringsWithNulls.stream()
+                .filter(nonNulls)
+                .forEach(s -> logger.fine(() -> "After filtering: " + s
+                    + ", valid values are: "));
     }
 
 }
