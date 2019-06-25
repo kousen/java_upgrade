@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FileFilterTest {
     private File root = new File("src/main/java");
@@ -44,4 +45,13 @@ public class FileFilterTest {
         assertEquals(11, files.length);
     }
 
+    @Test
+    public void listJavaSourceFiles() {
+        File[] files = root.listFiles(pathname -> pathname.getName().endsWith(".java"));
+        assertEquals(8, files.length);
+        for (File file : files) {
+            assertTrue(file.getName().endsWith(".java"));
+        }
+
+    }
 }
