@@ -9,11 +9,9 @@ public class CompanyEmployee implements Company, Employee {
         this.last = last;
     }
 
-    @Override
     public String getName() {
-        return String.format("%s works for %s",
-                Employee.super.getName(),
-                Company.super.getName());
+        return Employee.super.getName() + " works for " +
+                Company.super.getName();
     }
 
     @Override
@@ -28,7 +26,6 @@ public class CompanyEmployee implements Company, Employee {
 
     @Override
     public void doWork() {
-        System.out.println("Converting caffeine into code for money...");
+        System.out.println("Converting caffeine to code for money...");
     }
-
 }
