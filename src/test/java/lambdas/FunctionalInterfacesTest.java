@@ -14,6 +14,15 @@ import static org.junit.Assert.assertTrue;
 
 public class FunctionalInterfacesTest {
 
+    @Test
+    public void demoForEach() {
+        String[] strings = "this is a array of strings".split("\\s+");
+        Arrays.stream(strings).forEach(System.out::println);
+
+        List<String> strings1 = Arrays.asList("this", "is", "another", "list", "of", "strings");
+        strings1.forEach(System.out::println);
+    }
+
     @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
     @Test
     public void implementConsumerUsingAnonInnerClass() throws Exception {

@@ -17,7 +17,7 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
-        Collections.sort(strings, new Comparator<String>() {
+        strings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
@@ -29,7 +29,7 @@ public class StringExercises {
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator (reverse sort)
-        Collections.sort(strings, (s1, s2) -> s2.length() - s1.length());
+        strings.sort((s1, s2) -> s2.length() - s1.length());
         System.out.println(strings);
 
         // Use the "sorted" method on Stream
@@ -73,12 +73,32 @@ public class StringExercises {
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
+        LinkedList<String> evens = strings.stream()
+                .filter(s -> s.length() % 2 == 0)
+                .collect(Collectors.toCollection(LinkedList::new));
+        System.out.println(evens);
 
         // Add the strings to a map of string to length
+        Map<String, Integer> map = strings.stream()
+                // .collect(Collectors.toMap(Function.identity(), String::length));
+                .collect(Collectors.toMap(s -> s, String::length));
+        System.out.println(map);
+        map.forEach((k,v) -> System.out.println(k + ": " + v));
 
         // Filter out nulls, then print even-length strings
+        List<String> list = Arrays.asList("this", "is", null, "another", null,
+                "list", "of", null, "strings");
+        list.stream()
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> even = s -> s.length() % 2 == 0;
+        list.stream()
+                .filter(nonNull.and(even))
+                .forEach(System.out::println);
     }
 
 }
