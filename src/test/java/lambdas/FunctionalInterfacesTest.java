@@ -59,15 +59,14 @@ public class FunctionalInterfacesTest {
 
     @Test
     public void constructorReference() throws Exception {
+        List<String> stringList = List.of("a", "b", "b", "c", "d", "d");
 //        assertEquals(6, stringList.size());
 
         // Add the strings to a Set
-        // Set<String> strings = new HashSet<>(stringList);
 //        assertEquals(4, strings.size());
 //        assertEquals(HashSet.class, strings.getClass());
 
         // Add the strings to a TreeSet
-        // SortedSet<String> sortedStrings = new TreeSet<>(stringList);
 //        assertEquals(4, sortedStrings.size());
 //        assertEquals(TreeSet.class, sortedStrings.getClass());
 //        assertEquals("a", sortedStrings.first());
