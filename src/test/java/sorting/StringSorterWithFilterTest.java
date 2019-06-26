@@ -33,8 +33,13 @@ public class StringSorterWithFilterTest {
 
         List<String> filtered = sorter.filterStrings(both,
                 Arrays.asList("this", null, "is", "a", null, "list", "of", "strings"));
-        filtered.forEach(Assert::assertNotNull);
-        filtered.forEach(s -> assertEquals(0, s.length() % 2));
+//        filtered.forEach(Assert::assertNotNull);
+//        filtered.forEach(s -> assertEquals(0, s.length() % 2));
+
+        filtered.forEach(s -> {
+            assertNotNull(s);
+            assertTrue(s.length() % 2 == 0);
+        });
     }
 
     @Test
@@ -42,6 +47,7 @@ public class StringSorterWithFilterTest {
         List<String> filtered = sorter.filterStrings(s -> s.length() % 2 != 0,
                 Arrays.asList("this", "is", "a", "list", "of", "strings"));
 
+        // Check all are odd length
         filtered.forEach(s -> assertTrue(s.length() % 2 != 0));
     }
 }
