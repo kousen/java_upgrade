@@ -1,5 +1,6 @@
 package streams;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -15,9 +16,11 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("55"), answer);
     }
 
-    @Test  // Should fail (off by 1)
+    @Test  @Ignore
     public void sumFirstNDoubledValues() {
         BigDecimal answer = summer.sumDoubles(10);
+
+        // Used to show how reduce method without identity can give error
         assertEquals(new BigDecimal("110"), answer);
     }
 
