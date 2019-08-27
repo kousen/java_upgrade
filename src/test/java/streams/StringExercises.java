@@ -5,8 +5,10 @@ import org.junit.Test;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +16,9 @@ import static org.junit.Assert.assertEquals;
 public class StringExercises {
     private List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
+
+    String name;
+    private Logger logger = Logger.getLogger(StringExercises.class.getName());
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
@@ -91,8 +96,11 @@ public class StringExercises {
         System.out.println(filtered);
 
         stringsWithNulls.stream()
+                .peek(x -> logger.info("Before nonnull filter: " + x))
                 .filter(Objects::nonNull)
+                .peek(x1 -> System.out.println("After nonNull before length filter: " + x1))
                 .filter(s -> s.length() % 2 == 0)
+                .peek(x2 -> System.out.println("After even length filter: " + x2))
                 .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
@@ -102,6 +110,11 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(both)
                 .forEach(System.out::println);
+
+        Consumer<String> logging = logger::info;
+        Consumer<String> printer = System.out::println;
+
+        Consumer<String> logAndPrint = logging.andThen(printer);
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
+@SuppressWarnings("WeakerAccess")
 public class LazyStreams {
     private static Logger logger = Logger.getLogger(LazyStreams.class.getName());
 
