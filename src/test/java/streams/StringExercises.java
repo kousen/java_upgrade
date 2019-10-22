@@ -2,19 +2,19 @@ package streams;
 
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static org.junit.Assert.assertEquals;
 
 public class StringExercises {
     private List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
+
+    private static int compareStrings(String s1, String s2) {
+        return s1.length() - s2.length();
+    }
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
@@ -39,10 +39,6 @@ public class StringExercises {
                 .collect(Collectors.toList());
         System.out.println(sorted);
         System.out.println(strings);
-    }
-
-    private static int compareStrings(String s1, String s2) {
-        return s1.length() - s2.length();
     }
 
     @Test  // Use a lambda that calls 'compareStrings' directly
@@ -81,7 +77,7 @@ public class StringExercises {
         // Add the strings to a map of string to length
         Map<String, Integer> map = strings.stream()
                 .collect(Collectors.toMap(s -> s, String::length));
-        map.forEach((k,v) -> System.out.println(k + ":" + v));
+        map.forEach((k, v) -> System.out.println(k + ":" + v));
 
         List<String> stringsWithNulls = Arrays.asList("this", null, null,
                 "is", "a", null, "list", null, "of", "strings", null);
@@ -103,4 +99,18 @@ public class StringExercises {
         System.out.println(evens);
     }
 
+    @Test
+    public void maxIntStream() {
+        OptionalInt max = IntStream.of(3, 1, 4, 1, 5, 9, 2, 6, 5)
+                .filter(n -> n % 2 == 0)
+                .max();
+        System.out.println(max);
+    }
+
+    @Test
+    public void generateRandomNumbers() {
+        Stream.generate(Math::random)
+                .limit(10)
+                .forEach(System.out::println);
+    }
 }
