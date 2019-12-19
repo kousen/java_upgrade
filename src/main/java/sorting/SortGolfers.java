@@ -54,12 +54,12 @@ public class SortGolfers {
 
         // sort by score, then last name
         SortGolfers.printSorted(comparingInt(Golfer::getScore)
-            .thenComparing(Golfer::getLast));
+                .thenComparing(Golfer::getLast));
 
         // sort by score, then last name, then first name
         SortGolfers.printSorted(comparingInt(Golfer::getScore)
-            .thenComparing(Golfer::getLast)
-            .thenComparing(Golfer::getFirst));
+                .thenComparing(Golfer::getLast)
+                .thenComparing(Golfer::getFirst));
 
         List<Golfer> sorted = golfers.stream()
                 .sorted(comparing(Golfer::getScore)
@@ -86,11 +86,10 @@ public class SortGolfers {
         System.out.println(map);
 
         System.out.println("Printing the partitioned map:");
-        map.forEach( (key, golferList) -> {
+        map.forEach((key, golferList) -> {
             System.out.println(key);
             golferList.forEach(System.out::println);
         });
-
 
 
     }
