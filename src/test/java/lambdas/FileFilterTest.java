@@ -34,8 +34,17 @@ public class FileFilterTest {
     @Test
     public void listFiles_lambda() {
         File dir = new File("src/main/java");
-        File[] files = dir.listFiles(file -> file.getName().endsWith(".java"));
+        // Lambda must be compatibile with method in FilenameFilter, or won't compile
+        File[] files = dir.listFiles((File f, String name) -> name.endsWith(".java"));
 
         assertEquals(8, files.length);
+    }
+
+    @Test
+    public void listFiles_directories() {
+        File dir = new File("src/main/java");
+        // Lambda must be compatibile with FileFilter, or this won't compile
+        File[] directories = dir.listFiles(file -> file.isDirectory());
+        assertEquals(11, directories.length);
     }
 }
