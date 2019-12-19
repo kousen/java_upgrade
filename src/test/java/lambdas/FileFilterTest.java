@@ -48,9 +48,11 @@ public class FileFilterTest {
         File dir = new File("src/main/java");
         // Lambda must be compatibile with FileFilter, or this won't compile
         // S.A.M. is "boolean accept(File)"
-        FileFilter filter = file -> file.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] directories = dir.listFiles(filter);
-        assertEquals(11, directories.length);
+        if (directories != null) {
+            assertEquals(11, directories.length);
+        }
     }
 
     @Test
