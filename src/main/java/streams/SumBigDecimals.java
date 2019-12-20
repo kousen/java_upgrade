@@ -39,4 +39,11 @@ public class SumBigDecimals {
                     return total.add(e.multiply(two));
                 });
     }
+
+    public BigDecimal sumDoublesInitializedWithoutPrint(int n) {
+        BigDecimal two = new BigDecimal("2");
+        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+                .limit(n)
+                .reduce(BigDecimal.ZERO, (total, e) -> total.add(e.multiply(two)));
+    }
 }
