@@ -1,16 +1,10 @@
 package lambdas;
 
-import org.junit.Test;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.DoubleSupplier;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class FunctionalInterfacesTest {
 
@@ -59,7 +53,7 @@ public class FunctionalInterfacesTest {
 
     @Test
     public void constructorReference() throws Exception {
-        List<String> stringList = List.of("a", "b", "b", "c", "d", "d");
+        List<String> stringList = Arrays.asList("a", "b", "b", "c", "d", "d");
 //        assertEquals(6, stringList.size());
 
         // Add the strings to a Set
