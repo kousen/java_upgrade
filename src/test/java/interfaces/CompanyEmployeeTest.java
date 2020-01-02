@@ -1,10 +1,8 @@
 package interfaces;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
-
-import java.util.Comparator;
-
-import static org.junit.Assert.*;
 
 public class CompanyEmployeeTest {
     private CompanyEmployee emp = new CompanyEmployee("Peter", "Gibbons");

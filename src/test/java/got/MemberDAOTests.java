@@ -1,13 +1,18 @@
 package got;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
 
 import java.text.NumberFormat;
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
 
 public class MemberDAOTests {
     private Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
