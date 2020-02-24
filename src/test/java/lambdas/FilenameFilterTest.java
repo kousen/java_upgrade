@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 import static org.junit.Assert.assertEquals;
 

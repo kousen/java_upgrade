@@ -32,5 +32,17 @@ public class ConvertLoops {
                 .filter(person -> person.getName().length() % 2 == 0)  // Stream<Person>
                 .map(Person::getName)              // Stream<String>
                 .forEach(System.out::println);     // print each element
+
+        int total = 0;
+        List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5);
+        for (int x : integers) {
+            total += x;
+        }
+        System.out.println("The total is " + total);
+
+        String joinedString = strings.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.joining("+"));
+        System.out.println(joinedString);
     }
 }
