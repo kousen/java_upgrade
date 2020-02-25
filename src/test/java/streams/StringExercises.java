@@ -116,7 +116,8 @@ public class StringExercises {
 
         Consumer<String> printer = System.out::println;
         Consumer<String> logger = log::info;
-        strings.forEach(printer.andThen(logger));
+        Consumer<String> printAndLog = printer.andThen(logger);
+        strings.forEach(printAndLog);
     }
 
 }
