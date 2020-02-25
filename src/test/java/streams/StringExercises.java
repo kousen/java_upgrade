@@ -1,6 +1,6 @@
 package streams;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.*;
@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertEquals;
 
 public class StringExercises {
     private List<String> strings = Arrays.asList("this", "is", "a",

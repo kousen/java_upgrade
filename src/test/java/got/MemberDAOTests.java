@@ -1,12 +1,8 @@
 package got;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertFalse;
+import java.util.Collection;
 
 public class MemberDAOTests {
     private Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();

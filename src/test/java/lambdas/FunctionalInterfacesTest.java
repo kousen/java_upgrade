@@ -1,10 +1,10 @@
 package lambdas;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
-
-import org.junit.Test;
 
 public class FunctionalInterfacesTest {
 

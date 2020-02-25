@@ -1,6 +1,6 @@
 package interfaces;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 // Create a class called CompanyEmployee that implements both
 //   the Company and Employee interfaces
