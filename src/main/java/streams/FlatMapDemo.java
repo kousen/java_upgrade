@@ -2,6 +2,7 @@ package streams;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class FlatMapDemo {
@@ -47,6 +48,5 @@ public class FlatMapDemo {
                         customer.getOrders().size() == 0 ? Stream.empty() :
                                 customer.getOrders().stream())
                 .forEach(System.out::println);
-
     }
 }

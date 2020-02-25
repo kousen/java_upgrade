@@ -19,6 +19,15 @@ public class SumBigDecimals {
                 .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
+    public BigDecimal sumFirstN_usingReduce_verbose(int n) {
+        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+                .limit(n)
+                .reduce((bigDecimal, augend) -> {
+                    System.out.println("accumulator = " + bigDecimal + ", arg = " + augend);
+                    return bigDecimal.add(augend);
+                }).orElse(BigDecimal.ZERO);
+    }
+
     // Off by one error, because 1 is never doubled
     public BigDecimal sumDoubles(int n) {
         BigDecimal two = new BigDecimal("2");
@@ -38,5 +47,20 @@ public class SumBigDecimals {
                     System.out.println("total = " + total + ", e = " + e);
                     return total.add(e.multiply(two));
                 });
+    }
+
+    public double productOfDoubles(int n) {
+        return Stream.iterate(1.0, k -> k + 1)
+                .limit(n)
+                .reduce((acc, val) -> {
+                    System.out.println("acc = " + acc + ", val = " + val);
+                    return acc * val;
+                }).orElse(0.0);
+    }
+
+    public double productOfDoublesWithIdentity(int n) {
+        return Stream.iterate(1.0, k -> k + 1)
+                .limit(n)
+                .reduce(1.0, (acc, val) -> acc * val);
     }
 }
