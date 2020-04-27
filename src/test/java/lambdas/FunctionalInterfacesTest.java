@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class FunctionalInterfacesTest {
 
     @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
@@ -54,7 +56,7 @@ public class FunctionalInterfacesTest {
     @Test
     public void constructorReference() throws Exception {
         List<String> stringList = Arrays.asList("a", "b", "b", "c", "d", "d");
-//        assertEquals(6, stringList.size());
+        assertEquals(6, stringList.size());
 
         // Add the strings to a Set
 //        assertEquals(4, strings.size());

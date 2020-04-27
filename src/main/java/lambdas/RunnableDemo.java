@@ -24,7 +24,7 @@ public class RunnableDemo {
         new Thread(System.out::println).start();
 
         Stream.of("this is a string".split(" "))
-              .parallel()
+              // .parallel()
               .forEach(System.out::println);
     }
 }
