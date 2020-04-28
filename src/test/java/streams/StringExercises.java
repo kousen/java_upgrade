@@ -2,12 +2,15 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.reverseOrder;
+import static java.util.stream.Collectors.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -36,7 +39,7 @@ public class StringExercises {
         // Use the "sorted" method on Stream
         String sorted = strings.stream()
                 .sorted((s1, s2) -> s1.length() - s2.length())
-                .collect(Collectors.joining(","));
+                .collect(joining(","));
 
         System.out.println(sorted);
     }
@@ -49,7 +52,7 @@ public class StringExercises {
     public void stringLengthSort_methodCall() {
         String sorted = strings.stream()
                 .sorted((s1, s2) -> compareStrings(s1, s2))
-                .collect(Collectors.joining(","));
+                .collect(joining(","));
         System.out.println(sorted);
     }
 
@@ -57,16 +60,16 @@ public class StringExercises {
     public void stringLengthSort_methodRef() {
         String sorted = strings.stream()
                 .sorted(StringExercises::compareStrings)
-                .collect(Collectors.joining(","));
+                .collect(joining(","));
         System.out.println(sorted);
     }
 
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
         String sorted = strings.stream()
-                .sorted(Comparator.comparingInt(String::length)
-                                .thenComparing(Comparator.reverseOrder()))
-                .collect(Collectors.joining(","));
+                .sorted(comparingInt(String::length)
+                                .thenComparing(reverseOrder()))
+                .collect(joining(","));
         System.out.println(sorted);
     }
 
@@ -75,11 +78,37 @@ public class StringExercises {
         // Get only strings of even length
         // Add them to a LinkedList
 
+        LinkedList<String> evens = strings.stream()
+                .filter(s -> s.length() % 2 == 0)
+                .collect(toCollection(LinkedList::new));
+
+        evens.forEach(s -> assertEquals(0, s.length() % 2));
+
         // Add the strings to a map of string to length
+        Map<String, Integer> map = strings.stream()
+                .collect(toMap(Function.identity(), String::length));
+        System.out.println(map);
 
         // Filter out nulls, then print even-length strings
+        List<String> stringsWithNulls = Arrays.asList("this", null, "is", "another",
+                null, "list", "of", null, null, null, "strings");
+
+        String evenLengths = stringsWithNulls.stream()
+                 .filter(Objects::nonNull)
+                //.filter(s -> s != null && s.length() % 2 == 0)
+                .filter(s -> s.length() % 2 == 0)
+                .collect(joining(","));
+
+        System.out.println(evenLengths);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+
+        evenLengths = stringsWithNulls.stream()
+                .filter(nonNull.and(evenLength))
+                .collect(Collectors.joining(","));
+        System.out.println(evenLengths);
     }
 
 }
