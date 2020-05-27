@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ProductDAO {
-    private static Map<Integer, Product> products = new HashMap<>();
+    private static final Map<Integer, Product> products = new HashMap<>();
 
     static {
         products.put(1, new Product(1, "Football", 12.99));

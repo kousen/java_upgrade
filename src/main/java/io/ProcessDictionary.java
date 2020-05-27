@@ -14,8 +14,9 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
+@SuppressWarnings("DuplicatedCode")
 public class ProcessDictionary {
-    private Path dictionary = Paths.get("/usr/share/dict/words");
+    private final Path dictionary = Paths.get("/usr/share/dict/words");
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");

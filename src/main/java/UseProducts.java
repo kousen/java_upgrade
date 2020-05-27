@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class UseProducts {
-    private static Logger logger = Logger.getLogger(UseProducts.class.getName());
+    private static final Logger logger = Logger.getLogger(UseProducts.class.getName());
 
     public static void main(String[] args) {
         List<Product> products = Arrays.asList(new Product("football", 10),

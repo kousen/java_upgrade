@@ -7,7 +7,13 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.comparingInt;
 
 public class SortGolfers {
-    private List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9);
+    private final List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9);
+    private static final List<Golfer> golfers = Arrays.asList(
+            new Golfer("Jack", "Nicklaus", 68),
+            new Golfer("Tiger", "Woods", 70),
+            new Golfer("Tom", "Watson", 70),
+            new Golfer("Ty", "Webb", 68),
+            new Golfer("Bubba", "Watson", 70));
 
     public List<Integer> getValuesBefore() {
         List<Integer> results = new ArrayList<>();
@@ -28,12 +34,6 @@ public class SortGolfers {
                 .collect(Collectors.toList());
     }
 
-    private static List<Golfer> golfers = Arrays.asList(
-            new Golfer("Jack", "Nicklaus", 68),
-            new Golfer("Tiger", "Woods", 70),
-            new Golfer("Tom", "Watson", 70),
-            new Golfer("Ty", "Webb", 68),
-            new Golfer("Bubba", "Watson", 70));
 
     public static void printSorted(Comparator<Golfer> comparator) {
         System.out.println("----------");
@@ -90,8 +90,5 @@ public class SortGolfers {
             System.out.println(key);
             golferList.forEach(System.out::println);
         });
-
-
-
     }
 }

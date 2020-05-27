@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SumBigDecimalsTest {
-    private SumBigDecimals summer = new SumBigDecimals();
+    private final SumBigDecimals summer = new SumBigDecimals();
 
     @Test
     public void sumFirstN_usingReduce() {

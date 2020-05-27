@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static Logger logger = Logger.getLogger(LazyStreams.class.getName());
+    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
 
     public static int multByTwo(int n) {
         System.out.printf("Inside multByTwo with arg %d%n", n);

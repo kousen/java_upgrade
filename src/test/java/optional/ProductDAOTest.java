@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductDAOTest {
-    private ProductDAO dao = new ProductDAO();
+    private final ProductDAO dao = new ProductDAO();
 
     @Test
     public void findById_exists() {

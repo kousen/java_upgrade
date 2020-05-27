@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 
 public class MemberDAOTests {
-    private Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
+    private final Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
 
     /**
      * Find all members whose name starts with S and sort by id (natural sort)

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class InMemoryMemberDAO implements MemberDAO {
     private static final MemberDAO dao = new InMemoryMemberDAO();
 
-    private List<Member> allMembers = Arrays.asList(
+    private final List<Member> allMembers = Arrays.asList(
             new Member(1L, Title.LORD, "Eddard", LocalDate.of(1959, Month.APRIL, 17), 100000.0, new House("Stark")),
             new Member(2L, Title.LADY, "Catelyn", LocalDate.of(1964, Month.JANUARY, 17), 80000.0, new House("Stark")),
             new Member(3L, Title.LADY, "Arya", LocalDate.of(1997, Month.APRIL, 15), 50000.0, new House("Stark")),

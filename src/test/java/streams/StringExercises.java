@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StringExercises {
-    private List<String> strings = Arrays.asList("this", "is", "a",
+    private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
 
     @Test
