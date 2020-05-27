@@ -49,10 +49,15 @@ public class FileFilterTest {
         }
     }
 
-    @SuppressWarnings("Convert2MethodRef")
+    // @SuppressWarnings("Convert2MethodRef")
     @Test
     void testListFilesLambdaForDirectories() {
-        File[] directories = root.listFiles(path -> path.isDirectory());
+        File[] directories = root.listFiles(path -> {
+            boolean isDir = path.isDirectory();
+            System.out.println("File " + path.getName() + " "
+                + (isDir ? "is" : "is not") + " a directory");
+            return isDir;
+        });
         if (directories != null) {
             assertEquals(12, directories.length);
         }
