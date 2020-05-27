@@ -19,6 +19,7 @@ public class RunnableDemo {
         }).start();
 
         Runnable runnable = () -> System.out.println("Assigned to a variable");
+
         new Thread(runnable).start();
 
         new Thread(System.out::println).start();
