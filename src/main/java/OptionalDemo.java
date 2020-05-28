@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+@SuppressWarnings("ConstantConditions")
 public class OptionalDemo {
     public static void main(String[] args) {
         Optional<Integer> first = Stream.of(3, 1, 4, 1, 5, 9)
@@ -14,7 +15,7 @@ public class OptionalDemo {
 
         // System.out.println(first.isPresent() ? (int) first.get() : 0);
 
-        int defaultValue = 0;
+        int defaultValue = 999;
         System.out.println(first.orElse(defaultValue));
         System.out.println(first.orElseGet(() -> defaultValue));
         first.ifPresent(System.out::println);
