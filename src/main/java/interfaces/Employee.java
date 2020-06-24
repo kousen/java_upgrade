@@ -1,6 +1,7 @@
 package interfaces;
 
 public interface Employee {
+
     String getFirst();
 
     String getLast();
