@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -34,9 +36,24 @@ public class FileFilterTest {
     @Test
     public void listJavaFiles_lambda() {
         File f = new File(root);
-        FileFilter filter = pathname -> pathname.getName().endsWith(".java");
+        FileFilter filter = path -> path.getName().endsWith(".java");
         File[] files = f.listFiles(filter);
 
         assertEquals(8, files.length);
+    }
+
+    @Test
+    public void listDirectories() {
+        File f = new File(root);
+        // File[] directories = f.listFiles(pathname -> pathname.isDirectory());
+        File[] directories = f.listFiles(File::isDirectory);  // method reference
+        assertEquals(12, directories.length);
+    }
+
+    @Test
+    void forEachOnIterable() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(s -> System.out.println("The word is " + s));
+        strings.forEach(System.out::println);
     }
 }
