@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StringExercises {
@@ -84,8 +85,28 @@ public class StringExercises {
                 .collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println(map);
 
+        // group strings by length
+        Map<Integer, List<String>> stringsByLength = strings.stream()
+                .collect(Collectors.groupingBy(String::length));
+        System.out.println(stringsByLength);
+
+        List<String> stringsWithNulls = Arrays.asList(null, "this", "is", null,
+                "a", null, "list", "of", null, "strings", null);
+
         // Filter out nulls, then print even-length strings
+        stringsWithNulls.stream()
+                // .filter(s -> s != null && s.length() % 2 == 0)
+                //.filter(s -> s != null)
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+        List<String> nonNullEvens = stringsWithNulls.stream()
+                .filter(nonNull.and(evenLength))  // composition!
+                .collect(Collectors.toList());
+        System.out.println(nonNullEvens);
     }
 }
