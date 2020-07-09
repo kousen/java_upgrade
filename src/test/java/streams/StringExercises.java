@@ -5,7 +5,13 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -95,7 +101,33 @@ public class StringExercises {
         Predicate<String> nonNull = Objects::nonNull;
 
         // Combine the two predicates and use the result to print non-null, even-length strings
-
+        stringWithNulls.stream()
+                .filter(nonNull.and(evenLength))
+                .forEach(System.out::println);
     }
 
+    @Test
+    void lazyErrorMessage() {
+        int x = 5;
+        int y = 5;
+        assertAll(  // takes a vararg list of Executable...
+                () -> assertEquals(x, y, createErrorMessageSupplier(x, y)),
+                () -> assertEquals(x, y, () -> createErrorMessage(x, y))
+        );
+    }
+
+    private Supplier<String> createErrorMessageSupplier(int x, int y) {
+        return () -> "Value " + x + " is not equal to value " + y + "!";
+    }
+
+    private String createErrorMessage(int x, int y) {
+        return "Value " + x + " is not equal to value " + y + "!";
+    }
+
+    @Test
+    void logMessage() {
+        Logger logger = Logger.getLogger("myLogger");
+        logger.fine("this is " + " a concatenated " + " message");
+        logger.fine(() -> "this is " + " a concatenated " + " message");
+    }
 }
