@@ -37,6 +37,7 @@ public class SortGolfers {
                         .thenComparing(Golfer::getLast)
                         .thenComparing(Golfer::getFirst))
                 .forEach(System.out::println);
+        // System.out.println(golfers); // sorting streams does not affect the original source
     }
 
     public void partitionByScore() {

@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -90,5 +88,17 @@ public class FileFilterTest {
                 .map(n -> n * 2)
                 .forEach(doubleCollection::add);
         System.out.println(doubleCollection);
+    }
+
+    @Test
+    void iterateOverAMap() {
+        Map<String, Integer> map = new HashMap<>();
+        // In Java 11:
+        // Map.ofEntries(Map.entry("a", 1), Map.entry("b", 2), Map.entry("c", 2));
+        // unmodifiable map --> no way to add, remove, or replace elements
+        map.put("hello", 5);
+        map.put("world", 5);
+        map.put("what up?", 8);
+        map.forEach((k, v) -> map.put(k, 42));
     }
 }
