@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,5 +65,30 @@ public class FileFilterTest {
         NullPointerException ex = assertThrows(NullPointerException.class,
                 () -> assertEquals(21, files.length));
         assertNull(ex.getMessage());
+    }
+
+    @Test
+    void printValuesInCollection() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        System.out.println(strings);
+        strings.forEach(str -> System.out.println(str + " has length " + str.length()));
+        strings.forEach(System.out::println);
+    }
+
+    @Test
+    void showOrderingEvenInParallel() {
+        List<Integer> ints = Arrays.asList(3, 1, 4, 1, 5, 9);
+
+        List<Integer> doubles = ints.parallelStream()
+                .map(n -> n * 2)
+                .collect(Collectors.toList());
+        System.out.println(doubles);
+
+        // Legal, but not a good idea (shared mutable state, not ordered)
+        List<Integer> doubleCollection = new ArrayList<>();
+        ints.parallelStream()
+                .map(n -> n * 2)
+                .forEach(doubleCollection::add);
+        System.out.println(doubleCollection);
     }
 }
