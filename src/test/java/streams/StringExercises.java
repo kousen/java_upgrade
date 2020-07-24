@@ -1,17 +1,52 @@
 package streams;
 
 import org.junit.jupiter.api.Test;
+import sorting.Golfer;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
+
+    private int getLengthOfLastName(Golfer golfer) {
+        try {
+            return golfer.getLast().length();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Test
+    void golferIsValid() {
+        Golfer golfer = new Golfer("Ty", null, 68); // use a service to acquire a golfer
+        assertAll(
+                () -> assertEquals("Ty", golfer.getFirst()),
+                () -> assertNull(golfer.getLast()),
+                () -> assertTrue(golfer.getScore() > 62),
+                () -> assertThrows(NullPointerException.class, () -> getLengthOfLastName(golfer))
+        );
+    }
+
+    @Test
+    void concatAsBinaryOperator() {
+        //BinaryOperator<String> op = (target, arg) -> target.concat(arg);
+        BinaryOperator<String> op = String::concat;
+
+        String total = Stream.of("here", "are", "some", "strings")
+                .reduce("", op);
+        assertEquals("herearesomestrings", total);
+    }
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
@@ -26,9 +61,17 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_lambda() {
+        System.out.println(strings);
         // Use lambda for the Comparator (reverse sort)
+        Collections.sort(strings, (s1, s2) -> s2.length() - s1.length());
+        System.out.println(strings);
 
         // Use the "sorted" method on Stream
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> s1.length() - s2.length())
+                .collect(Collectors.toList());
+        System.out.println(strings);
+        System.out.println(sorted);
     }
 
     private static int compareStrings(String s1, String s2) {
@@ -37,14 +80,27 @@ public class StringExercises {
 
     @Test  // Use a lambda that calls 'compareStrings' directly
     public void stringLengthSort_methodCall() {
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> compareStrings(s1, s2))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use a method ref to 'compareStrings'
     public void stringLengthSort_methodRef() {
+        List<String> sorted = strings.stream()
+                .sorted(StringExercises::compareStrings)
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
+        List<String> sorted = strings.stream()
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test
