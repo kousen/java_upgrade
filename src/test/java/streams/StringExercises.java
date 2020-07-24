@@ -18,15 +18,6 @@ public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
 
-    private int getLengthOfLastName(Golfer golfer) {
-        try {
-            return golfer.getLast().length();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
     @Test
     void golferIsValid() {
         Golfer golfer = new Golfer("Ty", null, 68); // use a service to acquire a golfer
@@ -34,7 +25,7 @@ public class StringExercises {
                 () -> assertEquals("Ty", golfer.getFirst()),
                 () -> assertNull(golfer.getLast()),
                 () -> assertTrue(golfer.getScore() > 62),
-                () -> assertThrows(NullPointerException.class, () -> getLengthOfLastName(golfer))
+                () -> assertThrows(NullPointerException.class, () -> golfer.getLast().length())
         );
     }
 
