@@ -18,6 +18,9 @@ public class RunnableDemo {
 
         Runnable runnable = () -> System.out.println("Assigned to a variable");
         new Thread(runnable).start();
+
+        // Method reference version (which isn't terribly interesting)
+        new Thread(System.out::println).start();
     }
 }
 
