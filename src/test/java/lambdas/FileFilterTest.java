@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -60,4 +62,11 @@ public class FileFilterTest {
         }
     }
 
+    @Test
+    void iterateOverList() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list");
+        // List<String> strings = List.of("this", "is", "a", "list");
+        strings.forEach(s -> System.out.println("The string is " + s));
+        strings.forEach(System.out::println);
+    }
 }
