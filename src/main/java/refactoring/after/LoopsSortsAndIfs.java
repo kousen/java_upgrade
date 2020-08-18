@@ -1,7 +1,7 @@
 package refactoring.after;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
