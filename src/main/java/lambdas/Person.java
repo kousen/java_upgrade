@@ -1,12 +1,23 @@
 package lambdas;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Person {
     private String name;
 
-    public Person() {}
+    public Person() {
+        System.out.println("Default ctor on Person");
+    }
 
     public Person(String name) {
+        System.out.println("Person ctor on single string");
         this.name = name;
+    }
+
+    public Person(String... elements) {
+        System.out.println("Person ctor on vararg list");
+        name = String.join(" ", elements);
     }
 
     public String getName() {

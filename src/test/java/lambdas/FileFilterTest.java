@@ -44,7 +44,20 @@ public class FileFilterTest {
         // this lambda only works if the arg is of type File
         File[] files = root.listFiles(file -> file.isDirectory());
         if (files != null) {
-            assertEquals(13, files.length);
+            assertEquals(13, files.length, () -> getErrorMessage());
+        }
+    }
+
+    private String getErrorMessage() {
+        System.out.println("Inside getErrorMessage method");
+        return "There should be 13 directories";
+    }
+
+    @Test
+    public void testListFiles_fileFilter_methodRef() {
+        File[] files = root.listFiles(File::isDirectory);
+        if (files != null) {
+            assertEquals(13, files.length, this::getErrorMessage);
         }
     }
 
