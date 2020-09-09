@@ -2,11 +2,11 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;
@@ -97,7 +97,16 @@ public class StringExercises {
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(evensWithoutNulls);
 
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+        Consumer<String> consoleLogger = logger::info;
+        Consumer<String> consolePrinter = System.out::println;
+
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evenLength))
+                .forEach(consoleLogger.andThen(consolePrinter));
     }
 
 }
