@@ -17,6 +17,7 @@ public class SortGolfers {
 
     // default sort is by score
     public void defaultSort() {
+        System.out.println("\nNatural order:");
         golfers.stream()
                 .sorted()
                 .forEach(System.out::println);
@@ -24,6 +25,7 @@ public class SortGolfers {
 
     // sort by score, then equal scores by last name
     public void sortByScoreThenLast() {
+        System.out.println("\nSort by score then by last name:");
         golfers.stream()
                 .sorted(Comparator.comparingInt(Golfer::getScore)
                         .thenComparing(Golfer::getLast))
@@ -32,6 +34,7 @@ public class SortGolfers {
 
     // sort by score, then by last, then by first
     public void sortByScoreThenLastThenFirst() {
+        System.out.println("\nSort by score, then by last, then by first:");
         golfers.stream()
                 .sorted(Comparator.comparingInt(Golfer::getScore)
                         .thenComparing(Golfer::getLast)
@@ -44,7 +47,7 @@ public class SortGolfers {
                 .collect(Collectors.partitioningBy(
                         golfer -> golfer.getScore() < 70));
 
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             System.out.println(k);
             v.forEach(System.out::println);
         });
@@ -52,8 +55,8 @@ public class SortGolfers {
 
     public static void main(String[] args) {
         SortGolfers sg = new SortGolfers();
-//        sg.defaultSort();
-//        sg.sortByScoreThenLast();
+        sg.defaultSort();
+        sg.sortByScoreThenLast();
         sg.sortByScoreThenLastThenFirst();
 //         sg.partitionByScore();
     }
