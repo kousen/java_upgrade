@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -62,4 +64,22 @@ public class FileFilterTest {
         }
     }
 
+    @Test
+    void listDirectories_local_variable() {
+        File root = new File("src/main/java");
+        // FileFilter isDirectory = File::isDirectory;
+        FileFilter isDirectory = file -> file.isDirectory();
+        File[] directories = root.listFiles(isDirectory); // Method reference
+        if (directories != null) {
+            assertEquals(13, directories.length);
+        }
+    }
+
+    @Test  // forEach(Consumer) has been added to Iterable as a default method
+    void showForEachWithAConsumer() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(string -> System.out.println(string.length()));
+        strings.forEach(s -> System.out.println(s.length()));
+        strings.forEach(System.out::println);
+    }
 }
