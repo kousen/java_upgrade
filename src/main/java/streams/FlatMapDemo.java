@@ -24,6 +24,7 @@ public class FlatMapDemo {
                 .map(Customer::getName) // function<Customer,String>
                 .forEach(System.out::println);
 
+        // Want the list of Orders
         // map 1-many customer to orders --> Stream<List<Order>>
         customers.stream()
                 .map(Customer::getOrders) // function<Customer,List<Order>>
