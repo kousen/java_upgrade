@@ -19,14 +19,23 @@ public class SumBigDecimals {
                 .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
+    public BigDecimal sumFirstN_usingReduce_verbose(int n) {
+        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+                .limit(n)
+                .reduce((accumulator, current) -> {
+                    System.out.println("Accumulator: " + accumulator + ", Current: " + current);
+                    return accumulator.add(current);
+                }).orElse(BigDecimal.ZERO);
+    }
+
     // Off by one error, because 1 is never doubled
     public BigDecimal sumDoubles(int n) {
         BigDecimal two = new BigDecimal("2");
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
-                .reduce((total, e) -> {
-                    System.out.println("total = " + total + ", e = " + e);
-                    return total.add(e.multiply(two));
+                .reduce((total, each) -> {
+                    System.out.println("total = " + total + ", each = " + each);
+                    return total.add(each.multiply(two));
                 }).orElse(BigDecimal.ZERO);
     }
 
@@ -34,9 +43,9 @@ public class SumBigDecimals {
         BigDecimal two = new BigDecimal("2");
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
-                .reduce(BigDecimal.ZERO, (total, e) -> {
-                    System.out.println("total = " + total + ", e = " + e);
-                    return total.add(e.multiply(two));
+                .reduce(BigDecimal.ZERO, (total, each) -> {
+                    System.out.println("total = " + total + ", each = " + each);
+                    return total.add(each.multiply(two));
                 });
     }
 }

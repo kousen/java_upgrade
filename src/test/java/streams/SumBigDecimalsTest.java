@@ -16,6 +16,12 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("55"), answer);
     }
 
+    @Test
+    public void sumFirstN_usingReduce_verbose() {
+        BigDecimal answer = summer.sumFirstN_usingReduce_verbose(10);
+        assertEquals(new BigDecimal("55"), answer);
+    }
+
     @Test  @Disabled("disable until demo")
     public void sumFirstNDoubledValues() {
         BigDecimal answer = summer.sumDoubles(10);
