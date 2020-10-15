@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@SuppressWarnings("DuplicatedCode")
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
-        String[] strings = "this is an array of strings".split(" ");
+        String[] strings = "this is an array of strings".split("\\s+");
 
         List<String> evenLengths = new ArrayList<>();
         for (String s : strings) {

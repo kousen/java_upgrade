@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
@@ -36,12 +38,29 @@ public class StringExercises {
         List<String> sorted = strings.stream()
                 .sorted((s1, s2) -> s1.length() - s2.length())
                 .collect(Collectors.toList());
-        System.out.println(sorted);
-        System.out.println(strings);
+        System.out.println(sorted);  // a new collection, asc
+        System.out.println(strings); // the "original", still desc
+        List<Integer> lengths = sorted.stream()
+                .map(String::length)
+                .collect(Collectors.toList());
+        List<Integer> stringLengths = strings.stream()
+                .map(String::length)
+                .collect(Collectors.toList());
+
+        assertAll(
+                () -> assertEquals(Arrays.asList(1, 2, 2, 4, 4, 7), lengths),
+                () -> assertEquals(Arrays.asList(7, 4, 4, 2, 2, 1), stringLengths),
+                () -> assertThrows(ArrayIndexOutOfBoundsException.class, () -> strings.get(99))
+        );
     }
 
     private int compareStrings(String s1, String s2) {
         return s1.length() - s2.length();
+    }
+
+    private String getErrorMessage() {
+        System.out.println("Inside getErrorMessage");
+        return "The lengths should be in ascending order";
     }
 
     @Test  // Use a lambda that calls 'compareStrings' directly
@@ -50,6 +69,11 @@ public class StringExercises {
                 .sorted((s1, s2) -> compareStrings(s1, s2))
                 .collect(Collectors.toList());
         System.out.println(sorted);
+        List<Integer> lengths = sorted.stream()
+                .map(String::length)
+                .collect(Collectors.toList());
+        // Deferred execution of the Supplier<String>
+        assertEquals(Arrays.asList(1, 2, 2, 4, 4, 7), lengths, this::getErrorMessage);
     }
 
     @Test  // Use a method ref to 'compareStrings'
@@ -123,6 +147,9 @@ public class StringExercises {
         Consumer<String> consolePrint = System.out::println;
         Consumer<String> logger = log::info;
         evens.forEach(consolePrint.andThen(logger));
+
+        List<String> finalEvens = evens;
+        log.info(finalEvens::toString);
     }
 
     public List<String> filterByPredicate(List<String> strings, Predicate<String> predicate) {
