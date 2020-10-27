@@ -25,7 +25,8 @@ public class FilenameFilterTest {
     @Test
     public void listWithConsumer() {
         // Collection factory method
-        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        // List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
         strings.forEach(s -> System.out.println("The current word is " + s));
         strings.forEach(s -> System.out.println(s)); // can be expressed as a method reference
         strings.forEach(System.out::println);
