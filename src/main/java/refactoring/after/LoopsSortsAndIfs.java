@@ -7,10 +7,11 @@ import static java.util.Comparator.naturalOrder;
 
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
-        Arrays.stream("this is an array of strings".split(" "))
+        Arrays.stream("this is an array of strings".split("\\s+"))
                 .filter(s -> s.length() % 2 == 0)
-                .map(String::toUpperCase)
-                .sorted(comparingInt(String::length).thenComparing(naturalOrder()).reversed())
+                .sorted(comparingInt(String::length)
+                    .thenComparing(naturalOrder()))
                 .forEach(System.out::println);
+
     }
 }

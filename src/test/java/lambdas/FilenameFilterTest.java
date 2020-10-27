@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,6 +20,15 @@ public class FilenameFilterTest {
                     .forEach(System.out::println);
             assertEquals(21, files.length);
         }
+    }
+
+    @Test
+    public void listWithConsumer() {
+        // Collection factory method
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        strings.forEach(s -> System.out.println("The current word is " + s));
+        strings.forEach(s -> System.out.println(s)); // can be expressed as a method reference
+        strings.forEach(System.out::println);
     }
 
     @Test
