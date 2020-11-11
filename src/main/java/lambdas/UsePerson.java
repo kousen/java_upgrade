@@ -28,6 +28,7 @@ public class UsePerson {
                 .map(Person::new)
                 .collect(Collectors.toList());
         System.out.println(people);
+        System.out.println(people.getClass().getName());
 
         // Convert in parallel (highly inefficient!)
         people = names.parallelStream()
