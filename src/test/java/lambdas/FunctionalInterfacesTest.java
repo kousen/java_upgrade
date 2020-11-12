@@ -18,11 +18,16 @@ public class FunctionalInterfacesTest {
             }
         };
         consumer.accept("Hello, World!");
+
     }
 
     @Test
     public void implementConsumerUsingLambda() throws Exception {
 //        consumer.accept("Hello, World!");
+
+        Consumer<String> consumerInLambda = (s) -> System.out.println(s);
+
+        consumerInLambda.accept("Scott Learn Lambda");
     }
 
     @Test
