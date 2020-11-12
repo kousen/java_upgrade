@@ -3,7 +3,10 @@ package streams;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StringExercises {
@@ -12,7 +15,7 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
-        Collections.sort(strings, new Comparator<String>() {
+        strings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
@@ -78,9 +81,40 @@ public class StringExercises {
                 .collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println(map);
 
+        List<String> stringsWithNulls = Arrays.asList("this", null, "is", "a",
+                null, "list", null, null, "with", "nulls", null);
         // Filter out nulls, then print even-length strings
+        stringsWithNulls.stream()
+                .filter(s -> s != null && s.length() % 2 == 0)  // short-circuiting &&
+                .forEach(System.out::println);
+
+        stringsWithNulls.stream()
+                .filter(s -> s != null)            // short-circuiting filter
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
+
+        stringsWithNulls.stream()
+                .peek(s -> System.out.println("Before null filter: " + s))
+                .filter(Objects::nonNull)
+                .peek(s -> System.out.println("After null filter, before length filter: " + s))
+                .filter(s -> s.length() % 2 == 0)
+                .peek(s -> System.out.println("After length filter: " + s))
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nullFilter = Objects::nonNull;
+        Predicate<String> evenFilter = s -> s.length() % 2 == 0;
+
+        stringsWithNulls.stream()
+                .filter(nullFilter.and(evenFilter))  // composition
+                .forEach(System.out::println);
+
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+        Consumer<String> logConsumer = logger::info;
+        Consumer<String> consolePrinter = System.out::println;
+        stringsWithNulls.stream()
+                .filter(nullFilter.and(evenFilter))
+                .forEach(logConsumer.andThen(consolePrinter));
     }
 
 }
