@@ -24,10 +24,16 @@ public class OptionalDemo {
         Optional<String> s = strings.stream()
                 .findFirst();
 
-        System.out.println(s.orElse("No string found; legal values are: " + strings));
-        System.out.println(s.orElseGet(() -> "No string found; legal values are: " + strings));
+        System.out.println(s.orElse("No string found; legal values are: " + getListErrorMessage()));
+        System.out.println(s.orElseGet(() -> "No string found; legal values are: " + getListErrorMessage()));
         System.out.println(s.orElseThrow(IllegalArgumentException::new)); // default constructor
         System.out.println(s.orElseThrow(() -> new IllegalArgumentException("Not available")));
         s.ifPresent(System.out::println);
+    }
+
+    private static String getListErrorMessage() {
+        System.out.println("Inside getErrorListMessage method");
+        return "No string found; legal values are: " + Arrays.asList("this", "is", "a",
+                "list", "of", "strings");
     }
 }
