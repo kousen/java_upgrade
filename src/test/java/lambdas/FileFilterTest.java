@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -84,5 +86,13 @@ public class FileFilterTest {
             }
             assertEquals(8, javaSourceFiles.length);
         }
+    }
+
+    @Test
+    void forEachInIterable() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(str -> System.out.println(str));  // lambda expression
+        strings.forEach(System.out::println);             // method reference
+        strings.forEach(str -> System.out.println("element: " + str));  // lambda expression
     }
 }
