@@ -3,7 +3,10 @@ package streams;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;
@@ -89,7 +92,8 @@ public class StringExercises {
 
         // Add the strings to a map of string to length
         Map<String, Integer> map = strings.stream()
-                .collect(Collectors.toMap(s -> s, String::length));
+                //.collect(Collectors.toMap(s -> s, String::length));
+                .collect(Collectors.toMap(Function.identity(), String::length));
         map.forEach((str,len) -> System.out.println(str + " has length " + len));
 
         // Filter out nulls, then print even-length strings
@@ -107,9 +111,14 @@ public class StringExercises {
         Predicate<String> nullFilter = Objects::nonNull;
         Predicate<String> evenFilter = s -> s.length() % 2 == 0;
 
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+        Consumer<String> consolePrint = System.out::println;
+        Consumer<String> consoleLogger = logger::info;
+        Consumer<String> printThenLog = consolePrint.andThen(consoleLogger); // composite consumer
+
         stringsWithNulls.stream()
                 .filter(nullFilter.and(evenFilter))  // composition
-                .forEach(System.out::println);
+                .forEach(printThenLog);
     }
 
 }
