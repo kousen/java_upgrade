@@ -2,15 +2,12 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static java.util.Comparator.*;
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.naturalOrder;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -25,6 +22,18 @@ public class StringExercises {
             }
         });
         System.out.println(strings);
+    }
+
+    @Test
+    void sumNumbers() {
+        List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5);
+        long total = integers.stream().count();  // easier would be integers.size()
+//        for (int n : integers) {
+//            total += n;
+//        }
+//        integers.forEach(n -> total += n);
+
+        System.out.println("There are " + total + " elements in the stream");
     }
 
     @Test
