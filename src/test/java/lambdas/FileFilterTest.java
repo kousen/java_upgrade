@@ -2,9 +2,10 @@ package lambdas;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,10 +15,12 @@ public class FileFilterTest {
     @Test
     public void listFiles() {
         File[] files = root.listFiles();
-        for (File file : files) {
-            System.out.println(file);
+        if (files != null) {
+            for (File file : files) {
+                System.out.println(file);
+            }
+            assertEquals(21, files.length);
         }
-        assertEquals(21, files.length);
     }
 
     @Test
@@ -36,6 +39,14 @@ public class FileFilterTest {
     @Test
     void listOnlyDirectories_expressionLambda() {
         File[] directories = root.listFiles(pathname -> pathname.isDirectory());
+        if (directories != null) {
+            assertEquals(13, directories.length);
+        }
+    }
+
+    @Test
+    void listOnlyDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
         if (directories != null) {
             assertEquals(13, directories.length);
         }
@@ -66,5 +77,16 @@ public class FileFilterTest {
         if (javaSource != null) {
             assertEquals(8, javaSource.length);
         }
+    }
+
+    @Test
+    void iterableWithForEach() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        for (String s : strings) {
+            System.out.println(s);
+        }
+
+        strings.forEach(s -> System.out.println("s = " + s));
+        strings.forEach(System.out::println);
     }
 }
