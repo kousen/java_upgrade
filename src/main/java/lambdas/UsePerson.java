@@ -31,5 +31,24 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new);
         System.out.println(Arrays.toString(peopleArray));
+
+        // Sum the lengths of the names of the people
+        int totalLength = names.parallelStream()
+                .mapToInt(name -> name.length())
+                .sum();
+        System.out.println("The total length of the names is " + totalLength);
+
+        // Without using an IntStream
+        // local variables can be read in lambdas, but not modified
+        // they must be final or "effectively final"
+//        totalLength = 0;
+//        names.stream()
+//                .map(name -> name.length())
+//                .forEach(length -> totalLength += length);
+
+        // "Pure" function --> (1) output is determined only by the inputs
+        //                     (2) function has no side effects
+        // Functional programming favors pure functions --> easy to reason about and predict
+        // Functional programming favors immutability
     }
 }
