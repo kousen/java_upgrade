@@ -27,8 +27,13 @@ public class StringExercises {
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator (reverse sort)
-
+        Collections.sort(strings, (s1, s2) -> s2.length() - s1.length());
+        System.out.println(strings);
         // Use the "sorted" method on Stream
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> s1.length() - s2.length())
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     private static int compareStrings(String s1, String s2) {
@@ -37,14 +42,27 @@ public class StringExercises {
 
     @Test  // Use a lambda that calls 'compareStrings' directly
     public void stringLengthSort_methodCall() {
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> compareStrings(s1, s2))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use a method ref to 'compareStrings'
     public void stringLengthSort_methodRef() {
+        List<String> sorted = strings.stream()
+                .sorted(StringExercises::compareStrings)
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
+        List<String> sorted = strings.stream()
+                .sorted(Comparator.comparingInt(String::length)
+                    .thenComparing(Comparator.naturalOrder()))
+                .collect(Collectors.toList());
+        System.out.println(sorted);
     }
 
     @Test

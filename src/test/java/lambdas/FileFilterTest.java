@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -88,5 +90,26 @@ public class FileFilterTest {
 
         strings.forEach(s -> System.out.println("s = " + s));
         strings.forEach(System.out::println);
+    }
+
+    @Test
+    void iterateOverMap() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 2);
+
+        // keySet to iterate
+        for (String key : map.keySet()) {
+            System.out.println(key + " : " + map.get(key));
+        }
+
+        // entrySet to iterate
+        for (Map.Entry<String,Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " maps to " + entry.getValue());
+        }
+
+        // Use forEach in Map (default method)
+        map.forEach((k, v) -> System.out.println(k + " to " + v));
     }
 }
