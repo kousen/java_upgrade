@@ -1,6 +1,5 @@
 package lazy;
 
-import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -24,7 +23,6 @@ public class LazyStreams {
                 .map(n -> n * 2)
                 .findFirst().orElse(0);
         System.out.println(firstEvenDoubleDivBy3);
-
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)

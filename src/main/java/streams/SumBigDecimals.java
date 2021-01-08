@@ -1,6 +1,7 @@
 package streams;
 
 import java.math.BigDecimal;
+import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 public class SumBigDecimals {
@@ -13,10 +14,26 @@ public class SumBigDecimals {
         return new BigDecimal(total + "");
     }
 
+    public double sumFirstNDoubles(int n) {
+        return DoubleStream.iterate(1, x -> x + 1)
+                .limit(n)
+                .sum();
+    }
+
     public BigDecimal sumFirstN_usingReduce(int n) {
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
                 .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+    }
+
+    public BigDecimal sumFirstN_usingReduce_verbose(int n) {
+        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+                .limit(n)
+                .reduce((accumulator, element) -> {
+                    System.out.println("accumulator = " + accumulator + ", element = " + element);
+                    return accumulator.add(element);
+                })
+                .orElse(BigDecimal.ZERO);
     }
 
     // Off by one error, because 1 is never doubled
@@ -37,6 +54,15 @@ public class SumBigDecimals {
                 .reduce(BigDecimal.ZERO, (total, e) -> {
                     System.out.println("total = " + total + ", e = " + e);
                     return total.add(e.multiply(two));
+                });
+    }
+
+    public double productFirstN(int n) {
+        return DoubleStream.iterate(1, x -> x + 1)
+                .limit(n)
+                .reduce(1, (acc, e) -> {
+                    System.out.println("acc = " + acc + ", e = " + e);
+                    return acc * e;
                 });
     }
 }
