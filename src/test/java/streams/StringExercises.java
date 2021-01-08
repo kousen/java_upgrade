@@ -138,6 +138,13 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(nonNullString.and(evenLength))
                 .forEach(logToConsole.andThen(consolePrinter));
+
+        logger.fine(() -> getMessage());
+    }
+
+    private String getMessage() {
+        System.out.println("Inside getMessage");
+        return "message";
     }
 
 }
