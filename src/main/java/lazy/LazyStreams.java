@@ -26,6 +26,7 @@ public class LazyStreams {
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
+                // .parallel()
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
                 .findFirst().orElse(0);

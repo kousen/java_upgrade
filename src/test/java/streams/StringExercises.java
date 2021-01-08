@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
@@ -56,6 +58,25 @@ public class StringExercises {
                 .sorted(StringExercises::compareStrings)
                 .collect(Collectors.toList());
         System.out.println(sorted);
+
+        sorted.stream()
+            .reduce("", (prev, curr) -> {
+                System.out.println("prev = " + prev + ", curr = " + curr);
+                assertTrue(prev.length() <= curr.length());
+                return curr;
+            });
+
+        // Lexicographical sort
+        sorted = strings.stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        sorted.stream()
+                .reduce("", (prev, curr) -> {
+                    System.out.println("prev = " + prev + ", curr = " + curr);
+                    assertTrue(prev.compareTo(curr) <= 0);
+                    return curr;
+                });
     }
 
     @Test  // Use Comparator.comparingInt
