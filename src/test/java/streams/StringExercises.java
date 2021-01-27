@@ -5,9 +5,13 @@ import org.junit.jupiter.api.Test;
 import java.nio.file.DirectoryStream;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -103,6 +107,25 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(notNull.and(evenLength))
                 .forEach(System.out::println);
+
+        Logger log = Logger.getLogger(StringExercises.class.getName());
+        Consumer<String> consoleLogger = log::info;
+        Consumer<String> printer = System.out::println;
+        stringsWithNulls.stream()
+                .filter(notNull.and(evenLength))
+                .forEach(consoleLogger.andThen(printer));
+
+        log.info(() -> "my info message");  // Supplier<String> only gets called if the log
+                                            // message will be seen
     }
 
+    @Test
+    void errorMessageSupplier() {
+        assertTrue(true, () -> getErrorMessage()); // Supplier<String> instead of just String
+    }
+
+    private String getErrorMessage() {
+        System.out.println("inside getErrorMessage");
+        return "error message";
+    }
 }
