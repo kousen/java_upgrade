@@ -1,5 +1,8 @@
 package lambdas;
 
+// In Java 16:
+// public record Person(String name) {}
+
 public class Person {
     private String name;
 
