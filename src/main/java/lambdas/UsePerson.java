@@ -14,7 +14,9 @@ public class UsePerson {
         // In Java 7:
         List<Person> beatles = new ArrayList<>();
         for (String name: names) {
-            beatles.add(new Person(name));
+            if (name.contains("o")) {
+                beatles.add(new Person(name));
+            }
         }
         System.out.println(beatles);
 
@@ -26,6 +28,7 @@ public class UsePerson {
 
         // Uses constructor ref with a stream
         people = names.stream()
+                .filter(name -> name.contains("o"))
                 .map(Person::new)
                 .collect(Collectors.toList());
         System.out.println(people);
