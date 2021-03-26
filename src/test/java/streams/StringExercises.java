@@ -5,9 +5,13 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparingInt;
 import static java.util.Comparator.naturalOrder;
@@ -111,4 +115,54 @@ public class StringExercises {
                 .forEach(System.out::println);
     }
 
+    @Test
+    void localVariables() {
+        IntStream numbers = IntStream.of(3, 1, 4, 1, 5, 9, 2, 6, 5);
+        // Add up the numbers
+        int total = 0;
+        // Can not modify local variable from inside lambda
+        // local variables must be final or _effectively final_
+        // numbers.forEach(n -> total += n);
+        total = numbers.sum();
+        System.out.println(total);
+
+        numbers = IntStream.of(3, 1, 4, 1, 5, 9, 2, 6, 5);
+        int offset = 10;
+        numbers.forEach(num -> System.out.println(num + offset));
+    }
+
+    @Test
+    void composedConsumers() {
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+
+        Consumer<String> consolePrint = System.out::println;
+        Consumer<String> infoLogger = logger::info;
+
+        strings.forEach(consolePrint.andThen(infoLogger));
+    }
+
+    @Test
+    void getLongestString() {
+        Optional<String> max = strings.stream()
+                .max(comparingInt(String::length));
+        System.out.println(max);
+
+        Optional<String> min = strings.stream()
+                .filter(s -> s.length() > 10)
+                .min(comparingInt(String::length));
+        System.out.println(min);
+
+        Stream<String> stringStream = strings.stream()
+                .filter(s -> s.length() > 10);
+        System.out.println(stringStream);
+
+        min = strings.stream()
+                .filter(s -> s.length() > 10)
+                .min(comparingInt(String::length));
+        System.out.println(min.orElse("(empty stream, so none)"));
+
+        max = strings.stream()
+                .max(comparingInt(String::length));
+        System.out.println(max.orElse(""));
+    }
 }
