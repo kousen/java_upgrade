@@ -87,8 +87,28 @@ public class StringExercises {
         System.out.println(map.getClass().getName());
 
         // Filter out nulls, then print even-length strings
+        List<String> stringsWithNulls = Arrays.asList("this", null, "is", "a", null,
+                "list", null, "of", "strings", null, "with", "nulls");
+        stringsWithNulls.stream()
+                .filter(s -> s != null && s.length() % 2 == 0)
+                .forEach(System.out::println);
+
+        stringsWithNulls.stream()
+                .filter(s -> s != null)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
+
+        stringsWithNulls.stream()
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNullString = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+        stringsWithNulls.stream()
+                .filter(nonNullString.and(evenLength))
+                .forEach(System.out::println);
     }
 
 }
