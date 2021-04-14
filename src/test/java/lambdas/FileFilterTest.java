@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 public class FileFilterTest {
@@ -53,5 +56,27 @@ public class FileFilterTest {
     public void listFiles_methodRef() {
         File[] directories = root.listFiles(File::isDirectory);
         assertEquals(13, directories.length);
+    }
+
+    @Test
+    void showForEachOnAnIterable() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(string -> System.out.println("the string is " + string));
+        strings.forEach(System.out::println);
+    }
+
+    private String getErrorMessage() {
+        System.out.println("Inside getErrorMessage");
+        return "This is my error message";
+    }
+
+    @Test
+    void myTest() {
+        assertTrue(true, getErrorMessage());
+    }
+
+    @Test
+    void myLazyTest() {
+        assertTrue(true, () -> getErrorMessage());
     }
 }
