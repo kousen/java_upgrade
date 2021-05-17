@@ -12,17 +12,17 @@ public class UsePerson {
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
-
-
-        people = names.stream()
-                .map(Person::new)
-                .collect(Collectors.toList());
-
         System.out.println(people);
 
+        people = names.stream()
+                .map(Person::new)  // constructor reference, uses Person(String) ctor
+                .collect(Collectors.toList());
+        System.out.println(people);
+
+        // convert the list of string into an array of Person
         Person[] peopleArray = names.stream()
                 .map(Person::new)
-                .toArray(Person[]::new);
+                .toArray(Person[]::new); // dimension an array of Stream size and fill it
 
         System.out.println(Arrays.toString(peopleArray));
     }
