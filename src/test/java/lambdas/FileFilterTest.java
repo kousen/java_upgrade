@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileFilterTest {
     private final File root = new File("src/main/java");
@@ -78,5 +80,26 @@ public class FileFilterTest {
         if (directories != null) {
             assertEquals(13, directories.length);
         }
+    }
+
+    @Test
+    void printStrings() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        // strings.forEach(str -> System.out.println(str));
+        strings.forEach(System.out::println);
+    }
+
+    private String getErrorMessage() {
+        System.out.println("Inside getErrorMessage");
+        return "This is my error message";
+    }
+
+    @SuppressWarnings({"ConstantConditions", "SimplifiableAssertion"})
+    @Test
+    void assertWithLazySupplier() {
+        String abc = "abc";
+        // assertTrue("abc".length() == 3, getErrorMessage()); // always calls the error method
+        assertTrue("abc".length() == 3, () -> getErrorMessage()); // only calls error message if there's an error
+        // assertTrue("abc".length() == 3, this::getErrorMessage);
     }
 }
