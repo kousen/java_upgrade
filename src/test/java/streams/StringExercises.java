@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.*;
@@ -26,7 +28,7 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
-        Collections.sort(strings, new Comparator<String>() {
+        strings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
@@ -95,8 +97,28 @@ public class StringExercises {
         System.out.println(map);
 
         // Filter out nulls, then print even-length strings
+        List<String> stringsWithNulls = Arrays.asList(null, "this", null, "is",
+                "a", null, "list", null, "with", "nulls");
+        stringsWithNulls.stream()
+                // .filter(s -> s != null && s.length() % 2 == 0)  // Option 1: short-circuiting &&
+                //.filter(s -> s != null)  // Option 2: null filter before our even filter
+                .filter(Objects::nonNull)  // Option 2: null filter before our even filter
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLen = s -> s.length() % 2 == 0;
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evenLen))  // function composition
+                .forEach(System.out::println);
+
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+        Consumer<String> consolePrint = System.out::println;
+        Consumer<String> consoleLog = logger::info;
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evenLen))
+                .forEach(consolePrint.andThen(consoleLog));
     }
 
 }

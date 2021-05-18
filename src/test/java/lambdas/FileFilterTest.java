@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,6 +89,15 @@ public class FileFilterTest {
         List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
         // strings.forEach(str -> System.out.println(str));
         strings.forEach(System.out::println);
+    }
+
+    @Test
+    void retrieveAValueFromArrayArg() {
+        List<String> strings = Arrays.asList("Grace Hopper", "Barbara Liskov", "Ada Lovelace");
+        strings.stream()
+                .map(name -> name.split("\\s+"))
+                .map(array -> array[1])
+                .forEach(System.out::println);
     }
 
     private String getErrorMessage() {
