@@ -25,7 +25,6 @@ public class LazyStreams {
                 .findFirst().orElse(0);
         System.out.println(firstEvenDoubleDivBy3);
 
-
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
                 .filter(LazyStreams::modByThree)
