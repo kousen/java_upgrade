@@ -16,7 +16,11 @@ public class SumBigDecimals {
     public BigDecimal sumFirstN_usingReduce(int n) {
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
-                .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+                .reduce((accumulator, value) -> {
+                    System.out.println("accumulator = " + accumulator + ", value = " + value);
+                    return accumulator.add(value);
+                })
+                .orElse(BigDecimal.ZERO);
     }
 
     // Off by one error, because 1 is never doubled
@@ -27,7 +31,8 @@ public class SumBigDecimals {
                 .reduce((total, e) -> {
                     System.out.println("total = " + total + ", e = " + e);
                     return total.add(e.multiply(two));
-                }).orElse(BigDecimal.ZERO);
+                })
+                .orElse(BigDecimal.ZERO);
     }
 
     public BigDecimal sumDoublesInitialized(int n) {
@@ -38,5 +43,11 @@ public class SumBigDecimals {
                     System.out.println("total = " + total + ", e = " + e);
                     return total.add(e.multiply(two));
                 });
+    }
+
+    public BigDecimal productFirstN(int n) {
+        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+                .limit(n)
+                .reduce(BigDecimal.ONE, BigDecimal::multiply);
     }
 }
