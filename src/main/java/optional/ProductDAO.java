@@ -22,5 +22,6 @@ public class ProductDAO {
         Optional<Product> optional = findById(id);
         // Create default product only if no product with that id
         return optional.orElseGet(() -> new Product(999, "No name", 0.00));
+        // return optional.orElse(new Product(999, "No name", 0.00));
     }
 }

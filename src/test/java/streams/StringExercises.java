@@ -109,8 +109,9 @@ public class StringExercises {
         // Combine the two predicates and use the result to print non-null, even-length strings
         Predicate<String> nonNull = Objects::nonNull;
         Predicate<String> evenLen = s -> s.length() % 2 == 0;
+        Predicate<String> nonNullAndEven = nonNull.and(evenLen);
         stringsWithNulls.stream()
-                .filter(nonNull.and(evenLen))  // function composition
+                .filter(nonNullAndEven)  // function composition
                 .forEach(System.out::println);
 
         Logger logger = Logger.getLogger(StringExercises.class.getName());
@@ -119,6 +120,8 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(nonNull.and(evenLen))
                 .forEach(consolePrint.andThen(consoleLog));
+
+        logger.info(() -> "abc");
     }
 
 }
