@@ -1,9 +1,17 @@
 package streams;
 
 import java.math.BigDecimal;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SumBigDecimals {
+
+    public int sumFirstNIntegers(int n) {
+        //return IntStream.rangeClosed(1, n).sum();
+        return Stream.iterate(0, x -> x + 1)
+                .limit(n)
+                .reduce(0, Integer::sum);
+    }
 
     public BigDecimal sumFirstN_asDoubles(int n) {
         double total = Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))

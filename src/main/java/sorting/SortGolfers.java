@@ -44,7 +44,7 @@ public class SortGolfers {
                 .collect(Collectors.partitioningBy(
                         golfer -> golfer.getScore() < 70));
 
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             System.out.println(k);
             v.forEach(System.out::println);
         });
