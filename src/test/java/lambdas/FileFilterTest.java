@@ -46,6 +46,16 @@ public class FileFilterTest {
     }
 
     @Test
+    public void testListFilesOnAFile() {
+        File thisFile = new File("src/test/java/lambdas/FileFilterTest.java");
+        File[] files = thisFile.listFiles();
+        assertAll(
+                () -> assertNull(files),
+                () -> assertThrows(NullPointerException.class, () -> System.out.println(files.length))
+        );
+    }
+
+    @Test
     public void listDirectories_blockLambda() {
         File[] directories = root.listFiles(file -> {
             return file.isDirectory();
