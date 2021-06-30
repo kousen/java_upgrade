@@ -9,7 +9,7 @@ public class SumBigDecimals {
     public int sumFirstNIntegers(int n) {
         //return IntStream.rangeClosed(1, n).sum();
         return Stream.iterate(0, x -> x + 1)
-                .limit(n)
+                .limit(n + 1)
                 .reduce(0, Integer::sum);
     }
 
