@@ -49,7 +49,9 @@ public class FileFilterTest {
     public void testListFilesOnAFile() {
         File thisFile = new File("src/test/java/lambdas/FileFilterTest.java");
         File[] files = thisFile.listFiles();
-        assertAll(
+        // Probably don't want assertAll here, because if the files ref is not null,
+        // do want to skip the other test
+        assertAll( // Executable..., implemented as lambdas
                 () -> assertNull(files),
                 () -> assertThrows(NullPointerException.class, () -> System.out.println(files.length))
         );
@@ -95,8 +97,19 @@ public class FileFilterTest {
     @Test
     void printStrings() {
         List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
-        // strings.forEach(str -> System.out.println(str));
-        strings.forEach(System.out::println);
+        strings.forEach(str -> System.out.println(str));  // default method in Iterable
+        // strings.forEach(System.out::println);
+    }
+
+    private String getMessage() {
+        System.out.println("Inside getMessage");
+        return "Argument should be false";
+    }
+
+    @Test
+    void useMessageSupplier() {
+        // assertTrue(2 + 2 == 4, getMessage()); // Last arg is String
+        assertTrue(2 + 2 == 4, () -> getMessage());  // Last arg is Supplier<String>
     }
 
     @Test

@@ -1,6 +1,7 @@
 package lambdas;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,14 @@ public class UsePerson {
                 .map(Person::new)  // constructor reference, uses Person(String) ctor
                 .collect(Collectors.toList());
         System.out.println(people);
+        System.out.println(people.getClass().getName());
+
+        people = names.stream()
+                .map(Person::new)  // constructor reference, uses Person(String) ctor
+                //.collect(Collectors.toCollection(() -> new LinkedList<>()));
+                .collect(Collectors.toCollection(LinkedList::new));
+        System.out.println(people);
+        System.out.println(people.getClass().getName());
 
         // convert the list of string into an array of Person
         Person[] peopleArray = names.stream()
