@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,5 +54,19 @@ public class FileFilterTest {
     void listDirectories_methodReference() {
         File[] files = root.listFiles(File::isDirectory);
         assertEquals(13, files.length);
+    }
+
+    @Test
+    void listJavaSourceFiles() {
+//        File[] javaFiles = root.listFiles(new FilenameFilter() {
+//            @Override
+//            public boolean accept(File dir, String name) {
+//                return name.endsWith(".java");
+//            }
+//        });
+        File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
+        if (javaFiles != null) {
+            assertEquals(8, javaFiles.length);
+        }
     }
 }
