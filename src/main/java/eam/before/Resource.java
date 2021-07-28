@@ -13,6 +13,7 @@ public class Resource {
         System.out.println("op2 called...");
     }
 
+    @SuppressWarnings("deprecation")
     protected void finalize() {
         System.out.println("do any cleanup here...");
     }
