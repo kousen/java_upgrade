@@ -3,8 +3,7 @@ covering features from Java SE8 and above.
 
 Ken Kousen
 
-
 * Created July, 2016
 * Updated February, 2017
 * Updated April, 2018
-* Updated several times since then, most recently January, 2021
+* Updated several times since then, most recently July, 2021
