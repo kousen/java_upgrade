@@ -5,8 +5,13 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileFilterTest {
     private final File root = new File("src/main/java");
@@ -68,5 +73,36 @@ public class FileFilterTest {
         if (javaFiles != null) {
             assertEquals(8, javaFiles.length);
         }
+    }
+
+    @Test
+    void listFactory() {
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        // strings.forEach(s -> System.out.println(s));
+        strings.forEach(System.out::println);
+
+        Map<String, Integer> map = Map.ofEntries(
+                Map.entry("a", 1),
+                Map.entry("b", 2),
+                Map.entry("c", 2));
+        map.forEach((k,v) -> System.out.println(k + " maps to " + v));
+    }
+
+    @Test
+    void throwUOE() {
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        UnsupportedOperationException ex =
+                assertThrows(UnsupportedOperationException.class,
+                    () -> strings.add("abc"));
+        System.out.println(ex.getMessage());
+    }
+
+    @Test
+    void addingIntegers() {
+        int total = 0;
+        // Can NOT modify a local variable from inside a lambda
+//        Stream.of(3, 1, 4, 1, 5, 9)
+//                .forEach(n -> total += n);
+        total = IntStream.of(3, 1, 4, 1, 5, 9).sum();
     }
 }
