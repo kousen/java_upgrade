@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,4 +31,10 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("110"), answer);
     }
 
+    @Test
+    void joinString() {
+        String joined = summer.joinStrings(List.of("this", "is", "a", "list"));
+        System.out.println(joined);
+        assertEquals("thisisalist", joined);
+    }
 }
