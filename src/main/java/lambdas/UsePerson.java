@@ -29,7 +29,8 @@ public class UsePerson {
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
-                .toArray(Person[]::new);
+                //.toArray(Person[]::new);
+                .toArray(value -> new Person[value]);
         System.out.println(Arrays.toString(peopleArray));
     }
 }
