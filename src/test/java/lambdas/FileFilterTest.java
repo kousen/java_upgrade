@@ -56,4 +56,22 @@ public class FileFilterTest {
             assertEquals(13, directories.length);
         }
     }
+
+    @SuppressWarnings("Convert2MethodRef")
+    @Test
+    void listDirectories_variable() {
+        FileFilter filter = pathname -> pathname.isDirectory();
+        File[] directories = root.listFiles(filter);
+        if (directories != null) {
+            assertEquals(13, directories.length);
+        }
+    }
+
+    @Test
+    void fileNameFilter_JavaSrcFiles() {
+        File[] javaSrc = root.listFiles((dir, name) -> name.endsWith(".java"));
+        if (javaSrc != null) {
+            assertEquals(8, javaSrc.length);
+        }
+    }
 }
