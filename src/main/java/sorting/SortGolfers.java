@@ -1,9 +1,6 @@
 package sorting;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SortGolfers {
@@ -14,6 +11,11 @@ public class SortGolfers {
             new Golfer("Ty", "Webb", 68),
             new Golfer("Bubba", "Watson", 70)
     );
+
+    public void defaultSortCollections() {
+        Collections.sort(golfers);
+        System.out.println(golfers);
+    }
 
     // default sort is by score
     public void defaultSort() {
