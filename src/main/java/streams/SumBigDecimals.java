@@ -5,10 +5,11 @@ import java.util.stream.Stream;
 
 public class SumBigDecimals {
 
+    // Bad way to solve the problem
     public BigDecimal sumFirstN_asDoubles(int n) {
         double total = Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
-                .mapToDouble(BigDecimal::doubleValue)
+                .mapToDouble(BigDecimal::doubleValue)  // convert to DoubleStream
                 .sum();
         return new BigDecimal(total + "");
     }

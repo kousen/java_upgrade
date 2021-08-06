@@ -1,7 +1,9 @@
 package streams;
 
 import java.util.DoubleSummaryStatistics;
+import java.util.List;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 public class SummaryStatistics {
@@ -21,5 +23,11 @@ public class SummaryStatistics {
                 .limit(1_000_000)
                 .max();
         System.out.println("The max value is " + max);
+
+        List<Double> doubles = DoubleStream.generate(Math::random)
+                .limit(1000)
+                // .mapToObj(d -> Double.valueOf(d))
+                .boxed()
+                .collect(Collectors.toList());
     }
 }
