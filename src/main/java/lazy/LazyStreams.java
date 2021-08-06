@@ -25,12 +25,12 @@ public class LazyStreams {
                 .findFirst().orElse(0);
         System.out.println(firstEvenDoubleDivBy3);
 
-
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
+                // .parallel()
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
-                .findFirst().orElse(0);
+                .findAny().orElse(0);
         System.out.printf("First even divisible by 3 is %d%n", firstEvenDoubleDivBy3);
     }
 }
