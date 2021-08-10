@@ -1,9 +1,6 @@
 package refactoring.after;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
@@ -12,7 +9,7 @@ public class LoopsSortsAndIfs {
         List<String> evenLengths = new ArrayList<>();
         for (String s : strings) {
             if (s.length() % 2 == 0) {
-                evenLengths.add(s);
+                evenLengths.add(s.toUpperCase(Locale.ROOT));
             }
         }
 
