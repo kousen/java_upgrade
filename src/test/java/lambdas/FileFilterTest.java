@@ -4,8 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FileFilterTest {
     private final File root = new File("src/main/java");
@@ -54,11 +59,54 @@ public class FileFilterTest {
         }
     }
 
+    @SuppressWarnings("Convert2MethodRef")
+    @Test
+    public void listDirectoriesUsingVariable() {
+        FileFilter filter = file -> file.isDirectory();
+        File[] directories = root.listFiles(filter);
+        if (directories != null) {
+            assertEquals(13, directories.length);
+        }
+    }
+
+    @Test
+    public void listJavaSourceFiles() {
+        File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
+        if (javaFiles != null) {
+            assertEquals(8, javaFiles.length);
+        }
+    }
+
     @Test
     public void listDirectoriesMethodReference() {
+        // File[] directories = root.listFiles(file -> file.isDirectory());
         File[] directories = root.listFiles(File::isDirectory);
         if (directories != null) {
             assertEquals(13, directories.length);
         }
+    }
+
+    @Test
+    void forEachWithAConsumer() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list");
+        strings.forEach(System.out::println);
+    }
+
+    @Test
+    void forEachWithABiConsumer() {
+        Map<String,Integer> map = new HashMap<>();
+        map.put("a", 1); map.put("b", 2); map.put("c", 2);
+        map.forEach((key,value) -> System.out.println(key + " maps to " + value));
+    }
+
+    private String getErrorMessage() {
+        System.out.println("Inside getErroMessage");
+        return "error message";
+    }
+
+    @Test
+    void assertNotNullWithError() {
+        // retrieve the error message only if the test fails
+        assertNotNull("abc", () -> getErrorMessage());
     }
 }
