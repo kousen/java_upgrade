@@ -1,27 +1,18 @@
 package refactoring.after;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Locale;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.naturalOrder;
 
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
-        String[] strings = "this is an array of strings".split(" ");
-
-        List<String> evenLengths = new ArrayList<>();
-        for (String s : strings) {
-            if (s.length() % 2 == 0) {
-                evenLengths.add(s.toUpperCase(Locale.ROOT));
-            }
-        }
-
-        Collections.sort(evenLengths, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                return s1.length() - s2.length();
-            }
-        });
-
-        for (String s : evenLengths) {
-            System.out.println(s);
-        }
+        Arrays.stream("this is an array of strings".split(" "))
+                .filter(s -> s.length() % 2 == 0)
+                .map(s -> s.toUpperCase(Locale.ROOT))
+                .sorted(comparingInt(String::length)
+                        .thenComparing(naturalOrder()))
+                .forEach(System.out::println);
     }
 }

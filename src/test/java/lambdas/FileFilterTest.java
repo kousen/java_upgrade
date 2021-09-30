@@ -8,12 +8,25 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FileFilterTest {
     private final File root = new File("src/main/java");
+    private final Logger logger = Logger.getLogger(FileFilterTest.class.toString());
+
+    private String logMessage() {
+        System.out.println("Inside logMessage");
+        return "log message";
+    }
+
+    @Test
+    void loggerWithSupplier() {
+        logger.fine(logMessage()); // invoke method, even though not seen
+        logger.fine(() -> logMessage()); // don't invoke method, because not seen
+    }
 
     @Test
     public void listFiles() {
@@ -109,4 +122,6 @@ public class FileFilterTest {
         // retrieve the error message only if the test fails
         assertNotNull("abc", () -> getErrorMessage());
     }
+
+
 }
