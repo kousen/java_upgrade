@@ -53,4 +53,13 @@ public class FileFilterTest {
             assertEquals(13, directories.length);
         }
     }
+
+    @Test
+    public void listDirectories_usingVariable() {
+        FileFilter filter = pathname -> pathname.isDirectory();
+        File[] directories = root.listFiles(filter);
+        if (directories != null) {
+            assertEquals(13, directories.length);
+        }
+    }
 }
