@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 
 public class SumBigDecimals {
 
+    // Works, but not a good idea
     public BigDecimal sumFirstN_asDoubles(int n) {
         double total = Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)

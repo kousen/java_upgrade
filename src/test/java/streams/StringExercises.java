@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -105,6 +106,29 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(filterNulls.and(evenLengths))  // function composition of predicates
                 .forEach(consoleLog.andThen(printer)); // composition of consumers
+
+        Optional<String> maxLengthString = stringsWithNulls.stream()
+                .filter(filterNulls)
+                .max(Comparator.comparingInt(String::length));
+        System.out.println(maxLengthString);
+
+        int total = 1;
+        total = IntStream.of(1, 2, 3, 4, 5)
+                //.forEach(n -> total += n);
+                        // .sum();
+                .reduce((accumulator, element) -> {
+                    System.out.println("acc = " + accumulator + ", e = " + element);
+                    return accumulator * element;
+                }).orElse(0);
+        System.out.println("Total = " + total);
+
+        // compute product of doubles
+        total = IntStream.of(1, 2, 3, 4, 5)
+                .reduce(1, (acc, e) -> {
+                    System.out.println("acc = " + acc + ", e = " + e);
+                    return acc * (2 * e);
+                });
+        System.out.println("total = " + total);
     }
 
 }
