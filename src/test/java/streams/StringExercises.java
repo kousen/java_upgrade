@@ -97,7 +97,7 @@ public class StringExercises {
 
         // Two consumers:
         Logger logger = Logger.getLogger(StringExercises.class.getName());
-        Consumer<String> consoleLog = logger::info;
+        Consumer<String> consoleLog = msg -> logger.fine(() -> msg);
         Consumer<String> printer = System.out::println;
 
         // Combine the two predicates and use the result to print non-null, even-length strings
