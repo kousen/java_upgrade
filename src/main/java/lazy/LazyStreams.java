@@ -1,6 +1,5 @@
 package lazy;
 
-import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -8,11 +7,13 @@ public class LazyStreams {
     private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
 
     public static int multByTwo(int n) {
+        // System.out.println(Thread.currentThread().getName());
         System.out.printf("Inside multByTwo with arg %d%n", n);
         return n * 2;
     }
 
     public static boolean modByThree(int n) {
+        // System.out.println(Thread.currentThread().getName());
         System.out.printf("Inside modByThree with arg %d%n", n);
         return n % 3 == 0;
     }
@@ -20,14 +21,19 @@ public class LazyStreams {
     public static void main(String[] args) {
         // multiply numbers between 100 and 200 by 2, then find first n divisible by 3
         int firstEvenDoubleDivBy3 = IntStream.range(100, 200)
+                .peek(n -> System.out.println("Before filter, n = " + n))
                 .filter(n -> n % 3 == 0)
+                .peek(n -> System.out.println("After filter, before map, n = " + n))
                 .map(n -> n * 2)
-                .findFirst().orElse(0);
+                .peek(n -> System.out.println("After map, n = " + n))
+                .findFirst().orElse(-1);
         System.out.println(firstEvenDoubleDivBy3);
 
+        System.out.println(Runtime.getRuntime().availableProcessors() + " available processors");
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
+                .parallel()
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
                 .findFirst().orElse(0);

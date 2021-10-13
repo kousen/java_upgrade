@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
@@ -131,4 +133,10 @@ public class StringExercises {
         System.out.println("total = " + total);
     }
 
+    // @Test(NullPointerException.class) in JUnit 4
+    @Test
+    void showExceptionHandling() {
+        String y = null;
+        assertThrows(NullPointerException.class, () -> y.length());
+    }
 }
