@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -46,6 +49,17 @@ public class FileFilterTest {
     }
 
     @Test
+    void listFiles_methodReference() {
+        File[] files = dir.listFiles(File::isDirectory);
+        if (files != null) {
+            for (File file : files) {
+                System.out.println(file);
+            }
+            assertEquals(13, files.length);
+        }
+    }
+
+    @Test
     void listFiles_assignToVariable() {
         // FileFilter filter = pathname -> pathname.isDirectory();
         FileFilter filter = (File pathname) -> pathname.isDirectory();
@@ -73,12 +87,22 @@ public class FileFilterTest {
 
     @Test
     void listFiles_fileNameFilter() {
-        File[] files = dir.listFiles((dir, name) -> name.endsWith(".java"));
+        FilenameFilter filter = (File dir, String name) -> name.endsWith(".java");
+        File[] files = dir.listFiles(filter);
         if (files != null) {
             for (File file : files) {
                 System.out.println(file);
             }
             assertEquals(8, files.length);
         }
+    }
+
+    @Test
+    void showForEach() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        strings.forEach(string -> System.out.println(string));
+        strings.forEach(System.out::println);
+        strings.forEach(string -> System.out.println("The next string is " + string));
+
     }
 }
