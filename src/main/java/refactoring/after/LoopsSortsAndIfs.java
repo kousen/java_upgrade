@@ -1,27 +1,24 @@
 package refactoring.after;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
-        String[] strings = "this is an array of strings".split(" ");
 
-        List<String> evenLengths = new ArrayList<>();
-        for (String s : strings) {
-            if (s.length() % 2 == 0) {
-                evenLengths.add(s.toUpperCase(Locale.ROOT));
-            }
-        }
+        // loop --> stream
+        // if inside loop --> filter
+        // conversion inside loop --> map
+        // collect to list, or here just print
+        Arrays.stream("this is an array of strings".split(" "))
+                .peek(s -> System.out.println("Before filter: " + s))
+                .filter(s -> s.length() % 2 == 0)
+                .peek(s -> System.out.println("After filter: " + s))
+                .map(s -> s.toUpperCase(Locale.ROOT))
+                .peek(s -> System.out.println("After map: " + s))
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
+                .forEach(System.out::println);
 
-        Collections.sort(evenLengths, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                return s1.length() - s2.length();
-            }
-        });
-
-        for (String s : evenLengths) {
-            System.out.println(s);
-        }
     }
 }

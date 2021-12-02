@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -104,5 +106,11 @@ public class FileFilterTest {
         strings.forEach(System.out::println);
         strings.forEach(string -> System.out.println("The next string is " + string));
 
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 2);
+
+        map.forEach((key, value) -> System.out.println(key + " maps to " + value));
     }
 }
