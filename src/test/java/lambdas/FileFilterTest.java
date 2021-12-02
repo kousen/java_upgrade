@@ -46,6 +46,19 @@ public class FileFilterTest {
     }
 
     @Test
+    void listFiles_assignToVariable() {
+        // FileFilter filter = pathname -> pathname.isDirectory();
+        FileFilter filter = (File pathname) -> pathname.isDirectory();
+        File[] files = dir.listFiles(filter);
+        if (files != null) {
+            for (File file : files) {
+                System.out.println(file);
+            }
+            assertEquals(13, files.length);
+        }
+    }
+
+    @Test
     void listFiles_blockLambda() {
         File[] files = dir.listFiles(pathname -> {
             return pathname.isDirectory();
@@ -55,6 +68,17 @@ public class FileFilterTest {
                 System.out.println(file);
             }
             assertEquals(13, files.length);
+        }
+    }
+
+    @Test
+    void listFiles_fileNameFilter() {
+        File[] files = dir.listFiles((dir, name) -> name.endsWith(".java"));
+        if (files != null) {
+            for (File file : files) {
+                System.out.println(file);
+            }
+            assertEquals(8, files.length);
         }
     }
 }
