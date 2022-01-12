@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsePerson {
-    @SuppressWarnings({"UnusedAssignment", "Convert2MethodRef"})
+    @SuppressWarnings({"Convert2MethodRef"})
     public static void main(String[] args) {
         List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
 
