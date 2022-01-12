@@ -2,12 +2,10 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",

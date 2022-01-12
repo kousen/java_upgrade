@@ -3,7 +3,6 @@ package lambdas;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiFunction;
 
 public class MapDemo {
     public static void main(String[] args) {
