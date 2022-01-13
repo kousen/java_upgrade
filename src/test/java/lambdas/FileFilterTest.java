@@ -13,6 +13,7 @@ import java.util.function.BiConsumer;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FileFilterTest {
     private final File root = new File("src/main/java");
@@ -108,5 +109,24 @@ public class FileFilterTest {
         BiConsumer<String, Integer> consolePrint = (key, value) -> System.out.println(key + " maps to " + value);
         BiConsumer<String, Integer> logInfoPrint = (key, value) -> logger.info(key + " maps to " + value);
         map.forEach(consolePrint.andThen(logInfoPrint));
+    }
+
+    private String getErrorMessage(int x) {
+        System.out.println("Inside getErrorMessage");
+        return x + " should be greater than 10";
+    }
+
+    @Test
+    void showAssertions() {
+        int x = 42;
+        // second argument is a method that returns a String
+        assertTrue(x > 10, getErrorMessage(x));
+
+        // second argument is a Supplier<String>
+        // error message is produced "lazily" (only when needed)
+        assertTrue(x > 10, () -> getErrorMessage(x));
+
+        Logger logger = Logger.getLogger("abc");
+        logger.fine(() -> getErrorMessage(42));
     }
 }
