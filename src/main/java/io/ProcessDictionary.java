@@ -20,14 +20,13 @@ public class ProcessDictionary {
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        try (Stream<String> lines = Files.lines(dictionary)) {
-            lines.filter(s -> s.length() > 20)
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.filter(s -> s.length() > 20)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             e.printStackTrace();
         }
