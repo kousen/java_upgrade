@@ -13,10 +13,13 @@ public class SumBigDecimals {
         return new BigDecimal(total + "");
     }
 
+    // reduce takes a binary operator as an argument
+    // binary operator has two arguments -- accumulator and the stream value (both of same type)
+    // whatever the lambda returns is the next value of the accumulator on the next iteration
     public BigDecimal sumFirstN_usingReduce(int n) {
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
-                .limit(n)
-                .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+                     .limit(n)
+                     .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
 
     // Off by one error, because 1 is never doubled
