@@ -45,7 +45,7 @@ public class SortGolfers {
                         golfer -> golfer.getScore() < 70));
 
         map.forEach((k,v) -> {
-            System.out.println(k);
+            System.out.println(k ? "score < 70" : "score >= 70");
             v.forEach(System.out::println);
         });
     }
@@ -55,6 +55,6 @@ public class SortGolfers {
 //        sg.defaultSort();
 //        sg.sortByScoreThenLast();
         sg.sortByScoreThenLastThenFirst();
-//         sg.partitionByScore();
+        sg.partitionByScore();
     }
 }

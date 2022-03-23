@@ -8,6 +8,6 @@ public interface Employee {
     void doWork();
 
     default String getName() {
-        return String.format("%s %s", getFirst(), getLast());
+        return String.join(" ", getFirst(), getLast());
     }
 }
