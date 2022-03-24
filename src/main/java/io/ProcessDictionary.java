@@ -20,8 +20,8 @@ public class ProcessDictionary {
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        try (Stream<String> lines = Files.lines(dictionary)) {
-            lines.filter(s -> s.length() > 20)
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.filter(s -> s.length() > 20)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )

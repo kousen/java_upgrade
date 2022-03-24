@@ -2,6 +2,7 @@ package refactoring.before;
 
 import java.util.*;
 
+@SuppressWarnings("DuplicatedCode")
 public class LoopsSortsAndIfs {
     public static void main(String[] args) {
         String[] strings = "this is an array of strings".split(" ");
