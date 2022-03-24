@@ -113,6 +113,7 @@ public class StringExercises {
                 .forEach(System.out::println);
 
         Logger logger = Logger.getLogger("mylogger");
+        logger.fine("Here is my log message at info level");
         logger.fine(() -> "Here is my log message at info level");
         Consumer<String> log = message -> logger.info(message);
         Consumer<String> print = message -> System.out.println(message);

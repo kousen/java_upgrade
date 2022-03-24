@@ -14,6 +14,7 @@ public class LazyErrorTest {
     @Test
     void showErrorMessage() {
         int x = 42;
-        assertTrue(x > 0, () -> getErrorMessage());
+        assertTrue(x > 0, getErrorMessage());   // forms error message eagerly
+        assertTrue(x > 0, () -> getErrorMessage()); // lazy
     }
 }

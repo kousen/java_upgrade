@@ -1,18 +1,21 @@
 package lazy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
     private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
 
     public static int multByTwo(int n) {
-        System.out.printf("Inside multByTwo with arg %d%n", n);
+        System.out.printf("Inside multByTwo with arg %d and thread %s%n", n, Thread.currentThread().getName());
         return n * 2;
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside modByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d and thread %s%n", n, Thread.currentThread().getName());
         return n % 3 == 0;
     }
 
@@ -29,7 +32,28 @@ public class LazyStreams {
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
-                .findFirst().orElse(0);
+                .findAny().orElse(0);
         System.out.printf("First even divisible by 3 is %d%n", firstEvenDoubleDivBy3);
+
+        List<Integer> numbers = IntStream.range(1, 100)
+                // .mapToObj(i -> Integer.valueOf(i))
+                .boxed()
+                .parallel()
+                .collect(Collectors.toList());
+        System.out.println(numbers);
+
+        List<Integer> ints = new ArrayList<>();
+        IntStream.range(1, 100)
+                .parallel()
+                .forEach(n -> ints.add(n));
+        System.out.println(ints);
+
+        int total = 0;  // can NOT change a local variable inside a lambda
+//        ints.stream()
+//                .forEach(n -> total += n);
+        total = ints.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        System.out.println(total);
     }
 }
