@@ -3,12 +3,13 @@ package streams;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static java.util.Comparator.comparingInt;
-import static java.util.Comparator.naturalOrder;
+import static java.util.Comparator.*;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -73,21 +74,30 @@ public class StringExercises {
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
-        LinkedList<String> evens = strings.stream()
+        List<String> evens = strings.stream()
                 .filter(s -> s.length() % 2 == 0)
-                .collect(Collectors.toCollection(LinkedList::new));
+                .collect(Collectors.toCollection(() -> new LinkedList<String>()));
+        //.collect(Collectors.toCollection(LinkedList::new));
         System.out.println(evens);
-        assertTrue(evens instanceof LinkedList);
+        System.out.println(evens.getClass()
+                .getName());
 
         // Add the strings to a map of string to length
         Map<String, Integer> map = strings.stream()
                 // .collect(Collectors.toMap(s -> s, String::length));
-                .collect(Collectors.toMap(Function.identity(), String::length));
+                .collect(Collectors.toMap(Function.identity(), string -> string.length()));
         System.out.println(map);
 
         // Filter out nulls, then print even-length strings
         List<String> stringsWithNulls = Arrays.asList(null, "this", null, null,
                 "is", "another", null, "list", null, "of", "strings");
+        stringsWithNulls.stream()
+                .sorted(nullsFirst(naturalOrder()))
+                .forEach(System.out::println);
+        stringsWithNulls.stream()
+                .sorted(nullsLast(naturalOrder()))
+                .forEach(System.out::println);
+
         stringsWithNulls.stream()
                 // .filter(s -> s != null && s.length() % 2 == 0)
                 // .filter(s -> s != null)
@@ -101,6 +111,17 @@ public class StringExercises {
         stringsWithNulls.stream()
                 .filter(nonNull.and(evenLength)) // function composition
                 .forEach(System.out::println);
-    }
 
+        Logger logger = Logger.getLogger("mylogger");
+        logger.fine(() -> "Here is my log message at info level");
+        Consumer<String> log = message -> logger.info(message);
+        Consumer<String> print = message -> System.out.println(message);
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evenLength))
+        //        .forEach(log.andThen(print));
+                .forEach(string -> {
+                    logger.info(string);
+                    System.out.println(string);
+                });
+    }
 }
