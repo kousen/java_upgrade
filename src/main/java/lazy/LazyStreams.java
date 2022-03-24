@@ -1,6 +1,7 @@
 package lazy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -42,11 +43,12 @@ public class LazyStreams {
                 .collect(Collectors.toList());
         System.out.println(numbers);
 
-        List<Integer> ints = new ArrayList<>();
+        List<Integer> ints = Collections.synchronizedList(new ArrayList<>());
         IntStream.range(1, 100)
                 .parallel()
-                .forEach(n -> ints.add(n));
+                .forEach(ints::add);
         System.out.println(ints);
+        System.out.println(ints.size());
 
         int total = 0;  // can NOT change a local variable inside a lambda
 //        ints.stream()
