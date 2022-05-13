@@ -1,5 +1,7 @@
 package lambdas;
 
+// public record Person(String name) {}
+
 public class Person {
     private String name;
 
@@ -9,13 +11,21 @@ public class Person {
         this.name = name;
     }
 
+    public Person(String... names) {
+        this.name = String.join(" ", names);
+    }
+
+    public Person(Person person) {
+        this.name = person.name;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     @Override
     public boolean equals(Object o) {
