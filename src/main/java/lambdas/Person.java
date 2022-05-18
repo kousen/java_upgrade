@@ -9,6 +9,14 @@ public class Person {
         this.name = name;
     }
 
+    public Person(String... names) { // vararg constructor, uses names like an array
+        this.name = String.join(" ", names);
+    }
+
+    public Person(Person person) {  // copy constructor
+        this.name = person.name;
+    }
+
     public String getName() {
         return name;
     }
