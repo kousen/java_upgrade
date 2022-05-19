@@ -3,14 +3,17 @@ package streams;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
             "list", "of", "strings");
 
+    @SuppressWarnings("Convert2Lambda")
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
         strings.sort(new Comparator<String>() {
@@ -22,6 +25,7 @@ public class StringExercises {
         System.out.println(strings);
     }
 
+    @SuppressWarnings("ComparatorCombinators")
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator (reverse sort)
@@ -38,6 +42,7 @@ public class StringExercises {
         return s1.length() - s2.length();
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     @Test  // Use a lambda that calls 'compareStrings' directly
     public void stringLengthSort_methodCall() {
         strings.sort((s1, s2) -> compareStrings(s1, s2));
@@ -94,6 +99,14 @@ public class StringExercises {
                 .filter(nullFilter.and(evenFilter))  // function composition
                 .collect(Collectors.toList());
         System.out.println(evenLengths);
+
+        Logger logger = Logger.getLogger("streams.StringExercises");
+
+        Consumer<String> consolePrinter = System.out::println;
+        Consumer<String> consoleLogger = logger::info;
+        stringsWithNulls.stream()
+                .filter(nullFilter.and(evenFilter))
+                .forEach(consolePrinter.andThen(consoleLogger));
     }
 
 }
