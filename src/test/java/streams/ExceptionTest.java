@@ -1,5 +1,6 @@
 package streams;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class ExceptionTest {
     // 2. Delegate to a method that includes the try-catch -->
     //    preferred mechanism
     // 3. Use a framework that already catches the exception
-    @Test
+    @Test @Disabled
     void throwRuntimeException() {
         strings.stream()
                 .map(this::callValidation)
