@@ -119,4 +119,17 @@ public class StringExercises {
                 .max(Comparator.naturalOrder()).orElse("");
         System.out.println(maxByAlpha);
     }
+
+    @Test
+    void subList() {
+        List<String> days = new ArrayList<>();
+        days.add("Monday");
+        days.add("Tuesday");
+        days.add("Wednesday");
+        days = days.subList(0, 2);
+        System.out.println(days);
+        days.add("Thursday");
+        System.out.println(days);
+        days.forEach(System.out::println);
+    }
 }
