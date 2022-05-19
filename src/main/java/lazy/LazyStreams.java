@@ -1,18 +1,17 @@
 package lazy;
 
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
-        System.out.printf("Inside multByTwo with arg %d%n", n);
+        System.out.printf("Inside multByTwo with arg %d on thread %s%n",
+                n, Thread.currentThread().getName());
         return n * 2;
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside modByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d on thread %s%n",
+                n, Thread.currentThread().getName());
         return n % 3 == 0;
     }
 

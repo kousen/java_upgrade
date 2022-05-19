@@ -109,4 +109,14 @@ public class StringExercises {
                 .forEach(consolePrinter.andThen(consoleLogger));
     }
 
+    @Test
+    void maxString() {
+        String maxByLength = strings.stream()
+                .max(Comparator.comparingInt(String::length)).orElse("");
+        System.out.println(maxByLength);
+
+        String maxByAlpha = strings.stream()
+                .max(Comparator.naturalOrder()).orElse("");
+        System.out.println(maxByAlpha);
+    }
 }
