@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
         System.out.printf("Inside multByTwo with arg %d%n", n);
         return n * 2;
@@ -26,7 +24,7 @@ public class LazyStreams {
 
 
         // Demonstrate laziness using print statements
-        firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)
+        firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_100)
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
                 .findFirst().orElse(0);
