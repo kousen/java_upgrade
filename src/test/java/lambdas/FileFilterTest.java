@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,11 +50,17 @@ public class FileFilterTest {
         assertEquals(13, files.length);
     }
 
-    @SuppressWarnings("Convert2MethodRef")
     @Test
     void listDirectories_assignToVariable() {
-        FileFilter filter = file -> file.isDirectory();
+        // FileFilter filter = file -> file.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] files = root.listFiles(filter);
+        assertEquals(13, files.length);
+    }
+
+    @Test
+    void listDirectories_methodReference() {
+        File[] files = root.listFiles(File::isDirectory);
         assertEquals(13, files.length);
     }
 
@@ -66,5 +74,14 @@ public class FileFilterTest {
     void javaSrcFiles_filenameFilter() {
         File[] files = root.listFiles((dir, name) -> name.endsWith(".java"));
         assertEquals(8, files.length);
+    }
+
+    @Test
+    void mapWithBiConsumer() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 2);
+        map.forEach((key, value) -> System.out.println(key + " map to " + value));
     }
 }
