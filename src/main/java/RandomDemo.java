@@ -7,11 +7,7 @@ public class RandomDemo {
         Random r = new Random();
         int sum = IntStream.generate(() -> r.nextInt(10))
                 .limit(10)
-                .map(n -> {
-                    System.out.println("n = " + n);
-                    return n;
-                })
-                .filter(n -> n % 2 == 0)  // only even numbers
+                .filter(n -> n % 2 == 0)
                 .peek(System.out::println)
                 .map(n -> n * 2)
                 .sum();
@@ -22,6 +18,6 @@ public class RandomDemo {
                 .peek(System.out::println)
                 .filter(n -> n > 7)
                 .findFirst();
-
+        first.ifPresent(n -> System.out.println("First > 7: " + n));
     }
 }

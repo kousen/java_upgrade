@@ -16,10 +16,8 @@ public class CollectorsDemo {
 //                    return n;
 //                })
                 // equivalent to:
-                .peek(n -> {
-                    System.out.println("On " + Thread.currentThread().getName()
-                            + ", the value of n before the filter is " + n);
-                })
+                .peek(n -> System.out.println("On " + Thread.currentThread().getName()
+                        + ", the value of n before the filter is " + n))
                 .filter(n -> n % 2 == 0)
                 .peek(n -> System.out.println("On " + Thread.currentThread().getName()
                         + ", the value of n after the filter is  " + n))
@@ -34,6 +32,7 @@ public class CollectorsDemo {
         Set<String> collection =
                 Stream.of("this is a is a collection of strings".split(" "))
                 .collect(Collectors.toCollection(ConcurrentSkipListSet::new));
+        System.out.println(collection);
 
         Map<String, Integer> stringMap =
                 Stream.of("this is a collection of strings".split(" "))
