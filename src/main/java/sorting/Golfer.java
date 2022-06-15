@@ -1,16 +1,9 @@
 package sorting;
 
 public class Golfer implements Comparable<Golfer> {
-    private String first;
-    private String last;
-    private int score;
-
-    public Golfer() {}
-
-    public Golfer(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+    private final String first;
+    private final String last;
+    private final int score;
 
     public Golfer(String first, String last, int score) {
         this.first = first;
@@ -27,24 +20,12 @@ public class Golfer implements Comparable<Golfer> {
         return first;
     }
 
-    public void setFirst(String first) {
-        this.first = first;
-    }
-
     public String getLast() {
         return last;
     }
 
-    public void setLast(String last) {
-        this.last = last;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     @Override
