@@ -20,5 +20,8 @@ public class LazyMessageSupplierTest {
 
         // assertTrue(Boolean, Supplier<String>) --> lazily evaluates the String argument
         assertTrue(x, () -> getErrorMessage());
+
+        // method reference to Supplier<String>
+        assertTrue(x, this::getErrorMessage);
     }
 }
