@@ -1,11 +1,8 @@
 package lazy;
 
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
         System.out.printf("Inside multByTwo with arg %d%n", n);
         return n * 2;
@@ -21,7 +18,8 @@ public class LazyStreams {
         int firstEvenDoubleDivBy3 = IntStream.range(100, 200)
                 .filter(n -> n % 3 == 0)
                 .map(n -> n * 2)
-                .findFirst().orElse(0);
+                .findFirst().orElseThrow(
+                        () -> new IllegalArgumentException("No even double divisible by 3 found"));
         System.out.println(firstEvenDoubleDivBy3);
 
 

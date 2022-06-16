@@ -1,11 +1,11 @@
 package streams;
 
 import org.junit.jupiter.api.Test;
+import sun.security.rsa.RSAUtil;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StringExercises {
     private final List<String> strings = Arrays.asList("this", "is", "a",
@@ -61,6 +61,8 @@ public class StringExercises {
 
     @Test
     public void demoCollectors() {
+        reduceDemo();
+
         // Get only strings of even length
         // Add them to a LinkedList
 
@@ -69,6 +71,35 @@ public class StringExercises {
         // Filter out nulls, then print even-length strings
 
         // Combine the two predicates and use the result to print non-null, even-length strings
+    }
+
+    private void reduceDemo() {
+        int a = 3;
+        int b = 4;
+        int c = a + b;
+        System.out.println(c);
+        c = Integer.sum(a, b);
+        System.out.println(c);
+
+        OptionalInt totalOptional = IntStream.iterate(0, i -> i + 1)
+                .peek(x -> System.out.println("Before filter: " + x))
+                .filter(i -> i > 10)
+                .peek(x -> System.out.println("After filter: " + x))
+                .limit(10)
+                .reduce(Integer::sum);
+        System.out.println(totalOptional);
+
+        Optional<Integer> optional = Stream.iterate(0, i -> i + 1)
+                .limit(10)
+                .reduce(Integer::sum);
+                // .reduce((a1, b1) -> Integer.sum(a1, b1));
+        System.out.println(optional);
+
+        int total =IntStream.iterate(0, i -> i + 1)
+                .limit(10)
+                .filter(i -> i > 10)
+                .sum();
+        System.out.println(total);
     }
 
 }
