@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import sun.security.rsa.RSAUtil;
 
 import java.awt.*;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -113,7 +114,7 @@ public class StringExercises {
     }
 
     @Test
-    private void reduceDemo() {
+    void reduceDemo() {
         int a = 3;
         int b = 4;
         int c = a + b;
@@ -139,6 +140,44 @@ public class StringExercises {
                 .limit(10)
                 .filter(i -> i > 10)
                 .sum();
+        System.out.println(total);
+    }
+
+    @Test
+    void reduceDemoVerbose() {
+        Optional<Integer> optional = Stream.iterate(1, i -> i + 1)
+                .limit(10)
+                .reduce((accumulator, element) -> {
+                    System.out.println("accumulator = " + accumulator + ", element = " + element);
+                    // the accumulator is whatever the BinaryOperator returns on this pass
+                    return accumulator + element;
+                });
+        // .reduce((a1, b1) -> Integer.sum(a1, b1));
+        System.out.println(optional);
+    }
+
+    @Test
+    void reduceDemoVerboseWithIdentity() {
+        Integer total = Stream.iterate(1, i -> i + 1)
+                .limit(10)
+                .reduce(0, (accumulator, element) -> {
+                    System.out.println("accumulator = " + accumulator + ", element = " + element);
+                    // the accumulator is whatever the BinaryOperator returns on this pass
+                    return accumulator + element;
+                });
+        // .reduce((a1, b1) -> Integer.sum(a1, b1));
+        System.out.println(total);
+    }
+
+    @Test
+    void sumBigDecimals() {
+        BigDecimal total = Stream.iterate(BigDecimal.ONE, i -> i.add(BigDecimal.ONE))
+                .limit(10)
+                // .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, (accumlator, element) -> {
+                    System.out.println("accumlator = " + accumlator + ", element = " + element);
+                    return accumlator.add(element);
+                });
         System.out.println(total);
     }
 
