@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import sun.security.rsa.RSAUtil;
 
 import java.util.*;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -92,14 +93,22 @@ public class StringExercises {
         Optional<Integer> optional = Stream.iterate(0, i -> i + 1)
                 .limit(10)
                 .reduce(Integer::sum);
-                // .reduce((a1, b1) -> Integer.sum(a1, b1));
+        // .reduce((a1, b1) -> Integer.sum(a1, b1));
         System.out.println(optional);
 
-        int total =IntStream.iterate(0, i -> i + 1)
+        int total = IntStream.iterate(0, i -> i + 1)
                 .limit(10)
                 .filter(i -> i > 10)
                 .sum();
         System.out.println(total);
     }
 
+    @Test
+    void randomDoubles() {
+        System.out.println(
+                DoubleStream.generate(Math::random)
+                        .limit(1_000_000)
+                        .summaryStatistics());
+        //.forEach(System.out::println);
+    }
 }
