@@ -17,11 +17,14 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
-        // Using a stream:
+        // Using a (sequential) stream:
+        long start = System.nanoTime();
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
+        long end = System.nanoTime();
         System.out.println(people);
+        System.out.println("Sequential: " + (end - start) + "ns");
 
         // Method (constructor) reference:
         people = names.stream()
@@ -30,9 +33,12 @@ public class UsePerson {
         System.out.println(people);
 
         // In parallel (not worth it in this particular case):
+        start = System.nanoTime();
         people = names.parallelStream()
                 .map(Person::new)
                 .collect(Collectors.toList());
+        end = System.nanoTime();
+        System.out.println("Parallel: " + (end - start) + "ns");
         System.out.println(people);
 
         // Convert to an array instead of a collection:

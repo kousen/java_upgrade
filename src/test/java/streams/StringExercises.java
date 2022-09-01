@@ -13,7 +13,7 @@ public class StringExercises {
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
-        Collections.sort(strings, new Comparator<String>() {
+        strings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
