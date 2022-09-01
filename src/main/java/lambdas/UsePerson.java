@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 public class UsePerson {
     @SuppressWarnings({"Convert2MethodRef"})
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = Arrays.asList(
+                "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
 
         // Classic, Java 7 approach:
         List<Person> beatles = new ArrayList<>(); // shared mutable state
@@ -29,6 +30,12 @@ public class UsePerson {
         // Method (constructor) reference:
         people = names.stream()
                 .map(Person::new)
+                .collect(Collectors.toList());
+        System.out.println(people);
+
+        people = names.stream()
+                .map(s -> s.split(" "))
+                .map(Person::new) // Uses the vararg constructor
                 .collect(Collectors.toList());
         System.out.println(people);
 
