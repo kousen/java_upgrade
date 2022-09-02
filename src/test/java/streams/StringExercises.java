@@ -2,7 +2,6 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
@@ -59,7 +58,8 @@ public class StringExercises {
     @Test  // Use Comparator.comparingInt
     public void stringLengthSort_comparingInt() {
         strings.stream()
-                .sorted(Comparator.comparingInt(String::length))
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
                 .forEach(System.out::println);
     }
 
@@ -70,10 +70,10 @@ public class StringExercises {
         List<String> evens = strings.stream()
                 .filter(s -> s.length() % 2 == 0)
                 // .collect(Collectors.toCollection(() -> new LinkedList<>()));
+                // .collect(Collectors.toCollection(() -> new ArrayList<>(10)));
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(evens);
-        System.out.println(evens.getClass()
-                .getName());
+        System.out.println(evens.getClass().getName());
 
         // Add the strings to a map of string to length
         Map<String, Integer> map = strings.stream()
@@ -89,8 +89,11 @@ public class StringExercises {
         stringsWithNulls.stream()
                 // .filter(s -> s != null && s.length() % 2 == 0)  // short-circuiting logical AND
                 // .filter(s -> s != null)
+                .peek(s -> System.out.println("Before null filter: " + s))
                 .filter(Objects::nonNull)
+                .peek(s -> System.out.println("After null filter, before even filter: " + s))
                 .filter(s -> s.length() % 2 == 0)
+                .peek(s -> System.out.println("After even filter " + s))
                 .forEach(System.out::println);
 
         // Combine the two predicates and use the result to print non-null, even-length strings

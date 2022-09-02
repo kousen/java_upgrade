@@ -11,8 +11,8 @@ public class Person {
         this.name = name;
     }
 
-    public Person(String... names) {
-        this.name = String.join(" ", names);
+    public Person(String first, String last) {
+        this.name = String.join(" ", first, last);
     }
 
     public String getName() {
