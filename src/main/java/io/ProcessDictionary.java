@@ -16,18 +16,17 @@ import static java.util.stream.Collectors.groupingBy;
 
 @SuppressWarnings("DuplicatedCode")
 public class ProcessDictionary {
-    private final Path dictionary = Paths.get("/usr/share/dict/words");
+    private final Path dictionary = Paths.get("src/main/resources/web2");
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        try (Stream<String> lines = Files.lines(dictionary)) {
-            lines.filter(s -> s.length() > 20)
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.filter(s -> s.length() > 20)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +48,7 @@ public class ProcessDictionary {
         try (Stream<String> lines = Files.lines(dictionary)) {
             lines.filter(s -> s.length() > 20)
                     .collect(Collectors.groupingBy(String::length, Collectors.counting())) // Map<Integer,Long>
-                    .forEach((len, num) -> System.out.printf("%d: %d%n", len, num));
+                    .forEach((len, num) -> System.out.printf("Length %d: Count %d%n", len, num));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,7 +71,7 @@ public class ProcessDictionary {
     public void printSortedMapOfWordsUsingBufferedReader() {
         System.out.println("\nNumber of words of each length (desc order):");
         try (Stream<String> lines =
-                     new BufferedReader(new FileReader("/usr/share/dict/words")).lines()) {
+                     new BufferedReader(new FileReader("src/main/resources/web2")).lines()) {
             Map<Integer, Long> map = lines.filter(s -> s.length() > 20)
                     .collect(groupingBy(String::length, counting()));
 
