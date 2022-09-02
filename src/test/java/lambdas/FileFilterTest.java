@@ -18,7 +18,7 @@ public class FileFilterTest {
     public void listFiles_noFilter() {
         File[] files = root.listFiles();
         assert files != null;
-        assertEquals(21, files.length);
+        assertEquals(22, files.length);
     }
 
     @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
@@ -74,7 +74,7 @@ public class FileFilterTest {
     void listFiles_javaSrc() {
         File[] javaSourceFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
         assert javaSourceFiles != null;
-        assertEquals(8, javaSourceFiles.length);
+        assertEquals(9, javaSourceFiles.length);
     }
 
     @Test
