@@ -40,6 +40,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("Person(%s)", name);
+        return String.format("MyPerson(%s)", name);
     }
 }

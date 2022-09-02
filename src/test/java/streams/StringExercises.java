@@ -103,7 +103,7 @@ public class StringExercises {
 
         Logger logger = Logger.getLogger(StringExercises.class.getName());
         Consumer<String> consolePrint = System.out::println;
-        Consumer<String> loggerPrint = logger::info;
+        Consumer<String> loggerPrint = msg -> logger.info(() -> msg);
 
         stringsWithNulls.stream()
                 .filter(nonNull.and(evenLength)) // Function composition

@@ -23,10 +23,10 @@ public class UsePerson {
         // Using a (sequential) stream:
         Instant start = Instant.now();
         List<Person> people = names.stream()    // Stream<String>
-                .map(name -> new Person(name))  // Stream<Person>
-                .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
+                .map(name -> new Person(name))  // Stream<MyPerson>
+                .collect(Collectors.toList());  // Converts Stream<MyPerson> to List<MyPerson>
         System.out.println(people);
-        System.out.println("Sequential: " + Duration.between(start, Instant.now()).toString());
+        System.out.println("Sequential: " + Duration.between(start, Instant.now()).toMillis() + "ms");
 
         // Method (constructor) reference:
         people = names.stream()
@@ -45,7 +45,7 @@ public class UsePerson {
         people = names.parallelStream()
                 .map(Person::new)
                 .collect(Collectors.toList());
-        System.out.println("Parallel: " + Duration.between(start, Instant.now()).toString());
+        System.out.println("Parallel: " + Duration.between(start, Instant.now()).toMillisPart() + "ms");
         System.out.println(people);
 
         // Convert to an array instead of a collection:
