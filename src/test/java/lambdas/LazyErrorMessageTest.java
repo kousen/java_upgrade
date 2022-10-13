@@ -26,5 +26,6 @@ public class LazyErrorMessageTest {
     public void checkBooleanWithLazyErrorMessage() {
         boolean x = true;
         assertTrue(x, () -> getErrorMessage());  // Lazy evaluation of error
+        assertTrue(x, this::getErrorMessage);    // Lazy evaluation of error
     }
 }
