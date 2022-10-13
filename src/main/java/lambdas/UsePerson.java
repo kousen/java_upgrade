@@ -33,5 +33,8 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new); // array constructor reference
         System.out.println(Arrays.toString(peopleArray));
+
+        names.parallelStream()
+                .forEach(x -> System.out.println(Thread.currentThread().getName() + ": " + x));
     }
 }

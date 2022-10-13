@@ -52,6 +52,18 @@ public class SortGolfers {
         });
     }
 
+    public Optional<Golfer> maxOptionalGolfer() {
+        return golfers.stream()
+                .filter(golfer -> golfer.getScore() > 70)
+                .max(Comparator.comparingInt(Golfer::getScore));
+    }
+
+    public Golfer maxGolfer() {
+        return golfers.stream()
+                .max(Comparator.comparingInt(Golfer::getScore))
+                .orElseThrow(() -> new NoSuchElementException("No golfers found"));
+    }
+
     public static void main(String[] args) {
         SortGolfers sg = new SortGolfers();
         sg.sortGolfersInNaturalOrder();
@@ -59,5 +71,6 @@ public class SortGolfers {
 //        sg.sortByScoreThenLast();
         sg.sortByScoreThenLastThenFirst();
 //         sg.partitionByScore();
+        sg.maxOptionalGolfer().ifPresent(System.out::println);
     }
 }
