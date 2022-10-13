@@ -3,6 +3,7 @@ package lambdas;
 public class RunnableDemo {
     public static void main(String[] args) {
         // Java 7 syntax
+        // anonymous inner class
         new Thread(new Runnable() {
             @Override
             public void run() {
