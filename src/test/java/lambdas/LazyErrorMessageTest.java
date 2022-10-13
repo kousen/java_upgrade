@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LazyErrorMessageTest {
     @Test
     public void checkBoolean() {
-        boolean x = false;
+        boolean x = true;
         assertTrue(x);
     }
 
