@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,5 +67,27 @@ public class FileFilterTest {
         File[] javaSrc = root.listFiles(filter);
         assert javaSrc != null;
         assertEquals(8, javaSrc.length);
+    }
+
+    @Test
+    void consumeStrings() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list");
+        for (String string : strings) {
+            System.out.println(string);
+        }
+        strings.forEach(s -> System.out.println(s)); // expression lambda
+        strings.forEach(System.out::println);  // method reference equivalent to the above
+    }
+
+    @Test
+    void localVariablesAreEffectivelyFinal() {
+        int total;  // local variables must be "final" or "effectively final"
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        // can not modify a local variable inside a lambda
+        // numbers.forEach(number -> total += number);
+        total = numbers.stream()
+                .mapToInt(number -> number)
+                .sum();
+        System.out.println("The total is " + total);
     }
 }
