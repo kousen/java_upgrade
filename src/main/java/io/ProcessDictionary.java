@@ -18,16 +18,27 @@ import static java.util.stream.Collectors.groupingBy;
 public class ProcessDictionary {
     private final Path dictionary = Paths.get("/usr/share/dict/words");
 
+    public int maxLength() {
+        try (Stream<String> words = Files.lines(dictionary)) {
+            return words.max(Comparator.comparingInt(String::length))  // Optional<String>
+                    .orElse("").length();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        try (Stream<String> lines = Files.lines(dictionary)) {
-            lines.filter(s -> s.length() > 20)
+        int maxLength = maxLength();
+        System.out.println("The length of the longest word is " + maxLength);
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.filter(s -> s.length() > maxLength - 5)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             e.printStackTrace();
         }
