@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,7 +17,13 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("55"), answer);
     }
 
-    @Test  @Disabled("disable until demo")
+    @Test
+    public void sumFirstN_usingReduce_verbose() {
+        BigDecimal answer = summer.sumFirstN_usingReduce_verbose(10);
+        assertEquals(new BigDecimal("55"), answer);
+    }
+
+    @Test @Disabled("disable until demo")
     public void sumFirstNDoubledValues() {
         BigDecimal answer = summer.sumDoubles(10);
 
@@ -30,4 +37,10 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("110"), answer);
     }
 
+    @Test
+    void reduceToList() {
+        List<BigDecimal> bigDecimals = summer.reduceStream(4);
+        assertEquals(4, bigDecimals.size());
+        System.out.println(bigDecimals);
+    }
 }
