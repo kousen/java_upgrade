@@ -39,8 +39,8 @@ public class SumBigDecimalsTest {
 
     @Test
     void reduceToList() {
-        List<BigDecimal> bigDecimals = summer.reduceStream(4);
-        assertEquals(4, bigDecimals.size());
+        List<BigDecimal> bigDecimals = summer.reduceStream(10);
+        assertEquals(10, bigDecimals.size());
         System.out.println(bigDecimals);
     }
 }

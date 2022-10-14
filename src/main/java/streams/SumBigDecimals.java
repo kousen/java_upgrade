@@ -2,7 +2,6 @@ package streams;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -59,19 +58,22 @@ public class SumBigDecimals {
     //    L1        L2         L3           L4
     //                 L_total
     public List<BigDecimal> reduceStream(int n) {
+        // Using lambdas with 3-arg collect
+//        return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+//                .limit(n)
+//                .parallel()
+//                .collect(() -> new ArrayList<>(),              // supplier
+//                        (list, element) -> list.add(element),  // accumulator
+//                        (list1, list2) -> list1.addAll(list2)  // combiner
+//                );
+
+        // Using method references with 3-arg collect
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
-                // .parallel()
-                .peek(System.out::println)
-                .reduce(Collections.synchronizedList(new ArrayList<>(n)),
-                        (list, element) -> {
-                            list.add(element);
-                            System.out.println(list);
-                            return list;
-                        },
-                        (list1, list2) -> {
-                            list1.addAll(list2);
-                            return list1;
-                        });
+                .parallel()
+                .collect(ArrayList::new,   // supplier
+                        ArrayList::add,    // accumulator
+                        ArrayList::addAll  // combiner
+                );
     }
 }
