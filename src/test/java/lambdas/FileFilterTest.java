@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,7 +33,8 @@ public class FileFilterTest {
 
     @Test
     void listDirectories_expressionLambda() {
-        File[] directories = root.listFiles(file -> file.isDirectory());
+        // File[] directories = root.listFiles(file -> file.isDirectory());
+        File[] directories = root.listFiles(File::isDirectory);
         assert directories != null;
         assertEquals(13, directories.length);
     }
@@ -54,5 +57,21 @@ public class FileFilterTest {
         });
         assert javaSrc != null;
         assertEquals(8, javaSrc.length);
+    }
+
+    @Test
+    void forEach_list() {
+        // Java 8: Arrays.asList(T...) --> "fixed size" list
+        // Java 9: List.of(T...) --> "unmodifiable" list
+
+        List<String> strings = Arrays.asList("a", "b", "c");
+
+        // for-each loop
+        for (String s: strings) {
+            System.out.println(s);
+        }
+
+        // default forEach(Consumer) method
+        strings.forEach(System.out::println);
     }
 }
