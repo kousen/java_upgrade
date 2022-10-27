@@ -13,6 +13,10 @@ public class Person {
         this.name = String.join("-", names);
     }
 
+    public Person(Person p) {
+        this.name = p.name;
+    }
+
     public String getName() {
         return name;
     }

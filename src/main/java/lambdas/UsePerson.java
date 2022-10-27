@@ -28,12 +28,13 @@ public class UsePerson {
 
         people = names.stream()
                 .map(name -> name.split(" ")) // Stream<String[]>
-                .map(Person::new)
+                .map(Person::new) // calls new Person(String...)
                 .collect(Collectors.toList());
         System.out.println(people);
 
         people = names.stream()
-                .map(Person::new)
+                .map(Person::new) // calls new Person(String)  Stream<Person>
+                .map(Person::new) // calls new Person(Person)
                 .collect(Collectors.toList());
         System.out.println(people);
 
