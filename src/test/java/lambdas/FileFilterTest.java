@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -60,4 +64,17 @@ public class FileFilterTest {
         }
     }
 
+    @Test
+    void iterateUsingForEach() {
+        List<String> strings = Arrays.asList("one", "two", "three");
+        strings.forEach(entry -> System.out.println(entry));
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 2);
+        // In Java 9+, you could write:
+        // map = Map.ofEntries(Map.entry("a", 1), Map.entry("b", 2), Map.entry("c", 2));
+        map.forEach((key, value) -> System.out.println(key + " = " + value));
+    }
 }
