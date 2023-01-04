@@ -47,6 +47,14 @@ public class FileFilterTest {
     }
 
     @Test
+    void listFiles_directories_methodRef() {
+        File[] files = root.listFiles(File::isDirectory);
+        if (files != null) {
+            assertEquals(13, files.length);
+        }
+    }
+
+    @Test
     void listFiles_directories_blocklambda() {
         File[] files = root.listFiles(pathname -> {
             return pathname.isDirectory();

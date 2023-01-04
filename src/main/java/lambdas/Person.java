@@ -9,6 +9,18 @@ public class Person {
         this.name = name;
     }
 
+    public Person(String... names) {   // new Person("Captain", "Jean-Luc", "Picard")
+        this.name = String.join(" ", names);
+        try {
+            Thread.sleep(1000);  // Simulate a long-running operation
+        } catch (InterruptedException ignored) {
+        }
+    }
+
+    public Person(Person person) {
+        this.name = person.name;
+    }
+
     public String getName() {
         return name;
     }
