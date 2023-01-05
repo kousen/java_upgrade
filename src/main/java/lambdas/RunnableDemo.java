@@ -1,5 +1,7 @@
 package lambdas;
 
+import java.io.IOException;
+
 public class RunnableDemo {
     public static void main(String[] args) {
         // Java 7 syntax
