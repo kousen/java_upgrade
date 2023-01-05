@@ -1,18 +1,15 @@
 package lazy;
 
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
-        System.out.printf("Inside multByTwo with arg %d%n", n);
+        System.out.printf("Inside multByTwo with arg %d on thread %s%n", n, Thread.currentThread().getName());
         return n * 2;
     }
 
     public static boolean modByThree(int n) {
-        System.out.printf("Inside modByThree with arg %d%n", n);
+        System.out.printf("Inside modByThree with arg %d on thread %s%n", n, Thread.currentThread().getName());
         return n % 3 == 0;
     }
 
@@ -23,7 +20,6 @@ public class LazyStreams {
                 .map(n -> n * 2)
                 .findFirst().orElse(0);
         System.out.println(firstEvenDoubleDivBy3);
-
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.range(100, 2_000_000)

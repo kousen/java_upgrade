@@ -47,6 +47,5 @@ public class FlatMapDemo {
                         customer.getOrders().size() == 0 ? Stream.empty() :
                                 customer.getOrders().stream())
                 .forEach(System.out::println);
-
     }
 }
