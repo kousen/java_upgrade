@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
-import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -43,6 +44,13 @@ public class FileFilterTest {
     }
 
     @Test
+    void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
+        assert directories != null;
+        assertEquals(13, directories.length);
+    }
+
+    @Test
     void listDirectories_blockLambda() {
         File[] directories = root.listFiles(pathname -> {
             return pathname.isDirectory();
@@ -61,6 +69,14 @@ public class FileFilterTest {
 
     @Test
     void forEach() {
-        List.of("this", "is", "a", "list").forEach(x -> System.out.println(x));
+        List.of("this", "is", "a", "list")
+                .forEach(x -> System.out.println("x = " + x));
+
+
+        Logger logger = Logger.getLogger(FileFilterTest.class.getName());
+        IntStream.iterate(0, x -> x + 1)
+                .limit(10)
+                .peek(x -> logger.info(() -> "x = " + x))
+                .forEach(x -> System.out.println("x = " + x));
     }
 }
