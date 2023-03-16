@@ -18,7 +18,7 @@ public class SortGolfers {
     // default sort is by score
     public void defaultSort() {
         golfers.stream()
-                .sorted()
+                .sorted()  // Needs Golfer to implement Comparable
                 .forEach(System.out::println);
     }
 
@@ -54,7 +54,7 @@ public class SortGolfers {
         SortGolfers sg = new SortGolfers();
 //        sg.defaultSort();
 //        sg.sortByScoreThenLast();
-        sg.sortByScoreThenLastThenFirst();
-//         sg.partitionByScore();
+         sg.sortByScoreThenLastThenFirst();
+         sg.partitionByScore();
     }
 }
