@@ -1,9 +1,6 @@
 package sorting;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SortGolfers {
@@ -14,6 +11,14 @@ public class SortGolfers {
             new Golfer("Ty", "Webb", 68),
             new Golfer("Bubba", "Watson", 70)
     );
+
+    // Java 7 and below sort
+    public void java7Sort() {
+        Collections.sort(golfers);  // natural order (by score)
+        for (Golfer golfer : golfers) {
+            System.out.println(golfer);
+        }
+    }
 
     // default sort is by score
     public void defaultSort() {
@@ -35,7 +40,8 @@ public class SortGolfers {
         golfers.stream()
                 .sorted(Comparator.comparingInt(Golfer::getScore)
                         .thenComparing(Golfer::getLast)
-                        .thenComparing(Golfer::getFirst))
+                        .thenComparing(Golfer::getFirst)
+                )
                 .forEach(System.out::println);
     }
 
@@ -44,7 +50,7 @@ public class SortGolfers {
                 .collect(Collectors.partitioningBy(
                         golfer -> golfer.getScore() < 70));
 
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             System.out.println(k);
             v.forEach(System.out::println);
         });
@@ -52,9 +58,14 @@ public class SortGolfers {
 
     public static void main(String[] args) {
         SortGolfers sg = new SortGolfers();
-//        sg.defaultSort();
-//        sg.sortByScoreThenLast();
-         sg.sortByScoreThenLastThenFirst();
-         sg.partitionByScore();
+        System.out.println("Java 7 sort");
+        sg.java7Sort();
+        System.out.println("\nDefault sort");
+        sg.defaultSort();
+        System.out.println("\nSort by score, then last");
+        sg.sortByScoreThenLast();
+        System.out.println("\nSort by score, then last, then first");
+        sg.sortByScoreThenLastThenFirst();
+        sg.partitionByScore();
     }
 }

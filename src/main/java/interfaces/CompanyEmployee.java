@@ -1,0 +1,30 @@
+package interfaces;
+
+public class CompanyEmployee implements Company, Employee {
+    private final String first;
+    private final String last;
+
+    public CompanyEmployee(String first, String last) {
+        this.first = first;
+        this.last = last;
+    }
+
+    @Override
+    public String getName() {
+        return Employee.super.getName() + " works for " + Company.super.getName();
+    }
+
+    public String getFirst() {
+        return first;
+    }
+
+    public String getLast() {
+        return last;
+    }
+
+    public void doWork() {
+        System.out.println("Converting caffeine into code for $$...");
+    }
+
+
+}
