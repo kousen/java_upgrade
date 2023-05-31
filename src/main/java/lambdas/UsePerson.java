@@ -2,6 +2,7 @@ package lambdas;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,5 +34,24 @@ public class UsePerson {
                 .map(Person::new)
                 .toArray(Person[]::new);
         System.out.println(Arrays.toString(peopleArray));
+
+        List<Person> collect = names.stream()
+                .map(Person::new) // invokes the Person(String) constructor
+                .map(Person::new) // invokes the Person(Person) constructor
+                .collect(Collectors.toList());
+        System.out.println(collect);
+
+        collect = names.parallelStream()
+                .map(Person::new)
+                .collect(Collectors.toList());  // preserves order
+        System.out.println(collect);
+
+        List<Person> persons = Collections.synchronizedList(new ArrayList<>());
+        names.parallelStream()
+                .peek(x -> System.out.println(" processing name " + x +
+                                              " on thread " + Thread.currentThread().getName()))
+                .map(Person::new)
+                .forEach(persons::add);  // does NOT preserve order
+        System.out.println(persons);
     }
 }
