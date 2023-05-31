@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
-import java.util.List;
-import java.util.logging.Logger;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +22,7 @@ public class FileFilterTest {
     }
 
     @Test
-    void listDirectories_anonInnerClass() {
+    void listDirectoriesWithFileFilter_anonInnerClass() {
         File[] directories = root.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
@@ -37,22 +34,16 @@ public class FileFilterTest {
     }
 
     @Test
-    void listDirectories_expressionLambda() {
-        File[] directories = root.listFiles(pathname -> pathname.isDirectory());
+    void listDirectoriesWithFileFilter_expressionLambda() {
+        File[] directories = root.listFiles(path -> path.isDirectory());
         assert directories != null;
         assertEquals(13, directories.length);
     }
 
     @Test
-    void listDirectories_methodReference() {
-        File[] directories = root.listFiles(File::isDirectory);
-        assert directories != null;
-        assertEquals(13, directories.length);
-    }
-
-    @Test
-    void listDirectories_blockLambda() {
+    void listDirectoriesWithFileFilter_blockLambda() {
         File[] directories = root.listFiles(pathname -> {
+            System.out.println("Checking whether " + pathname + " is a directory");
             return pathname.isDirectory();
         });
         assert directories != null;
@@ -60,23 +51,33 @@ public class FileFilterTest {
     }
 
     @Test
-    void listJavaSrcFiles() {
-        FilenameFilter filter = (dir, name) -> name.endsWith(".java");
-        File[] javaSrcFiles = root.listFiles(filter);
-        assert javaSrcFiles != null;
-        assertEquals(8, javaSrcFiles.length);
+    void listJavaSrcFiles_anonInnerClass() {
+        File[] javaSourceFiles = root.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".java");
+            }
+        });
+        assert javaSourceFiles != null;
+        assertEquals(8, javaSourceFiles.length);
     }
 
     @Test
-    void forEach() {
-        List.of("this", "is", "a", "list")
-                .forEach(x -> System.out.println("x = " + x));
+    void listJavaSrcFiles_lambda() {
+        File[] javaSourceFiles = root.listFiles((dir, name) -> {
+            System.out.println("Checking whether " + name + " in " +
+                               dir + " is a Java source file");
+            return name.endsWith(".java");
+        });
+        assert javaSourceFiles != null;
+        assertEquals(8, javaSourceFiles.length);
+    }
 
-
-        Logger logger = Logger.getLogger(FileFilterTest.class.getName());
-        IntStream.iterate(0, x -> x + 1)
-                .limit(10)
-                .peek(x -> logger.info(() -> "x = " + x))
-                .forEach(x -> System.out.println("x = " + x));
+    @Test
+    void listJavaSrcFiles_assignedToVariable() {
+        FilenameFilter filter = (directory, fileName) -> fileName.endsWith(".java");
+        File[] javaSourceFiles = root.listFiles(filter);
+        assert javaSourceFiles != null;
+        assertEquals(8, javaSourceFiles.length);
     }
 }
