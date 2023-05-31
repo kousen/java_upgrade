@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -35,7 +40,8 @@ public class FileFilterTest {
 
     @Test
     void listDirectoriesWithFileFilter_expressionLambda() {
-        File[] directories = root.listFiles(path -> path.isDirectory());
+        // File[] directories = root.listFiles(path -> path.isDirectory());
+        File[] directories = root.listFiles(File::isDirectory);
         assert directories != null;
         assertEquals(13, directories.length);
     }
@@ -79,5 +85,22 @@ public class FileFilterTest {
         File[] javaSourceFiles = root.listFiles(filter);
         assert javaSourceFiles != null;
         assertEquals(8, javaSourceFiles.length);
+    }
+
+    @Test
+    void forEachOnList() {
+        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        // strings.forEach(s -> System.out.println(s));
+        strings.forEach(System.out::println);
+        strings.forEach(s -> System.out.println(s + " (test)"));
+        System.out.println(strings);
+
+        Map<String,Integer> map = new HashMap<>();
+        map.put("one", 1);
+        map.put("two", 2);
+        BiConsumer<String,Integer> printer =
+                (word, number) -> System.out.println(word + " = " + number);
+        map.forEach(printer);
+        System.out.println(map);
     }
 }

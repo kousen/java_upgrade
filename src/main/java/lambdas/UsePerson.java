@@ -11,7 +11,7 @@ public class UsePerson {
         List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
 
         // Java 7 and earlier:
-        List<Person> beatles = new ArrayList<>();
+        List<Person> beatles = new ArrayList<>();  // shared mutable state
         for (String name : names) {
             beatles.add(new Person(name));
         }

@@ -1,5 +1,7 @@
 package lambdas;
 
+import java.util.Objects;
+
 public class Person {
     private String name;
 
@@ -24,7 +26,7 @@ public class Person {
 
         Person person = (Person) o;
 
-        return name != null ? name.equals(person.name) : person.name == null;
+        return Objects.equals(name, person.name);
     }
 
     @Override
