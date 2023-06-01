@@ -2,7 +2,6 @@ package lambdas;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,7 +13,6 @@ public class LazyErrorMessageTest {
         System.out.println("getLogMessage() called");
         return "This is a log message";
     }
-
 
     private String getErrorMessage(boolean x) {
         System.out.println("getErrorMessage() called");
