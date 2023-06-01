@@ -18,16 +18,24 @@ import static java.util.stream.Collectors.groupingBy;
 public class ProcessDictionary {
     private final Path dictionary = Paths.get("/usr/share/dict/words");
 
+    public int maxlength() {
+        try (Stream<String> words = Files.lines(dictionary)) {
+            //return words.mapToInt(String::length).max().orElse(0);
+            return words.max(Comparator.comparingInt(String::length)).orElse("").length();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        try (Stream<String> lines = Files.lines(dictionary)) {
-            lines.filter(s -> s.length() > 20)
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.filter(s -> s.length() > 20)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,6 +94,7 @@ public class ProcessDictionary {
 
     public static void main(String[] args) {
         ProcessDictionary processDictionary = new ProcessDictionary();
+        System.out.println("Max length: " + processDictionary.maxlength());
         processDictionary.printTenLongestWords();
         processDictionary.printWordsOfEachLength();
         processDictionary.printHowManyWordsOfEachLength();
