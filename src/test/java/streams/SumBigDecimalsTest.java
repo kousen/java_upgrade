@@ -11,6 +11,11 @@ public class SumBigDecimalsTest {
     private final SumBigDecimals summer = new SumBigDecimals();
 
     @Test
+    void sumFirstN() {
+        assertEquals(5050, summer.sumFirstN(100));
+    }
+
+    @Test
     public void sumFirstN_usingReduce() {
         BigDecimal answer = summer.sumFirstN_usingReduce(10);
         assertEquals(new BigDecimal("55"), answer);

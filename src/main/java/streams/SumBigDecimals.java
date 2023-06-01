@@ -1,16 +1,30 @@
 package streams;
 
 import java.math.BigDecimal;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SumBigDecimals {
+
+    public String concatString(String... strings) {
+        return Stream.of(strings)
+                .reduce("", String::concat);
+    }
+
+    public int sumFirstN(int n) {
+        return IntStream.iterate(1, i -> i + 1)
+                .limit(n)
+                //.sum();
+                //.reduce(0, Integer::sum);
+                .reduce(Integer::sum).orElse(0);
+    }
 
     public BigDecimal sumFirstN_asDoubles(int n) {
         double total = Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
                 .mapToDouble(BigDecimal::doubleValue)
                 .sum();
-        return new BigDecimal(total + "");
+        return BigDecimal.valueOf(total);
     }
 
     public BigDecimal sumFirstN_usingReduce(int n) {
@@ -21,7 +35,7 @@ public class SumBigDecimals {
 
     // Off by one error, because 1 is never doubled
     public BigDecimal sumDoubles(int n) {
-        BigDecimal two = new BigDecimal("2");
+        BigDecimal two = BigDecimal.valueOf(2);
         return Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
                 .limit(n)
                 .reduce((total, e) -> {
