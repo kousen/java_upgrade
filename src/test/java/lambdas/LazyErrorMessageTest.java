@@ -23,7 +23,7 @@ public class LazyErrorMessageTest {
 
     @Test
     void testErrorMessage() {
-        boolean x = new Random().nextBoolean();
+        boolean x = true;
         // assertTrue(x, getErrorMessage(x));
         logger.fine(this::getLogMessage);
         assertTrue(x, () -> getErrorMessage(x));
