@@ -5,7 +5,7 @@ public class RunnableDemo {
         // Java 7 syntax
         new Thread(new Runnable() {
             @Override
-            public void run() {
+            public void run() {  // Single abstract method
                 System.out.println("Inside an anonymous inner class");
             }
         }).start();
