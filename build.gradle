@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'eclipse'
+    id 'jacoco'
 }
 
 repositories {
@@ -15,3 +16,5 @@ dependencies {
 tasks.named("test", Test) {
     useJUnitPlatform()
 }
+
+jacocoTestReport.dependsOn('test')
