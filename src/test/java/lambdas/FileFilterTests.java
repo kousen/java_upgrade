@@ -22,8 +22,8 @@ public class FileFilterTests {
         for (File file : files) {
             System.out.println(file);
         }
-        assertEquals(21, files.length);
-        assertThat(files).hasSize(21);
+        assertEquals(22, files.length);
+        assertThat(files).hasSize(22);
     }
 
     @Test
@@ -34,19 +34,19 @@ public class FileFilterTests {
                 return file.isDirectory();
             }
         });
-        assertThat(directories).hasSize(13);
+        assertThat(directories).hasSize(14);
     }
 
     @Test
     void listDirectories_expressionLambda() {
         File[] directories = root.listFiles(file -> file.isDirectory());
-        assertThat(directories).hasSize(13);
+        assertThat(directories).hasSize(14);
     }
 
     @Test
     void listDirectories_methodReference() {
         File[] directories = root.listFiles(File::isDirectory);
-        assertThat(directories).hasSize(13);
+        assertThat(directories).hasSize(14);
     }
 
     @Test
