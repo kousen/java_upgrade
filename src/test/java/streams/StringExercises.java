@@ -90,21 +90,26 @@ public class StringExercises {
         map = strings.stream()  // "merge" duplicates by taking just the first one
                 .collect(Collectors.toMap(Function.identity(), String::length, (x, y) -> x));
 
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
+
         // Filter out nulls, then print even-length strings
         List<String> stringsWithNulls = Arrays.asList("this", "is", null, "a", "list", null,
                 "of", "strings", null, "with", null, "nulls");
         List<String> evenLengths = stringsWithNulls.stream()
-                //.filter(s -> s != null && s.length() % 2 == 0)  // short-circuiting logical AND
+                // .filter(s -> s != null && s.length() % 2 == 0)  // short-circuiting logical AND
                 // .filter(s -> s != null)
+                .peek(s -> logger.fine(() -> "before null check: " + s))
                 .filter(Objects::nonNull)
+                .peek(s -> logger.fine(() -> "after null check, before length check: " + s))
                 .filter(s -> s.length() % 2 == 0)
+                .peek(s -> logger.fine(() -> "after length check: " + s))
                 .collect(Collectors.toList());
         System.out.println(evenLengths);
 
         // Function composition
-        Logger logger = Logger.getLogger(StringExercises.class.getName());
         Consumer<String> print = System.out::println;
         Consumer<String> log = logger::info;
+
 
         // Combine the two predicates and use the result to print non-null, even-length strings
         Predicate<String> nonNull = Objects::nonNull;

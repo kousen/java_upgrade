@@ -21,7 +21,7 @@ public class AntarcticaTimeZones {
                         .collect(Collectors.toList());
 
         antarcticZones.forEach(zdt ->
-                System.out.printf("%7s: %25s %7s%n", zdt.getOffset(), zdt.getZone(),
+                System.out.printf("UTC%6s: %25s %7s%n", zdt.getOffset(), zdt.getZone(),
                         zdt.getZone().getRules().isDaylightSavings(zdt.toInstant())));
     }
 }

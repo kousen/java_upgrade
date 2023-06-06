@@ -3,7 +3,7 @@ package optional;
 import java.util.Optional;
 
 public class Department {
-    private String name;
+    private final String name;
     private Manager manager;
 
     public Department(String name) {

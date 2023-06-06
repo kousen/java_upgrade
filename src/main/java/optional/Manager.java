@@ -1,7 +1,7 @@
 package optional;
 
 public class Manager {
-    private String name;
+    private final String name;
 
     public Manager(String name) {
         this.name = name;
