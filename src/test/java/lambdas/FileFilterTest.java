@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,6 +44,13 @@ public class FileFilterTest {
     }
 
     @Test
+    public void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
+        assert directories != null;
+        assertEquals(14, directories.length);
+    }
+
+    @Test
     public void listDirectories_blockLambda() {
         File[] directories = root.listFiles((File pathname) -> {
             System.out.println("Checking for directories...");
@@ -51,10 +60,10 @@ public class FileFilterTest {
         assertEquals(14, directories.length);
     }
 
-    @SuppressWarnings("Convert2MethodRef")
     @Test
     public void listDirectories_assignToVariable() {
-        FileFilter filter = (File pathname) -> pathname.isDirectory();
+        // FileFilter filter = (File pathname) -> pathname.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] directories = root.listFiles(filter);
         assert directories != null;
         assertEquals(14, directories.length);
@@ -72,6 +81,14 @@ public class FileFilterTest {
     public void iterateOverList() {
         List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
         strings.forEach(s -> System.out.println(s));
+    }
+
+    @Test
+    public void iterateOverMap() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("one", 1);
+        map.put("two", 2);
+        map.forEach((k, v) -> System.out.println(k + " = " + v));
     }
 
 

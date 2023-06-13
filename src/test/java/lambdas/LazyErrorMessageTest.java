@@ -20,6 +20,7 @@ public class LazyErrorMessageTest {
     @Test
     void assertArgIsTrue_lazyErrorMessage() {
         boolean x = true;
-        assertTrue(x, () -> getErrorMessage());  // 2nd arg is a Supplier<String>
+        // assertTrue(x, () -> getErrorMessage());  // 2nd arg is a Supplier<String>
+        assertTrue(x, this::getErrorMessage);  // 2nd arg is a Supplier<String>
     }
 }

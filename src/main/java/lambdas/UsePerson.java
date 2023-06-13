@@ -31,7 +31,7 @@ public class UsePerson {
         Person[] peopleArray = names.stream()
                 .map(Person::new)
                 .toArray(Person[]::new);
-                //.toArray(value -> new Person[value]);
+                //.toArray(size -> new Person[size]);
         System.out.println(Arrays.toString(peopleArray));
 
         List<String> fullNames = Arrays.asList(
@@ -49,7 +49,7 @@ public class UsePerson {
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),                // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
