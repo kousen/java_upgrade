@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class UsePerson {
     public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
+        @SuppressWarnings("Convert2MethodRef")
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
@@ -24,20 +26,20 @@ public class UsePerson {
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
                 .toArray(Person[]::new);
-                //.toArray(value -> new Person[value]);
+        //.toArray(count -> new Person[count]);
         System.out.println(Arrays.toString(peopleArray));
 
         List<String> fullNames = Arrays.asList(
                 "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
         people = fullNames.stream()
-                .map(name -> name.split(" "))
+                .map(name -> name.split("\\s+"))
                 .map(Person::new) // use the Person(String...) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
@@ -46,10 +48,11 @@ public class UsePerson {
         // p1..p5 | p6..p10 | p11..p15 | p16..p20  // say you have 4 cores and run in parallel
         //   l1       l2         l3         l4
         //                 list
+        @SuppressWarnings("Convert2MethodRef")
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),                // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
@@ -66,5 +69,14 @@ public class UsePerson {
                 .map(Person::new)
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(linkedPersons);
+
+        LinkedList<Object> squares =
+                IntStream.of(3, 1, 4, 1, 5, 9)
+                        .map(i -> i * i)
+                        .collect(
+                                LinkedList::new,
+                                LinkedList::add,
+                                LinkedList::addAll);
+        System.out.println(squares);
     }
 }
