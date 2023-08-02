@@ -15,6 +15,7 @@ public class RunnableDemo {
 
         // Block lambda
         new Thread(() -> {
+            System.out.println("Hello, World!");
             System.out.println("Inside block lambda");
         }).start();
 
