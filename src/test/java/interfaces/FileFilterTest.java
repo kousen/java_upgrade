@@ -8,6 +8,8 @@ import java.io.FilenameFilter;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -117,5 +119,14 @@ public class FileFilterTest {
         Stream.of(1, 2, 3, 4, 5)
                 .reduce(Integer::sum)
                 .ifPresent(System.out::println);
+    }
+
+    @Test
+    void iterateOverAMap() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 2);
+        map.forEach((k, v) -> System.out.printf("key=%s, value=%d%n", k, v));
     }
 }
