@@ -13,7 +13,7 @@ public class SumBigDecimalsTest {
     @Test
     public void sumFirstN_usingReduce() {
         BigDecimal answer = summer.sumFirstN_usingReduce(10);
-        assertEquals(new BigDecimal("55"), answer);
+        assertEquals(BigDecimal.valueOf(55), answer);
     }
 
     @Test @Disabled("disable until demo")
@@ -30,4 +30,17 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("110"), answer);
     }
 
+    @Test
+    void sumFirstN_asDoubles() {
+        BigDecimal sum = summer.sumFirstN_asDoubles(10);
+        assertEquals(BigDecimal.valueOf(55.0), sum);
+    }
+
+    @Test
+    void sumDoubles() {
+    }
+
+    @Test
+    void sumDoublesInitialized() {
+    }
 }
