@@ -36,19 +36,21 @@ public class SortGolfers {
 
     // sort by score, then by last, then by first
     public void sortByScoreThenLastThenFirst() {
-        golfers.stream()
-                .sorted(Comparator.comparingInt(Golfer::getScore)
+        Comparator<Golfer> golferComparator =
+                Comparator.comparingInt(Golfer::getScore)
                         .thenComparing(Golfer::getLast)
-                        .thenComparing(Golfer::getFirst))
+                        .thenComparing(Golfer::getFirst);
+        golfers.stream()
+                .sorted(golferComparator)
                 .forEach(System.out::println);
     }
 
     public void partitionByScore() {
         Map<Boolean, List<Golfer>> map = golfers.stream()
                 .collect(Collectors.partitioningBy(
-                        golfer -> golfer.getScore() < 70));
+                        golfer -> golfer.getScore() < 70)); // Map<Boolean, List<Golfer>>
 
-        map.forEach((k,v) -> {
+        map.forEach((k, v) -> {
             System.out.println(k);
             v.forEach(System.out::println);
         });
