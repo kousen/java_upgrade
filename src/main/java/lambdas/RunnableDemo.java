@@ -1,5 +1,6 @@
 package lambdas;
 
+@SuppressWarnings("Convert2Lambda")
 public class RunnableDemo {
     public static void main(String[] args) {
         // Java 7 syntax
@@ -15,6 +16,7 @@ public class RunnableDemo {
 
         // Block lambda
         new Thread(() -> {
+            sleepForOneSecond();
             System.out.println("Hello, World!");
             System.out.println("Inside block lambda");
         }).start();
@@ -22,6 +24,14 @@ public class RunnableDemo {
         // Assign a lambda to a variable
         Runnable runnable = () -> System.out.println("Assigned to a variable");
         new Thread(runnable).start();
+    }
+
+    private static void sleepForOneSecond() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

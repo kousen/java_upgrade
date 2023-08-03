@@ -8,8 +8,7 @@ import java.util.Optional;
 public class Company {
     private final String name;
 
-    private final Map<String, Department> departmentMap =
-            new HashMap<>();
+    private final Map<String, Department> departmentMap = new HashMap<>();
 
     public Company(String name) {
         this.name = name;

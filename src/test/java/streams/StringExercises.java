@@ -82,15 +82,18 @@ public class StringExercises {
         // Filter out nulls, then print even-length strings
         List<String> stringsWithNulls = Arrays.asList("this", null, "is",
                 "a", null, "list", "of", null, "strings");
+        Logger logger = Logger.getLogger("demoCollectors");
         stringsWithNulls.stream()
                 // .filter(s -> s != null && s.length() % 2 == 0) // use short-circuiting logical AND
                 // .filter(s -> s != null)
+                .peek(x -> logger.fine(() -> "Before null filter: " + x))
                 .filter(Objects::nonNull)
+                .peek(x -> logger.fine(() -> "After null filter, before even length filter: " + x))
                 .filter(s -> s.length() % 2 == 0)
+                .peek(x -> logger.fine(() -> "After even length filter: " + x))
                 .forEach(System.out::println);
 
-        Logger logger = Logger.getLogger("demoCollectors");
-        Consumer<String> log = logger::info;
+        Consumer<String> log = msg -> logger.info(() -> msg);
         Consumer<String> print = System.out::println;
 
         Predicate<String> nonNull = Objects::nonNull;

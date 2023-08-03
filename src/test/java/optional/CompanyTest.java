@@ -32,16 +32,18 @@ class CompanyTest {
     @Test
     void getOptionalDepartment() {
         Optional<Department> optionalDept = company.getDepartment("Whatever");
+        assertTrue(optionalDept.isEmpty());
         System.out.println(optionalDept.map(Department::getManager));
-        System.out.println(optionalDept.map(Department::getOptionalManager));
+        System.out.println(optionalDept.map(Department::getOptionalManager)); // dangerous
         System.out.println(optionalDept.flatMap(Department::getOptionalManager));
     }
 
     @Test
     void getOptionalDepartmentWithManager() {
         Optional<Department> optionalDept = company.getDepartment("Finance");
+        assertTrue(optionalDept.isPresent());
         System.out.println(optionalDept.map(Department::getManager));
-        System.out.println(optionalDept.map(Department::getOptionalManager));
-        System.out.println(optionalDept.flatMap(Department::getOptionalManager));
+        System.out.println(optionalDept.map(Department::getOptionalManager)); // Optional<Optional<Manager>>
+        System.out.println(optionalDept.flatMap(Department::getOptionalManager)); // Optional<Manager>
     }
 }

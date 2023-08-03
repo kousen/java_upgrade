@@ -2,7 +2,6 @@ package streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -20,17 +19,16 @@ public class BoxedStreams {
                 .collect(Collectors.toList());
         System.out.println(list);
 
-        List<Integer> ints = IntStream.of(3, 1, 4, 1, 5, 9)
-//                .collect(Collectors.toList());
-                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        System.out.println(ints);
-
         List<Integer> listOfInt = IntStream.of(3, 1, 4, 1, 5, 9)
                 .boxed()
                 .collect(Collectors.toList());
         System.out.println(listOfInt);
 
-//        IntStream.of(3, 1, 4, 1, 5, 9)
+        List<Integer> ints = IntStream.of(3, 1, 4, 1, 5, 9)
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        System.out.println(ints);
+
+        //        IntStream.of(3, 1, 4, 1, 5, 9)
 //                .collect(Collectors.toCollection(ArrayList<Integer>::new));
 
         int[] intArray = IntStream.of(3, 1, 4, 1, 5, 9).toArray();
