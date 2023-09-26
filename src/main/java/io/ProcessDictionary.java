@@ -3,6 +3,7 @@ package io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,7 +38,7 @@ public class ProcessDictionary {
                     .forEach(w ->
                             System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -48,7 +49,7 @@ public class ProcessDictionary {
                     .collect(Collectors.groupingBy(String::length)) // Map<Integer,List<String>>
                     .forEach((len, wordList) -> System.out.println(len + ": " + wordList));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -59,7 +60,7 @@ public class ProcessDictionary {
                     .collect(Collectors.groupingBy(String::length, Collectors.counting())) // Map<Integer,Long>
                     .forEach((len, num) -> System.out.printf("%d: %d%n", len, num));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
