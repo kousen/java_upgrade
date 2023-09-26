@@ -7,6 +7,7 @@ public class RunnableDemo {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
+        // Java 7 or earlier
         executorService.submit(new Runnable() {
             @Override
             public void run() {
