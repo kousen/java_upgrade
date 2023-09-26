@@ -1,28 +1,17 @@
 package interfaces;
 
-public class CompanyEmployee implements Company, Employee {
-    private final String first;
-    private final String last;
+// Records in Java:
+// - immutable data holders
+// - primary constructor outside the braces {}
+// - automatically generate toString, equals, and hashCode
+// - "getters" match the names of the attributes
 
-    public CompanyEmployee(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+public record CompanyEmployee(String first, String last) implements Company, Employee {
 
     @Override
     public String getName() {
         return Employee.super.getName() + " works for " +
                Company.super.getName();
-    }
-
-    @Override
-    public String getFirst() {
-        return first;
-    }
-
-    @Override
-    public String getLast() {
-        return last;
     }
 
     @Override
