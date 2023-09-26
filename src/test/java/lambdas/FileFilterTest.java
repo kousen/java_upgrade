@@ -21,6 +21,7 @@ public class FileFilterTest {
         assertThat(files.length).isEqualTo(22);
     }
 
+    @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
     @Test
     void listDirectories_anonInnerClass() {
         File[] directories = root.listFiles(new FileFilter() {
@@ -33,9 +34,17 @@ public class FileFilterTest {
         assertThat(directories.length).isEqualTo(14);
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     @Test
     void listDirectories_expressionLambda() {
         File[] directories = root.listFiles(file -> file.isDirectory());
+        assert directories != null;
+        assertThat(directories.length).isEqualTo(14);
+    }
+
+    @Test
+    void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
         assert directories != null;
         assertThat(directories.length).isEqualTo(14);
     }

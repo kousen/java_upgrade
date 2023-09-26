@@ -11,6 +11,7 @@ public class Person {
         this.name = name;
     }
 
+    // copy constructor
     public Person(Person other) {
         this.name = other.name;
     }
