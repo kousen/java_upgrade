@@ -1,26 +1,31 @@
 package lambdas;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class RunnableDemo {
     public static void main(String[] args) {
-        // Java 7 syntax
-        new Thread(new Runnable() {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+        executorService.submit(new Runnable() {
             @Override
-            public void run() {  // Single abstract method
+            public void run() {
                 System.out.println("Inside an anonymous inner class");
             }
-        }).start();
+        });
 
-        // Expression lambda
-        new Thread(() -> System.out.println("Inside expression lambda")).start();
+        executorService.submit(() -> System.out.println("Inside expression lambda"));
 
-        // Block lambda
-        new Thread(() -> {
+        executorService.submit(() -> {
+            System.out.println(Thread.currentThread().getName());
             System.out.println("Inside block lambda");
-        }).start();
+        });
 
-        // Assign a lambda to a variable
         Runnable runnable = () -> System.out.println("Assigned to a variable");
-        new Thread(runnable).start();
+        executorService.submit(runnable);
+
+        executorService.shutdown();
+
     }
 }
 
