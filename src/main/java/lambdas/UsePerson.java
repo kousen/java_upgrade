@@ -28,6 +28,7 @@ public class UsePerson {
                 // .map(Person::new) // uses the Person(Person) ctr -> Stream<Person>
                 .collect(Collectors.toList());
         System.out.println(people);
+        System.out.println(people.getClass().getName());
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
