@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("Convert2MethodRef")
 public class UsePerson {
     public static void main(String[] args) {
         List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
@@ -23,8 +24,8 @@ public class UsePerson {
         System.out.println(people);
 
         people = names.stream()
-                .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new) // uses the Person(String) ctr -> Stream<Person>
+                // .map(Person::new) // uses the Person(Person) ctr -> Stream<Person>
                 .collect(Collectors.toList());
         System.out.println(people);
 
@@ -49,7 +50,7 @@ public class UsePerson {
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),          // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);

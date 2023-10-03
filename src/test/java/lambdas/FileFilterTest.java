@@ -1,5 +1,7 @@
 package lambdas;
 
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -8,6 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class FileFilterTest {
     private final File root = new File("src/main/java");
 
@@ -82,16 +85,27 @@ public class FileFilterTest {
     @Test
     void forEach_on_a_list() {
         List<String> strings = List.of("this", "is", "a", "list");
-        // Java 5+
-        for (String string : strings) {
-            System.out.println(string);
-        }
 
-        // Java 8+
-        strings.forEach(System.out::println);
+        measureTimeAndPrint("default forEach method",
+                () -> strings.forEach(System.out::println));
 
-        // Parallel stream
-        strings.parallelStream().forEach(System.out::println);
+        measureTimeAndPrint("for-each loop",
+                () -> {
+                    for (String string : strings) {
+                        System.out.println(string);
+                    }
+                });
+
+
+        measureTimeAndPrint("parallel forEach method",
+                () -> strings.parallelStream().forEach(System.out::println));
+    }
+
+    private void measureTimeAndPrint(String methodType, Runnable action) {
+        long start = System.nanoTime();
+        action.run();
+        long end = System.nanoTime();
+        System.out.println(methodType + ": " + (end - start) / 1_000 + " microseconds");
     }
 
 }
