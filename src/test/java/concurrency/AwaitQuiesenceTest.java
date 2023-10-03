@@ -20,7 +20,7 @@ public class AwaitQuiesenceTest {
             cf.get();
             assertTrue(cf.isDone());
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -36,7 +36,9 @@ public class AwaitQuiesenceTest {
         CompletableFuture<Void> cf = aq.supplyThenAccept();
         assertFalse(cf.isDone());
 
-        ForkJoinPool.commonPool().awaitQuiescence(1, TimeUnit.SECONDS);
+        boolean result = ForkJoinPool.commonPool()
+                .awaitQuiescence(1, TimeUnit.SECONDS);
+        assertTrue(result);
         assertTrue(cf.isDone());
     }
 }
