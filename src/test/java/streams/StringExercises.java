@@ -3,13 +3,15 @@ package streams;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class StringExercises {
-    private final List<String> strings = Arrays.asList("this", "is", "a",
-            "list", "of", "strings");
+    private final List<String> strings =
+            Arrays.asList("this", "is", "a", "list", "of", "strings");
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
@@ -25,8 +27,15 @@ public class StringExercises {
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator (reverse sort)
+        strings.sort((s1, s2) -> s2.length() - s1.length());
+        System.out.println(strings);
 
         // Use the "sorted" method on Stream
+        List<String> sorted = strings.stream()
+                .sorted((s1, s2) -> s1.length() - s2.length())
+                .collect(Collectors.toList());
+        System.out.println(sorted);
+        System.out.println(strings);
     }
 
     private int compareStrings(String s1, String s2) {

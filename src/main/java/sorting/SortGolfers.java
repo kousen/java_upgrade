@@ -45,8 +45,7 @@ public class SortGolfers {
 
     public void partitionByScore() {
         Map<Boolean, List<Golfer>> map = golfers.stream()
-                .collect(Collectors.partitioningBy(
-                        golfer -> golfer.getScore() < 70));
+                .collect(Collectors.partitioningBy(golfer -> golfer.getScore() < 70));
 
         map.forEach((k,v) -> {
             System.out.println(k);
