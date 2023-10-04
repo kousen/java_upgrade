@@ -105,7 +105,7 @@ public class StringExercises {
         Predicate<String> nonNull = Objects::nonNull;
         Predicate<String> evenLength = s -> s.length() % 2 == 0;
 
-        Consumer<String> log = logger::info;
+        Consumer<String> log = msg -> logger.info(() -> msg);
         Consumer<Object> print = System.out::println;
 
         // Combine the two predicates and use the result to print non-null, even-length strings
