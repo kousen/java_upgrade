@@ -1,6 +1,6 @@
 package got;
 
-import static org.junit.Assert.assertFalse;
+import org.junit.jupiter.api.Test;
 
 import java.text.NumberFormat;
 import java.util.Collection;
@@ -12,10 +12,10 @@ import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class MemberDAOTests {
-    private Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
+    private final Collection<Member> allMembers = InMemoryMemberDAO.getInstance().getAll();
 
     /**
      * Find all members whose name starts with S and sort by id (natural sort)
