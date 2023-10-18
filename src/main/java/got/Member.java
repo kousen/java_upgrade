@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Member implements Comparable<Member> {
     private Long id;
-    private Title title = Title.LORD;
+    private Title title;
     private String name;
     private LocalDate dob;
     private double salary;
