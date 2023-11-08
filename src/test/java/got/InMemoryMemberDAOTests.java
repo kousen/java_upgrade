@@ -1,5 +1,6 @@
 package got;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+@Disabled("Remove this line to run tests")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class InMemoryMemberDAOTests {
     private final MemberDAO dao = new InMemoryMemberDAO();
