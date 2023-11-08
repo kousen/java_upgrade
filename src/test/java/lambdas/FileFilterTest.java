@@ -4,10 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings({"Convert2MethodRef", "Convert2Lambda", "Anonymous2MethodRef"})
 public class FileFilterTest {
     private final File root = new File("src/main/java");
 
@@ -56,7 +57,7 @@ public class FileFilterTest {
 
     @Test
     void listDirectories_assignToVariable() {
-        FileFilter filter = path -> path.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] directories = root.listFiles(filter);
         assert directories != null;
         assertEquals(14, directories.length);
@@ -74,5 +75,12 @@ public class FileFilterTest {
         File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
         assert javaFiles != null;
         assertEquals(8, javaFiles.length);
+    }
+
+    @Test
+    void forEach_list() {
+        List<String> strings = List.of("one", "two", "three");
+        strings.forEach(s -> System.out.println(s));
+        strings.forEach(System.out::println);
     }
 }

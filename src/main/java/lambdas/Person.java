@@ -5,16 +5,20 @@ import java.util.Objects;
 public class Person {
     private String name;
 
+    // Default constructor
     public Person() {}
 
+    // Single-arg constructor
     public Person(String name) {
         this.name = name;
     }
 
+    // Copy constructor
     public Person(Person other) {
         this.name = other.name;
     }
 
+    // Varargs constructor
     public Person(String... names) {
         this.name = String.join(" ", names);
     }
