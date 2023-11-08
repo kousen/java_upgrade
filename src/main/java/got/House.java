@@ -1,38 +1,18 @@
 package got;
 
-public class House {
-    private String name;
-
-    public House(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        House house = (House) o;
-
-        return name.equals(house.name);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
-    }
+public enum House {
+    ARRYN,
+    BARATHEON,
+    BOLTON,
+    FREY,
+    GREYJOY,
+    LANNISTER,
+    MARTELL,
+    MORMONT,
+    SNOW,
+    TARLY,
+    STARK,
+    TARGARYEN,
+    TULLY,
+    TYRELL
 }
