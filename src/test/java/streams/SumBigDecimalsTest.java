@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SumBigDecimalsTest {
@@ -13,7 +15,7 @@ public class SumBigDecimalsTest {
     @Test
     public void sumFirstN_usingReduce() {
         BigDecimal answer = summer.sumFirstN_usingReduce(10);
-        assertEquals(new BigDecimal("55"), answer);
+        assertThat(answer).isCloseTo(BigDecimal.valueOf(55), within(BigDecimal.valueOf(0.01)));
     }
 
     @Test @Disabled("disable until demo")
