@@ -1,11 +1,8 @@
 package lazy;
 
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
         System.out.printf("Inside multByTwo with arg %d on thread %s%n",
                 n, Thread.currentThread().getName());
@@ -29,7 +26,7 @@ public class LazyStreams {
 
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.rangeClosed(100, 2_000_000)
-                // .parallel()
+                //.parallel()
                 .filter(LazyStreams::modByThree)
                 .map(LazyStreams::multByTwo)
                 .findFirst().orElse(0);
