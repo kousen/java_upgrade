@@ -16,4 +16,10 @@ public class CompanyEmployeeTest {
         CompanyEmployee emp = new CompanyEmployee("Peter", "Gibbons");
         assertEquals("Peter Gibbons works for Initech", emp.getName());
     }
+
+    @Test
+    void getCompany() {
+        CompanyEmployee emp = new CompanyEmployee("Peter", "Gibbons");
+        assertEquals("Initech", emp.company());
+    }
 }

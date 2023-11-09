@@ -21,8 +21,8 @@ public class SortGolfers {
 
     // default sort is by score, using streams
     public void defaultSort() {
-        golfers.stream()
-                .sorted()
+        golfers.stream()  // Stream<Golfer>
+                .sorted() // Stream<Golfer> (natural sort)
                 .forEach(System.out::println);
     }
 

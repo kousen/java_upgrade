@@ -12,9 +12,12 @@ public record CompanyEmployee(String first, String last) implements Company, Emp
         return Employee.super.getName() + " works for " + Company.super.getName();
     }
 
-    @Override
+    public String company() {
+        return Company.super.getName();
+    }
+
     public void doWork() {
-        System.out.println("Preparing TPS reports for six different bosses...");
+        System.out.println("Work, work...");
     }
 
 }
