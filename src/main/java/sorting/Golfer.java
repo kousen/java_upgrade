@@ -18,7 +18,7 @@ public class Golfer implements Comparable<Golfer> {
         this.score = score;
     }
 
-    @Override
+    @Override // "natural ordering" for golfers
     public int compareTo(Golfer golfer) {
         return score - golfer.score;
     }
