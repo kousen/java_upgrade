@@ -2,6 +2,13 @@ package lambdas;
 
 import java.util.Objects;
 
+// Records:
+// - are immutable data holders
+// - have "canonical" or "primary" constructors BEFORE the braces
+// - autogenerate equals(), hashCode(), and toString()
+// - have "getters" whose names match the field names, e.g., name()
+record PersonRecord(String name) {}
+
 public class Person {
     private String name;
 
