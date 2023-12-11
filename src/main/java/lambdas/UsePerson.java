@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsePerson {
+    @SuppressWarnings("Convert2MethodRef")
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = List.of("John", "Paul", "George", "Ringo");
 
         // Old-style way:
         List<Person> beatles = new ArrayList<>(); // Shared mutable state
@@ -17,14 +18,15 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
+        @SuppressWarnings("Convert2MethodRef")
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
         people = names.stream()
-                .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new)    // uses the Person(String) ctr
+                .map(Person::new)    // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 
@@ -46,12 +48,15 @@ public class UsePerson {
         // p1..p5 | p6..p10 | p11..p15 | p16..p20  // say you have 4 cores and run in parallel
         //   l1       l2         l3         l4
         //                 list
-        LinkedList<Person> linkedPersons = names.stream()
+        LinkedList<Person> linkedPersons = names.parallelStream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),                // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
-                        (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
+                        (list1, list2) -> {
+                            System.out.println("processing " + list1 + " and " + list2);
+                            list1.addAll(list2);
+                        });  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
 
         linkedPersons = names.stream()
@@ -66,5 +71,10 @@ public class UsePerson {
                 .map(Person::new)
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(linkedPersons);
+
+        List<PersonRecord> records = names.stream()
+                .map(PersonRecord::new)
+                .toList();  // added in Java 16, produces immutable collections
+        System.out.println(records);
     }
 }
