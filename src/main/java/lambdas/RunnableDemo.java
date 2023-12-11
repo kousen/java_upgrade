@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class RunnableDemo {
+    @SuppressWarnings("Convert2Lambda")
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
@@ -15,8 +16,10 @@ public class RunnableDemo {
             }
         });
 
+        // Expression lambda
         executorService.submit(() -> System.out.println("Inside expression lambda"));
 
+        // Block lambda
         executorService.submit(() -> {
             System.out.println(Thread.currentThread().getName());
             System.out.println("Inside block lambda");
