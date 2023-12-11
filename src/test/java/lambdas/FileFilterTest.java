@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -76,6 +77,12 @@ public class FileFilterTest {
         File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
         assert javaFiles != null;
         assertEquals(8, javaFiles.length);
+    }
+
+    @Test
+    void forEachOnIterable() {
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
+        strings.forEach(s -> System.out.println(s));
     }
 
 }
