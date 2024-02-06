@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsePerson {
+    @SuppressWarnings("Convert2MethodRef")
     public static void main(String[] args) {
         List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
 
@@ -26,8 +27,7 @@ public class UsePerson {
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
                 .peek(person -> System.out.println(person + " processed by " +
-                                                   Thread.currentThread()
-                                                           .getName()))
+                                                   Thread.currentThread().getName()))
                 // .map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
