@@ -3,6 +3,7 @@ package lambdas;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@SuppressWarnings("Convert2Lambda")
 public class RunnableDemo {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
