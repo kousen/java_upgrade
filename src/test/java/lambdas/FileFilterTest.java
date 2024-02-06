@@ -73,7 +73,7 @@ public class FileFilterTest {
 
     @Test
     void listJavaSourceFiles_fileFilter() {
-        File[] javaFiles = root.listFiles(file -> file.getName().endsWith("."));
+        File[] javaFiles = root.listFiles(file -> file.getName().endsWith(".java"));
         assert javaFiles != null;
         assertEquals(8, javaFiles.length);
     }
