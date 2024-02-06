@@ -22,16 +22,28 @@ public class UsePerson {
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
+        // Sequential stream
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
+                .peek(person -> System.out.println(person + " processed by " +
+                                                   Thread.currentThread()
+                                                           .getName()))
                 // .map(Person::new) // uses the Person(Person) ctr
+                .collect(Collectors.toList());
+        System.out.println(people);
+
+        // Parallel stream
+        people = names.parallelStream()
+                .map(Person::new) // uses the Person(String) ctr
+                .peek(person -> System.out.println(person + " processed by " +
+                                                   Thread.currentThread().getName()))
                 .collect(Collectors.toList());
         System.out.println(people);
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
                 .toArray(Person[]::new);
-                //.toArray(value -> new Person[value]);
+        //.toArray(value -> new Person[value]);
         System.out.println(Arrays.toString(peopleArray));
 
         List<String> fullNames = Arrays.asList(
@@ -49,7 +61,7 @@ public class UsePerson {
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),                // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
