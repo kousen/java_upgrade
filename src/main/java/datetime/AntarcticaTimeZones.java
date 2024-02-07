@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparingInt;
 
@@ -18,7 +17,7 @@ public class AntarcticaTimeZones {
                         .map(now::atZone) // Stream<ZonedDateTime>
                         .sorted(comparingInt(
                                 zoneId -> zoneId.getOffset().getTotalSeconds()))
-                        .collect(Collectors.toList());
+                        .toList();
 
         antarcticZones.forEach(zdt ->
                 System.out.printf("UTC%6s: %25s %7s%n", zdt.getOffset(), zdt.getZone(),
