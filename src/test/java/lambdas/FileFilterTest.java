@@ -38,9 +38,15 @@ public class FileFilterTest {
     }
 
     @Test
+    void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
+        assert directories != null;
+        assertThat(directories.length).isEqualTo(14);
+    }
+
+    @Test
     void listJavaSrcFiles_fileFilter() {
-        File[] javaSrcFiles = root.listFiles(file -> file.getName()
-                .endsWith(".java"));
+        File[] javaSrcFiles = root.listFiles(file -> file.getName().endsWith(".java"));
         assert javaSrcFiles != null;
         assertThat(javaSrcFiles.length).isEqualTo(8);
     }
