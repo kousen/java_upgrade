@@ -22,11 +22,15 @@ public class UsePerson {
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
+        long startTime = System.nanoTime();
         people = names.stream()
+                .peek(name -> System.out.println(name + " on thread " + Thread.currentThread().getName()))
                 .map(Person::new) // uses the Person(String) ctr
                 // .map(Person::new) // uses the Person(Person) ctr
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());  // reduction operation
+        long endTime = System.nanoTime();
         System.out.println(people);
+        System.out.println("Time taken: " + (endTime - startTime) / 1_000_000 + " ms");
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
@@ -37,7 +41,7 @@ public class UsePerson {
         List<String> fullNames = Arrays.asList(
                 "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
         people = fullNames.stream()
-                .map(name -> name.split(" "))
+                .map(name -> name.split("\\s+"))
                 .map(Person::new) // use the Person(String...) ctr
                 .collect(Collectors.toList());
         System.out.println(people);

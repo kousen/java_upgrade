@@ -9,6 +9,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
 public class FileFilterTest {
     private final File root = new File("src/main/java");
 
@@ -33,7 +34,7 @@ public class FileFilterTest {
 
     @Test
     public void listDirectories_expressionLambda() {
-        File[] directories = root.listFiles(pathname -> pathname.isDirectory());
+        File[] directories = root.listFiles(File::isDirectory);
         assert directories != null;
         assertEquals(14, directories.length);
     }
@@ -50,7 +51,8 @@ public class FileFilterTest {
 
     @Test
     public void listDirectories_assignToVariable() {
-        FileFilter filter = pathname -> pathname.isDirectory();
+        //FileFilter filter = pathname -> pathname.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] directories = root.listFiles(filter);
         assert directories != null;
         assertEquals(14, directories.length);
@@ -76,7 +78,8 @@ public class FileFilterTest {
         map.forEach((k, v) -> System.out.println(k + " -> " + v));
 
         var list = List.of("a", "b", "c");
-        list.forEach(x -> System.out.println(x));
+        list.forEach(x -> System.out.println("the value of x is " + x));
+        list.forEach(System.out::println);
     }
 
 }
