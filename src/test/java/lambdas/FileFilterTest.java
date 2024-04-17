@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -67,6 +69,15 @@ public class FileFilterTest {
         File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
         assert javaFiles != null;
         assertEquals(8, javaFiles.length);
+    }
+
+    @Test
+    void iterate_over_map() {
+        var map = Map.of("a", 1, "b", 2, "c", 3);
+        map.forEach((k, v) -> System.out.println(k + " -> " + v));
+
+        var list = List.of("a", "b", "c");
+        list.forEach(x -> System.out.println(x));
     }
 
 }
