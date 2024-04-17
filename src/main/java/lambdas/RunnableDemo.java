@@ -8,12 +8,13 @@ public class RunnableDemo {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
         // Java 7 or earlier
-        executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Inside an anonymous inner class");
-            }
-        });
+        executorService.submit(// anonymous inner class
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("Inside an anonymous inner class");
+                    }
+                });
 
         executorService.submit(() -> System.out.println("Inside expression lambda"));
 
