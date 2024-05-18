@@ -3,11 +3,13 @@ package io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,6 +18,8 @@ import static java.util.stream.Collectors.groupingBy;
 
 @SuppressWarnings("DuplicatedCode")
 public class ProcessDictionary {
+    private final Logger logger = Logger.getLogger(ProcessDictionary.class.getName());
+
     private final Path dictionary = Paths.get("/usr/share/dict/words");
 
     public long getMaxLength() {
@@ -28,8 +32,9 @@ public class ProcessDictionary {
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
+        long max = getMaxLength() - 5;
         try (Stream<String> words = Files.lines(dictionary)) {
-            words.filter(s -> s.length() > 20)
+            words.filter(s -> s.length() > max)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
@@ -37,7 +42,7 @@ public class ProcessDictionary {
                     .forEach(w ->
                             System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.warning(() -> e.getMessage());
         }
     }
 
@@ -48,7 +53,7 @@ public class ProcessDictionary {
                     .collect(Collectors.groupingBy(String::length)) // Map<Integer,List<String>>
                     .forEach((len, wordList) -> System.out.println(len + ": " + wordList));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
