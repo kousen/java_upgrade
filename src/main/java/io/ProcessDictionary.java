@@ -3,6 +3,7 @@ package io;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,14 +23,15 @@ public class ProcessDictionary {
         try (Stream<String> words = Files.lines(dictionary)) {
             return words.mapToInt(String::length).max().orElse(0);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
+        long max = getMaxLength() - 5;
         try (Stream<String> words = Files.lines(dictionary)) {
-            words.filter(s -> s.length() > 20)
+            words.filter(s -> s.length() > max)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
@@ -37,7 +39,7 @@ public class ProcessDictionary {
                     .forEach(w ->
                             System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -48,7 +50,7 @@ public class ProcessDictionary {
                     .collect(Collectors.groupingBy(String::length)) // Map<Integer,List<String>>
                     .forEach((len, wordList) -> System.out.println(len + ": " + wordList));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -59,7 +61,7 @@ public class ProcessDictionary {
                     .collect(Collectors.groupingBy(String::length, Collectors.counting())) // Map<Integer,Long>
                     .forEach((len, num) -> System.out.printf("%d: %d%n", len, num));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -73,7 +75,7 @@ public class ProcessDictionary {
                     .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                     .forEach(e -> System.out.printf("Length %d: %d words%n", e.getKey(), e.getValue()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
@@ -88,7 +90,7 @@ public class ProcessDictionary {
                     .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
                     .forEach(e -> System.out.printf("Length %d: %d words%n", e.getKey(), e.getValue()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException(e);
         }
     }
 
