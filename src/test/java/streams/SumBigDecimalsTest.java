@@ -16,7 +16,7 @@ public class SumBigDecimalsTest {
         assertEquals(new BigDecimal("55"), answer);
     }
 
-    @Test //@Disabled("disable until demo")
+    @Test @Disabled("disable until demo")
     public void sumFirstNDoubledValues() {
         BigDecimal answer = summer.sumDoubles(10);
 
