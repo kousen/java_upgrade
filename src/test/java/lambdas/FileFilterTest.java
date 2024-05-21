@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -52,5 +53,21 @@ public class FileFilterTest {
                 .isNotNull()
                 .isNotEmpty()
                 .hasSize(14);
+    }
+
+    @Test
+    void listDirectories_variable() {
+        FileFilter filter = (File pathname) -> pathname.isDirectory();
+        File[] directories = root.listFiles(filter);
+        assertThat(directories)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(14);
+    }
+
+    @Test
+    void mapForEach() {
+        Map.of(1, "one", 2, "two", 3, "three")
+                .forEach((key, value) -> System.out.println(key + " -> " + value));
     }
 }
