@@ -11,10 +11,12 @@ public class Person {
         this.name = name;
     }
 
+    // Copy constructor
     public Person(Person other) {
         this.name = other.name;
     }
 
+    // Varargs constructor
     public Person(String... names) {
         this.name = String.join(" ", names);
     }

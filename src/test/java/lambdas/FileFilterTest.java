@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings({"Convert2MethodRef", "Convert2Lambda", "Anonymous2MethodRef"})
 public class FileFilterTest {
     private final File root = new File("src/main/java");
 
@@ -37,6 +38,15 @@ public class FileFilterTest {
     @Test
     void listDirectories_expressionLambda() {
         File[] directories = root.listFiles(pathname -> pathname.isDirectory());
+        assertThat(directories)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(14);
+    }
+
+    @Test
+    void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
         assertThat(directories)
                 .isNotNull()
                 .isNotEmpty()

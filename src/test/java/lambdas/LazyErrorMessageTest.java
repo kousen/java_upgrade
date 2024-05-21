@@ -29,7 +29,9 @@ public class LazyErrorMessageTest {
     @Test
     void assertArgIsTrue_lazyErrorMessage() {
         boolean x = true;
-        log.fine(() -> getLogMessage());
-        assertTrue(x, () -> getErrorMessage());  // 2nd arg is a Supplier<String>
+        // log.fine(() -> getLogMessage());
+        log.fine(this::getLogMessage);
+        // assertTrue(x, () -> getErrorMessage());  // 2nd arg is a Supplier<String>
+        assertTrue(x, this::getErrorMessage);  // 2nd arg is a Supplier<String>
     }
 }
