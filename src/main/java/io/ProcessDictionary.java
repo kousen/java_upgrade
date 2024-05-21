@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-@SuppressWarnings("DuplicatedCode")
 public class ProcessDictionary {
     private final Path dictionary = Paths.get("/usr/share/dict/words");
 
