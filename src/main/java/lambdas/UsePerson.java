@@ -1,11 +1,9 @@
 package lambdas;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("Convert2MethodRef")
 public class UsePerson {
     public static void main(String[] args) {
         List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
@@ -49,7 +47,7 @@ public class UsePerson {
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),          // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
@@ -66,5 +64,13 @@ public class UsePerson {
                 .map(Person::new)
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(linkedPersons);
+
+        // Collectors.toMap(keyMapper, valueMapper)
+        Map<String, String> map = fullNames.stream()
+                .map(name -> name.split(" "))
+                .collect(Collectors.toMap(
+                        name -> name[0],  // keyMapper
+                        name -> name[1]));// valueMapper
+        map.forEach((key, value) -> System.out.println(key + " -> " + value));
     }
 }
