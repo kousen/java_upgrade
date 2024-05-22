@@ -1,26 +1,16 @@
 package interfaces;
 
-public class CompanyEmployee implements Company, Employee {
-    private final String first;
-    private final String last;
-
-    public CompanyEmployee(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+// Records:
+// - introduced in Java 16
+// - immutable data carriers
+// - autogenerate equals, hashCode, and toString methods
+// - primary (canonical) constructor defined before the body {}
+// - "getter" methods match property names, as in first() and last()
+// - final, and extend java.lang.Record
+public record CompanyEmployee(String first, String last) implements Company, Employee {
 
     public String getName() {
-        return Employee.super.getName() + " works for " + Company.super.getName();
-    }
-
-    @Override
-    public String getFirst() {
-        return first;
-    }
-
-    @Override
-    public String getLast() {
-        return last;
+        return "%s works for %s".formatted(Employee.super.getName(), Company.super.getName());
     }
 
     @Override

@@ -1,13 +1,13 @@
 package interfaces;
 
 public interface Employee {
-    String getFirst();
+    String first();
 
-    String getLast();
+    String last();
 
     void doWork();
 
     default String getName() {
-        return String.format("%s %s", getFirst(), getLast());
+        return "%s %s".formatted(first(), last());
     }
 }
