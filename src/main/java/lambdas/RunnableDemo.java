@@ -7,9 +7,9 @@ public class RunnableDemo {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        // Java 7 or earlier
+        // Java 7 or earlier (anonymous inner class)
         executorService.submit(new Runnable() {
-            @Override
+            @Override  // Single abstract method
             public void run() {
                 System.out.println("Inside an anonymous inner class");
             }
