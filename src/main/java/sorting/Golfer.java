@@ -1,16 +1,11 @@
 package sorting;
 
+import java.util.Objects;
+
 public class Golfer implements Comparable<Golfer> {
-    private String first;
-    private String last;
-    private int score;
-
-    public Golfer() {}
-
-    public Golfer(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+    private final String first;
+    private final String last;
+    private final int score;
 
     public Golfer(String first, String last, int score) {
         this.first = first;
@@ -20,31 +15,20 @@ public class Golfer implements Comparable<Golfer> {
 
     @Override
     public int compareTo(Golfer golfer) {
-        return score - golfer.score;
+        return Integer.compare(score, golfer.score);
+        // return score - golfer.score;
     }
 
     public String getFirst() {
         return first;
     }
 
-    public void setFirst(String first) {
-        this.first = first;
-    }
-
     public String getLast() {
         return last;
     }
 
-    public void setLast(String last) {
-        this.last = last;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     @Override
@@ -54,8 +38,8 @@ public class Golfer implements Comparable<Golfer> {
 
         Golfer golfer = (Golfer) o;
 
-        if (first != null ? !first.equals(golfer.first) : golfer.first != null) return false;
-        return last != null ? last.equals(golfer.last) : golfer.last == null;
+        if (!Objects.equals(first, golfer.first)) return false;
+        return Objects.equals(last, golfer.last);
 
     }
 

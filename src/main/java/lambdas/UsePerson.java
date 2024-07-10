@@ -24,7 +24,7 @@ public class UsePerson {
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 
@@ -57,7 +57,7 @@ public class UsePerson {
         linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        LinkedList::new,      // Supplier<LinkedList>
+                        LinkedList::new,      // Supplier<LinkedList> using default constructor
                         LinkedList::add,      // BiConsumer<LinkedList, Person>
                         LinkedList::addAll);  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
@@ -66,5 +66,10 @@ public class UsePerson {
                 .map(Person::new)
                 .collect(Collectors.toCollection(LinkedList::new));
         System.out.println(linkedPersons);
+
+        ArrayList<Person> arrayList = names.stream()
+                .map(Person::new)
+                .collect(Collectors.toCollection(() -> new ArrayList<>(4)));
+        System.out.println(arrayList);
     }
 }

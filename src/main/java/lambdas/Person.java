@@ -2,6 +2,17 @@ package lambdas;
 
 import java.util.Objects;
 
+// Records:
+// - introduced in Java 16
+// - immutable data holders
+// - automatically generate equals(), hashCode(), and toString() methods
+// - primary ("canonical") constructor appears before the body
+// - "getter" methods match the names of the components
+// - are final and extend java.lang.Record
+//
+// public record PersonRecord(String name) {}
+// "getter" method would be name()
+
 public class Person {
     private String name;
 
@@ -11,6 +22,7 @@ public class Person {
         this.name = name;
     }
 
+    // "Copy" constructor
     public Person(Person other) {
         this.name = other.name;
     }
