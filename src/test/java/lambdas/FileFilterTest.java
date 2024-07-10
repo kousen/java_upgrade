@@ -10,6 +10,7 @@ import java.io.FilenameFilter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings({"Convert2MethodRef", "Convert2Lambda", "Anonymous2MethodRef"})
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class FileFilterTest {
     private final File root = new File("src/main/java");
@@ -80,6 +81,4 @@ public class FileFilterTest {
         assert javaFiles != null;
         assertEquals(8, javaFiles.length);
     }
-
-
 }
