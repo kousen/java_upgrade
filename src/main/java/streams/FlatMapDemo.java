@@ -17,7 +17,7 @@ public class FlatMapDemo {
         ivanova.addOrder(new Order(4))
                 .addOrder(new Order(5));
 
-        List<Customer> customers = Arrays.asList(sheridan, ivanova, garibaldi);
+        List<Customer> customers = List.of(sheridan, ivanova, garibaldi);
 
         // map for 1-1 customer to name --> Stream<String>
         customers.stream()
@@ -44,7 +44,7 @@ public class FlatMapDemo {
         //      stream() on an empty collection already returns an empty stream
         customers.stream()
                 .flatMap(customer ->
-                        customer.getOrders().size() == 0 ? Stream.empty() :
+                        customer.getOrders().isEmpty() ? Stream.empty() :
                                 customer.getOrders().stream())
                 .forEach(System.out::println);
 
