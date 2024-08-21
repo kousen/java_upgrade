@@ -4,11 +4,14 @@ import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class LazyStreams {
-    private static final Logger logger = Logger.getLogger(LazyStreams.class.getName());
-
     public static int multByTwo(int n) {
         System.out.printf("Inside multByTwo with arg %d on thread %s%n",
                 n, Thread.currentThread().getName());
+        if (n == 101) try {
+            throw new Exception("101 is a bad number");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return n * 2;
     }
 
@@ -30,8 +33,8 @@ public class LazyStreams {
         // Demonstrate laziness using print statements
         firstEvenDoubleDivBy3 = IntStream.rangeClosed(100, 2_000_000)
                 // .parallel()
+                .map(n -> multByTwo(n))
                 .filter(LazyStreams::modByThree)
-                .map(LazyStreams::multByTwo)
                 .findFirst().orElse(0);
         System.out.printf("First even divisible by 3 is %d%n", firstEvenDoubleDivBy3);
     }

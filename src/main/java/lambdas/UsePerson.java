@@ -1,14 +1,11 @@
 package lambdas;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UsePerson {
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = List.of("John", "Paul", "George", "Ringo");
 
         // Old-style way:
         List<Person> beatles = new ArrayList<>(); // Shared mutable state
@@ -24,9 +21,18 @@ public class UsePerson {
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                //.map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
+
+        Optional<Person> first = names.stream()
+                .peek(System.out::println)
+                .filter(name -> name.startsWith("P"))
+                .peek(System.out::println)
+                .map(Person::new)
+                .peek(System.out::println)
+                .findFirst();  // short-circuiting, terminal operation; returns Optional<Person>
+        System.out.println(first);
 
         Person[] peopleArray = names.stream()
                 .map(Person::new)
