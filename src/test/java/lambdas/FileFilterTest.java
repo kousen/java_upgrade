@@ -20,6 +20,7 @@ public class FileFilterTest {
         assertEquals(22, files.length);
     }
 
+    @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
     @Test
     void listDirectories_anonInnerClass() {
         File[] directories = root.listFiles(new FileFilter() {
@@ -28,12 +29,22 @@ public class FileFilterTest {
                 return file.isDirectory();
             }
         });
+        assert directories != null;
+        assertEquals(14, directories.length);
+    }
+
+    @SuppressWarnings("Convert2MethodRef")
+    @Test
+    void listDirectories_expressionLambda() {
+        File[] directories = root.listFiles(file -> file.isDirectory());
+        assert directories != null;
         assertEquals(14, directories.length);
     }
 
     @Test
-    void listDirectories_expressionLambda() {
-        File[] directories = root.listFiles(file -> file.isDirectory());
+    void listDirectories_methodReference() {
+        File[] directories = root.listFiles(File::isDirectory);
+        assert directories != null;
         assertEquals(14, directories.length);
     }
 
@@ -43,13 +54,29 @@ public class FileFilterTest {
             System.out.println("Checking: " + file);
             return file.isDirectory();
         });
+        assert directories != null;
         assertEquals(14, directories.length);
     }
 
     @Test
     void listDirectories_assignedToVariable() {
-        FileFilter filter = (File file) -> file.isDirectory();
+        FileFilter filter = File::isDirectory;
         File[] directories = root.listFiles(filter);
+        assert directories != null;
         assertEquals(14, directories.length);
+    }
+
+    @Test
+    void listJavaSrcFiles_fileFilter() {
+        File[] javaFiles = root.listFiles(file -> file.getName().endsWith(".java"));
+        assert javaFiles != null;
+        assertEquals(8, javaFiles.length);
+    }
+
+    @Test
+    void listJavaSrcFiles_filenameFilter() {
+        File[] javaFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
+        assert javaFiles != null;
+        assertEquals(8, javaFiles.length);
     }
 }

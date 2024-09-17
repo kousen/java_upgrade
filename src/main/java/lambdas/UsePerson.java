@@ -24,7 +24,7 @@ public class UsePerson {
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 

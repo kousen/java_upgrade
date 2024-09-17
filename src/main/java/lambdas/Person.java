@@ -2,6 +2,8 @@ package lambdas;
 
 import java.util.Objects;
 
+// public record Person(String name) {}
+
 public class Person {
     private String name;
 
@@ -11,10 +13,12 @@ public class Person {
         this.name = name;
     }
 
+    // copy constructor
     public Person(Person other) {
         this.name = other.name;
     }
 
+    // varargs constructor
     public Person(String... names) {
         this.name = String.join(" ", names);
     }
