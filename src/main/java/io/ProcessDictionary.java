@@ -21,7 +21,8 @@ public class ProcessDictionary {
 
     public long getMaxLength() {
         try (Stream<String> words = Files.lines(dictionary)) {
-            return words.mapToInt(String::length).max().orElse(0);
+            return words.mapToInt(String::length)
+                    .max().orElse(0);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
@@ -29,15 +30,14 @@ public class ProcessDictionary {
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        long max = getMaxLength() - 5;
+        long max = getMaxLength() - 10;
         try (Stream<String> words = Files.lines(dictionary)) {
             words.filter(s -> s.length() > max)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
