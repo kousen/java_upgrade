@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SortingTest {
 
     // "Getter" methods on a record match
     // the property name, as in name(), priority()
-    record Project(String name, int priority) {}
+    record Project(String name, int priority) {
+    }
 
     private List<Project> projects;
 
@@ -31,11 +31,9 @@ public class SortingTest {
     // sort by priority, then by name
     @Test
     public void sortByPriorityThenName() {
-        List<Project> sorted = projects.stream()
-                .sorted(Comparator.comparingInt(Project::priority)
+        projects.stream()
+                .sorted(Comparator.comparingInt(Project::priority).reversed()
                         .thenComparing(Project::name))
-                .collect(Collectors.toList());
-        System.out.println(sorted);
-        System.out.println(projects);
+                .forEach(System.out::println);
     }
 }
