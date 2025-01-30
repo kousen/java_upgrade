@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class UsePerson {
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = List.of("John", "Paul", "George", "Ringo");
 
         // Old-style way:
         List<Person> beatles = new ArrayList<>(); // Shared mutable state
@@ -17,14 +17,15 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
-        List<Person> people = names.stream()    // Stream<String>
+        // New way:
+        List<Person> people = names.stream()          // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
-                .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
+                .collect(Collectors.toList());        // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
         people = names.stream()
-                .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new)    // uses the Person(String) ctr
+                .map(Person::new)    // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 
@@ -48,6 +49,7 @@ public class UsePerson {
         //                 list
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
+                .peek(x -> System.out.println(x + " on thread " + Thread.currentThread().getName()))
                 .collect(
                         () -> new LinkedList<Person>(),          // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
