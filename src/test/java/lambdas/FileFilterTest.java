@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings({"Convert2MethodRef", "Convert2Lambda", "Anonymous2MethodRef"})
 public class FileFilterTest {
     private final File root = new File("src/main/java");
 
@@ -37,6 +39,13 @@ public class FileFilterTest {
     }
 
     @Test
+    void listDirectories_methodReference() {
+        File[] dirs = root.listFiles(File::isDirectory);
+        assert dirs != null;
+        assertEquals(14, dirs.length);
+    }
+
+    @Test
     void listDirectories_blockLambda() {
         File[] dirs = root.listFiles(pathname -> {
             System.out.println("Checking " + pathname);
@@ -52,6 +61,27 @@ public class FileFilterTest {
         File[] dirs = root.listFiles(filter);
         assert dirs != null;
         assertEquals(14, dirs.length);
+    }
+
+    @Test
+    void listJavaSrcFiles_fileNameFilter() {
+        File[] javaSrcFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
+        assert javaSrcFiles != null;
+        assertEquals(8, javaSrcFiles.length);
+    }
+
+    @Test
+    void listJavaSrcFiles_fileFilter() {
+        File[] javaSrcFiles = root.listFiles(file -> file.getName().endsWith(".java"));
+        assert javaSrcFiles != null;
+        assertEquals(8, javaSrcFiles.length);
+    }
+
+    @Test
+    void consumerDemo() {
+        List.of("this", "is", "a", "list", "of", "strings")
+                .forEach(System.out::println);
+
     }
 
 }
