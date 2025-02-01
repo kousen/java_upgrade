@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -82,6 +83,12 @@ public class FileFilterTest {
         List.of("this", "is", "a", "list", "of", "strings")
                 .forEach(System.out::println);
 
+    }
+
+    @Test
+    void mapForEach() {
+        Map.ofEntries(Map.entry("one", 1), Map.entry("two", 2))
+                .forEach((k, v) -> System.out.println(k + " -> " + v));
     }
 
 }
