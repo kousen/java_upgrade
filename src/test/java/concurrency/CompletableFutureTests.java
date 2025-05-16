@@ -50,7 +50,7 @@ public class CompletableFutureTests {
     public void completeExceptionallyWithCause() {
         try {
             parseNumber("abc").get();
-            fail("Should not get here");
+            Assertions.fail("Should not get here");
         } catch (Exception e) {
             assertEquals(ExecutionException.class, e.getClass());
             assertEquals(NumberFormatException.class, e.getCause()

@@ -2,7 +2,6 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.IntPredicate;
 
@@ -14,7 +13,7 @@ public class SumEvens {
 
     @Test
     public void addEvenElements() {
-        List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5);
+        List<Integer> integers = List.of(3, 1, 4, 1, 5, 9, 2, 6, 5);
         int sum = 0;
         for (int n : integers) {
             if (n % 2 == 0) {

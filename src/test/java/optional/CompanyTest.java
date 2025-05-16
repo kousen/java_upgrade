@@ -13,7 +13,7 @@ class CompanyTest {
     void getDepartmentWithManager() {
         Optional<Department> dept = company.getDepartment("Accounting");
         assertTrue(dept.isPresent());
-        Department department = dept.get();
+        Department department = dept.orElseThrow();
         System.out.println(department.getName());
         System.out.println(department.getManager());
         System.out.println(department.getOptionalManager());
@@ -23,7 +23,7 @@ class CompanyTest {
     void getDepartmentWithoutManager() {
         Optional<Department> dept = company.getDepartment("IT");
         assertTrue(dept.isPresent());
-        Department department = dept.get();
+        Department department = dept.orElseThrow();
         System.out.println(department.getName());
         System.out.println(department.getManager());
         System.out.println(department.getOptionalManager());

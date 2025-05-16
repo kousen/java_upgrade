@@ -2,13 +2,12 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
 public class StringExercises {
-    private final List<String> strings = Arrays.asList("this", "is", "a",
+    private final List<String> strings = List.of("this", "is", "a",
             "list", "of", "strings");
 
     @Test

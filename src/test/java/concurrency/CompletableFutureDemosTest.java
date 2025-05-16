@@ -33,7 +33,7 @@ public class CompletableFutureDemosTest {
     public void testExceptionWithCause() throws Exception {
         try {
             demo.getProduct(666).get();
-            fail("Houston, we have a problem...");
+            Assertions.fail("Houston, we have a problem...");
         } catch (ExecutionException e) {
             assertEquals(ExecutionException.class, e.getClass());
             assertEquals(RuntimeException.class, e.getCause().getClass());
