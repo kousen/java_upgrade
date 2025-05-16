@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class CollectorsDemo {
     public static void main(String[] args) {
-        List<Integer> nums = Stream.of("this", "is", "a", "collection", "of", "strings")
+        var nums = Stream.of("this", "is", "a", "collection", "of", "strings")
                 .parallel()
                 .map(String::length)
 //                .map(n -> {
@@ -26,16 +26,16 @@ public class CollectorsDemo {
                 .toList();
         System.out.println(nums);
 
-        Set<String> set = Stream.of("this is a is a collection of strings".split(" "))
+        var set = Stream.of("this is a is a collection of strings".split(" "))
                 .collect(Collectors.toSet());
         System.out.println(set);
         System.out.println(set.getClass().getName());
 
-        Set<String> collection =
+        var collection =
                 Stream.of("this is a is a collection of strings".split(" "))
                 .collect(Collectors.toCollection(ConcurrentSkipListSet::new));
 
-        Map<String, Integer> stringMap =
+        var stringMap =
                 Stream.of("this is a collection of strings".split(" "))
                 .collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println(stringMap);
