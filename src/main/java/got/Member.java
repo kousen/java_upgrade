@@ -91,9 +91,7 @@ public class Member implements Comparable<Member> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Member member = (Member) o;
+        if (!(o instanceof Member member)) return false;
 
         if (Double.compare(member.salary, salary) != 0) return false;
         if (!id.equals(member.id)) return false;

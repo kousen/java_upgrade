@@ -1,7 +1,7 @@
 package streams;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,7 +11,7 @@ public class StringExercises {
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private List<String> strings = new ArrayList<>();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         strings.add("this");
         strings.add("is");
@@ -26,14 +26,14 @@ public class StringExercises {
         strings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
-                return s1.length() - s2.length();
+                return Integer.compare(s1.length(), s2.length());
             }
         });
     }
 
     @Test
     public void stringLengthSort_lambda() {
-        strings.sort((s1, s2) -> s1.length() - s2.length());
+        strings.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
     }
 
     @SuppressWarnings("Convert2MethodRef")
@@ -54,7 +54,7 @@ public class StringExercises {
 
 
     private static int compareStrings(String s1, String s2) {
-        return s1.length() - s2.length();
+        return Integer.compare(s1.length(), s2.length());
     }
 
 
