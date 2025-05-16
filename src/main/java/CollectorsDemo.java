@@ -23,7 +23,7 @@ public class CollectorsDemo {
                 .filter(n -> n % 2 == 0)
                 .peek(n -> System.out.println("On " + Thread.currentThread().getName()
                         + ", the value of n after the filter is  " + n))
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(nums);
 
         Set<String> set = Stream.of("this is a is a collection of strings".split(" "))
