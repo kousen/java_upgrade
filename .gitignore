@@ -14,3 +14,6 @@ build/
 .idea/
 *.iml
 *.ipr
+
+# macOS system files
+.DS_Store
