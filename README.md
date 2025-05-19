@@ -185,7 +185,7 @@ Most modern IDEs (IntelliJ IDEA, Eclipse, VS Code) support running JUnit tests d
 
 **Ken Kousen**  
 - Email: ken.kousen@kousenit.com
-- Bluesky: [@kenkousen.bsky.social](https://bsky.app/profile/kenkousen.bsky.social)
+- Bluesky: [@kousenit.com](https://bsky.app/profile/kousenit.com)
 - LinkedIn: [Ken Kousen](https://www.linkedin.com/in/kenkousen/)
 - Website: [www.kousenit.com](http://www.kousenit.com)
 
