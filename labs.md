@@ -19,16 +19,17 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 11: String Sorting](#exercise-11-string-sorting)
   - [Exercise 12: Book Sorting with Comparators](#exercise-12-book-sorting-with-comparators)
   - [Exercise 13: Collectors Demo](#exercise-13-collectors-demo)
+  - [Exercise 14: Parallel Streams](#exercise-14-parallel-streams)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
-  - [Exercise 14: BigDecimal Reduce Operations](#exercise-14-bigdecimal-reduce-operations)
+  - [Exercise 15: BigDecimal Reduce Operations](#exercise-15-bigdecimal-reduce-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 15: Optional with DAO Pattern](#exercise-15-optional-with-dao-pattern)
-  - [Exercise 16: Optional Chaining](#exercise-16-optional-chaining)
+  - [Exercise 16: Optional with DAO Pattern](#exercise-16-optional-with-dao-pattern)
+  - [Exercise 17: Optional Chaining](#exercise-17-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 17: CompletableFuture Basics](#exercise-17-completablefuture-basics)
-  - [Exercise 18: Await Quiescence](#exercise-18-await-quiescence)
+  - [Exercise 18: CompletableFuture Basics](#exercise-18-completablefuture-basics)
+  - [Exercise 19: Await Quiescence](#exercise-19-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 19: Multiple Interface Implementation](#exercise-19-multiple-interface-implementation)
+  - [Exercise 20: Multiple Interface Implementation](#exercise-20-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -427,9 +428,58 @@ public void demoCollectors() {
 
 [Back to Table of Contents](#table-of-contents)
 
+### Exercise 14: Parallel Streams
+
+Open the test file `src/test/java/streams/ParallelStreamExercises.java`
+
+**Task:** Learn the basics of parallel stream processing:
+
+1. Convert streams to parallel and observe thread behavior
+2. Understand ordering differences between sequential and parallel
+3. Use `forEachOrdered` to maintain order
+4. Perform parallel reductions
+5. Compare `findFirst` vs `findAny` behavior
+6. Avoid stateful operations in parallel streams
+7. Use thread-safe collectors
+8. Understand when to use parallel streams
+
+```java
+@Test
+public void basicParallelStream() {
+    // TODO: Convert the stream to parallel and observe thread names
+    // Stream.of("apple", "banana", "cherry", "date", "elderberry")
+    //     .parallel()
+    //     .forEach(fruit -> System.out.println(
+    //         Thread.currentThread().getName() + ": " + fruit));
+}
+
+@Test
+public void statefulOperationProblem() {
+    // TODO: Learn why stateful operations are problematic in parallel
+    // This is an anti-pattern example!
+}
+
+@Test
+public void parallelPerformanceConsiderations() {
+    // TODO: Understand when parallel streams are beneficial
+    // Hint: Large datasets, CPU-intensive operations, independent work
+}
+```
+
+**Key Concepts:**
+- `parallel()` and `sequential()` methods
+- Thread safety with parallel operations
+- When to use parallel streams (performance considerations)
+- Ordering guarantees with `forEachOrdered`
+- Appropriate collectors for parallel operations
+
+**Note:** For detailed performance analysis with benchmarks, see the separate JMH project repository.
+
+[Back to Table of Contents](#table-of-contents)
+
 ## BigDecimal Stream Operations
 
-### Exercise 14: BigDecimal Reduce Operations
+### Exercise 15: BigDecimal Reduce Operations
 
 Open the test file `src/test/java/streams/BigDecimalReduceExercises.java`
 
@@ -470,7 +520,7 @@ public void sumWithEmptyStream() {
 
 Open the test files in `src/test/java/optional/`
 
-### Exercise 15: Optional with DAO Pattern
+### Exercise 16: Optional with DAO Pattern
 
 **File:** `ProductDAOTest.java`
 
@@ -480,7 +530,7 @@ Open the test files in `src/test/java/optional/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 16: Optional Chaining
+### Exercise 17: Optional Chaining
 
 **File:** `CompanyTest.java`
 
@@ -494,7 +544,7 @@ Open the test files in `src/test/java/optional/`
 
 Open the test files in `src/test/java/concurrency/`
 
-### Exercise 17: CompletableFuture Basics
+### Exercise 18: CompletableFuture Basics
 
 **File:** `CompletableFutureTests.java`
 
@@ -507,7 +557,7 @@ Open the test files in `src/test/java/concurrency/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 18: Await Quiescence
+### Exercise 19: Await Quiescence
 
 **File:** `AwaitQuiesenceTest.java`
 
@@ -520,7 +570,7 @@ Open the test files in `src/test/java/concurrency/`
 
 ## Interface Evolution
 
-### Exercise 19: Multiple Interface Implementation
+### Exercise 20: Multiple Interface Implementation
 
 Open the test file `src/test/java/interfaces/CompanyEmployeeTest.java`
 
