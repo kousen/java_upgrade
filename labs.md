@@ -9,19 +9,22 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 2: Implement Supplier](#exercise-2-implement-supplier)
   - [Exercise 3: Constructor References](#exercise-3-constructor-references)
   - [Exercise 4: Filter with Predicate](#exercise-4-filter-with-predicate)
+  - [Exercise 5: Function Interface and Composition](#exercise-5-function-interface-and-composition)
+  - [Exercise 6: Runnable and ExecutorService](#exercise-6-runnable-and-executorservice)
 - [Stream Operations](#stream-operations)
-  - [Exercise 5: Sum Even and Odd Numbers](#exercise-5-sum-even-and-odd-numbers)
-  - [Exercise 6: String Sorting](#exercise-6-string-sorting)
-  - [Exercise 7: Collectors Demo](#exercise-7-collectors-demo)
+  - [Exercise 7: FlatMap with Nested Data Structures](#exercise-7-flatmap-with-nested-data-structures)
+  - [Exercise 8: Sum Even and Odd Numbers](#exercise-8-sum-even-and-odd-numbers)
+  - [Exercise 9: String Sorting](#exercise-9-string-sorting)
+  - [Exercise 10: Collectors Demo](#exercise-10-collectors-demo)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 8: Optional with DAO Pattern](#exercise-8-optional-with-dao-pattern)
-  - [Exercise 9: Optional Chaining](#exercise-9-optional-chaining)
+  - [Exercise 11: Optional with DAO Pattern](#exercise-11-optional-with-dao-pattern)
+  - [Exercise 12: Optional Chaining](#exercise-12-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 10: CompletableFuture Basics](#exercise-10-completablefuture-basics)
-  - [Exercise 11: Await Quiescence](#exercise-11-await-quiescence)
+  - [Exercise 13: CompletableFuture Basics](#exercise-13-completablefuture-basics)
+  - [Exercise 14: Await Quiescence](#exercise-14-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 12: Multiple Interface Implementation](#exercise-12-multiple-interface-implementation)
+  - [Exercise 15: Multiple Interface Implementation](#exercise-15-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -132,9 +135,105 @@ public void filterWithPredicate() {
 
 [Back to Table of Contents](#table-of-contents)
 
+### Exercise 5: Function Interface and Composition
+
+Open the test file `src/test/java/lambdas/FunctionExercises.java`
+
+**Task:** Complete various Function interface exercises:
+
+1. Implement basic Function interface
+2. Use method references with Functions
+3. Compose functions using `andThen` and `compose`
+4. Work with BiFunction, UnaryOperator, and BinaryOperator
+5. Use Functions in stream operations
+
+```java
+@Test
+public void implementFunction() {
+    // TODO: Create a Function<String, Integer> that returns string length
+    // Function<String, Integer> stringLength = ...
+    
+    // assertEquals(5, stringLength.apply("Hello"));
+    // assertEquals(0, stringLength.apply(""));
+}
+
+@Test
+public void functionComposition() {
+    // TODO: Create and compose functions
+    // Function<String, Integer> stringLength = ...
+    // Function<Integer, String> toBinary = ...
+    // Function<String, String> lengthToBinary = ...
+    
+    // assertEquals("101", lengthToBinary.apply("Hello")); // 5 in binary
+}
+```
+
+[Back to Table of Contents](#table-of-contents)
+
+### Exercise 6: Runnable and ExecutorService
+
+Open the test file `src/test/java/lambdas/RunnableExercises.java`
+
+**Task:** Evolve from anonymous inner classes to lambda expressions:
+
+1. Implement Runnable as anonymous inner class
+2. Convert to expression lambda
+3. Use block lambda
+4. Assign lambda to variable
+5. Work with ExecutorService
+6. Explore virtual threads (Java 21+)
+
+```java
+@Test
+public void implementRunnableAsAnonymousInnerClass() throws InterruptedException {
+    // TODO: Submit a Runnable using an anonymous inner class
+    AtomicReference<String> result = new AtomicReference<>("");
+    CountDownLatch latch = new CountDownLatch(1);
+    
+    // executorService.submit(new Runnable() { ... });
+    
+    // assertTrue(latch.await(1, TimeUnit.SECONDS));
+    // assertEquals("Anonymous Inner Class", result.get());
+}
+```
+
+[Back to Table of Contents](#table-of-contents)
+
 ## Stream Operations
 
-### Exercise 5: Sum Even and Odd Numbers
+### Exercise 7: FlatMap with Nested Data Structures
+
+Open the test file `src/test/java/streams/FlatMapExercises.java`
+
+**Task:** Work with nested data structures using map and flatMap:
+
+1. Use `map` to transform customers to names
+2. Observe nested structures with `map`
+3. Use `flatMap` to flatten nested collections
+4. Filter and transform with `flatMap`
+5. Combine operations for complex transformations
+
+```java
+@Test
+public void getAllOrdersFlat() {
+    // TODO: Use flatMap to get all orders as a flat List<Order>
+    // List<Order> allOrders = ...
+    
+    // assertEquals(5, allOrders.size());
+}
+
+@Test
+public void combineCustomerNamesWithOrderIds() {
+    // TODO: Create strings in format "CustomerName-OrderId" for all orders
+    // List<String> customerOrderStrings = ...
+    
+    // assertTrue(customerOrderStrings.contains("Sheridan-1"));
+}
+```
+
+[Back to Table of Contents](#table-of-contents)
+
+### Exercise 7: Sum Even and Odd Numbers
 
 Open the test file `src/test/java/streams/SumEvens.java`
 
@@ -161,7 +260,7 @@ public void addOddElementsUsingStreams() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 6: String Sorting
+### Exercise 8: String Sorting
 
 Open the test file `src/test/java/streams/StringExercises.java`
 
@@ -193,7 +292,7 @@ public void stringLengthSort_comparingInt() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 7: Collectors Demo
+### Exercise 9: Collectors Demo
 
 **Task:** Complete the `demoCollectors` test method:
 
@@ -230,7 +329,7 @@ Open the test file `src/test/java/streams/SumBigDecimalsTest.java`
 
 Open the test files in `src/test/java/optional/`
 
-### Exercise 8: Optional with DAO Pattern
+### Exercise 11: Optional with DAO Pattern
 
 **File:** `ProductDAOTest.java`
 
@@ -240,7 +339,7 @@ Open the test files in `src/test/java/optional/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 9: Optional Chaining
+### Exercise 12: Optional Chaining
 
 **File:** `CompanyTest.java`
 
@@ -254,7 +353,7 @@ Open the test files in `src/test/java/optional/`
 
 Open the test files in `src/test/java/concurrency/`
 
-### Exercise 10: CompletableFuture Basics
+### Exercise 13: CompletableFuture Basics
 
 **File:** `CompletableFutureTests.java`
 
@@ -267,7 +366,7 @@ Open the test files in `src/test/java/concurrency/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 11: Await Quiescence
+### Exercise 14: Await Quiescence
 
 **File:** `AwaitQuiesenceTest.java`
 
@@ -280,7 +379,7 @@ Open the test files in `src/test/java/concurrency/`
 
 ## Interface Evolution
 
-### Exercise 12: Multiple Interface Implementation
+### Exercise 15: Multiple Interface Implementation
 
 Open the test file `src/test/java/interfaces/CompanyEmployeeTest.java`
 
