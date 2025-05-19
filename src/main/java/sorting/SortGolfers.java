@@ -29,24 +29,24 @@ public class SortGolfers {
     // sort by score, then equal scores by last name
     public void sortByScoreThenLast() {
         golfers.stream()
-                .sorted(Comparator.comparingInt(Golfer::getScore)
-                        .thenComparing(Golfer::getLast))
+                .sorted(Comparator.comparingInt(Golfer::score)
+                        .thenComparing(Golfer::last))
                 .forEach(System.out::println);
     }
 
     // sort by score, then by last, then by first
     public void sortByScoreThenLastThenFirst() {
         golfers.stream()
-                .sorted(Comparator.comparingInt(Golfer::getScore)
-                        .thenComparing(Golfer::getLast)
-                        .thenComparing(Golfer::getFirst))
+                .sorted(Comparator.comparingInt(Golfer::score)
+                        .thenComparing(Golfer::last)
+                        .thenComparing(Golfer::first))
                 .forEach(System.out::println);
     }
 
     public void partitionByScore() {
         Map<Boolean, List<Golfer>> map = golfers.stream()
                 .collect(Collectors.partitioningBy(
-                        golfer -> golfer.getScore() < 70));
+                        golfer -> golfer.score() < 70));
 
         map.forEach((k,v) -> {
             System.out.println(k);
