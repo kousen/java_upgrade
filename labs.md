@@ -12,20 +12,21 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 5: Function Interface and Composition](#exercise-5-function-interface-and-composition)
   - [Exercise 6: Runnable and ExecutorService](#exercise-6-runnable-and-executorservice)
   - [Exercise 7: FileFilter Lambda Evolution](#exercise-7-filefilter-lambda-evolution)
+  - [Exercise 8: Lazy Evaluation with Suppliers](#exercise-8-lazy-evaluation-with-suppliers)
 - [Stream Operations](#stream-operations)
-  - [Exercise 8: FlatMap with Nested Data Structures](#exercise-8-flatmap-with-nested-data-structures)
-  - [Exercise 9: Sum Even and Odd Numbers](#exercise-9-sum-even-and-odd-numbers)
-  - [Exercise 10: String Sorting](#exercise-10-string-sorting)
-  - [Exercise 11: Collectors Demo](#exercise-11-collectors-demo)
+  - [Exercise 9: FlatMap with Nested Data Structures](#exercise-9-flatmap-with-nested-data-structures)
+  - [Exercise 10: Sum Even and Odd Numbers](#exercise-10-sum-even-and-odd-numbers)
+  - [Exercise 11: String Sorting](#exercise-11-string-sorting)
+  - [Exercise 12: Collectors Demo](#exercise-12-collectors-demo)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 12: Optional with DAO Pattern](#exercise-12-optional-with-dao-pattern)
-  - [Exercise 13: Optional Chaining](#exercise-13-optional-chaining)
+  - [Exercise 13: Optional with DAO Pattern](#exercise-13-optional-with-dao-pattern)
+  - [Exercise 14: Optional Chaining](#exercise-14-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 14: CompletableFuture Basics](#exercise-14-completablefuture-basics)
-  - [Exercise 15: Await Quiescence](#exercise-15-await-quiescence)
+  - [Exercise 15: CompletableFuture Basics](#exercise-15-completablefuture-basics)
+  - [Exercise 16: Await Quiescence](#exercise-16-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 16: Multiple Interface Implementation](#exercise-16-multiple-interface-implementation)
+  - [Exercise 17: Multiple Interface Implementation](#exercise-17-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -230,6 +231,35 @@ void listDirectories_anonInnerClass() {
 void listDirectories_methodReference() {
     // TODO: Implement using method reference
     // File[] dirs = root.listFiles(...);
+}
+```
+
+[Back to Table of Contents](#table-of-contents)
+
+### Exercise 8: Lazy Evaluation with Suppliers
+
+Open the test file `src/test/java/lambdas/LazyEvaluationExercises.java`
+
+**Task:** Understand lazy evaluation using `Supplier<String>`:
+
+1. Compare eager vs lazy evaluation in assertions
+2. Demonstrate lazy logging with Java's Logger
+3. Create custom lazy evaluation scenarios
+4. Understand when to use Supplier for performance
+
+```java
+@Test
+void eagerEvaluation() {
+    boolean x = true;
+    // TODO: Call assertTrue with getErrorMessage() directly
+    // Notice that the message is generated even when the assertion passes
+}
+
+@Test
+void lazyEvaluationWithLambda() {
+    boolean x = true;
+    // TODO: Call assertTrue with a lambda that calls getErrorMessage()
+    // The message should NOT be generated when the assertion passes
 }
 ```
 
