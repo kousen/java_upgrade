@@ -17,17 +17,18 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 9: FlatMap with Nested Data Structures](#exercise-9-flatmap-with-nested-data-structures)
   - [Exercise 10: Sum Even and Odd Numbers](#exercise-10-sum-even-and-odd-numbers)
   - [Exercise 11: String Sorting](#exercise-11-string-sorting)
-  - [Exercise 12: Collectors Demo](#exercise-12-collectors-demo)
+  - [Exercise 12: Book Sorting with Comparators](#exercise-12-book-sorting-with-comparators)
+  - [Exercise 13: Collectors Demo](#exercise-13-collectors-demo)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
-  - [Exercise 13: BigDecimal Reduce Operations](#exercise-13-bigdecimal-reduce-operations)
+  - [Exercise 14: BigDecimal Reduce Operations](#exercise-14-bigdecimal-reduce-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 14: Optional with DAO Pattern](#exercise-14-optional-with-dao-pattern)
-  - [Exercise 15: Optional Chaining](#exercise-15-optional-chaining)
+  - [Exercise 15: Optional with DAO Pattern](#exercise-15-optional-with-dao-pattern)
+  - [Exercise 16: Optional Chaining](#exercise-16-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 16: CompletableFuture Basics](#exercise-16-completablefuture-basics)
-  - [Exercise 17: Await Quiescence](#exercise-17-await-quiescence)
+  - [Exercise 17: CompletableFuture Basics](#exercise-17-completablefuture-basics)
+  - [Exercise 18: Await Quiescence](#exercise-18-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 18: Multiple Interface Implementation](#exercise-18-multiple-interface-implementation)
+  - [Exercise 19: Multiple Interface Implementation](#exercise-19-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -359,7 +360,52 @@ public void stringLengthSort_comparingInt() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 12: Collectors Demo
+### Exercise 12: Book Sorting with Comparators
+
+Open the test file `src/test/java/sorting/BookSortingExercises.java`
+
+**Task:** Practice sorting using modern Java Comparator methods:
+
+1. Sort by natural ordering (publication year)
+2. Sort by title alphabetically
+3. Sort by author, then by title
+4. Sort by year descending (newest first)
+5. Sort by title length
+6. Partition books by publication year
+7. Group books by decade
+8. Create complex multi-level sorts
+9. Filter and sort books in a specific year range
+10. Find books by a specific author
+
+```java
+@Test
+public void sortByAuthorThenTitle() {
+    // TODO: Sort by author, then by title for books by the same author
+    // Hint: Use Comparator.comparing().thenComparing()
+}
+
+@Test
+public void groupByDecade() {
+    // TODO: Group books by the decade they were published
+    // Hint: Use Collectors.groupingBy() with year/10*10
+}
+
+@Test
+public void findKenKousenBooks() {
+    // TODO: Find all books by Ken Kousen and sort by publication year
+}
+```
+
+**Key Concepts:**
+- `Comparator.comparing()`
+- `thenComparing()` for secondary sorts
+- `reversed()` for descending order
+- `comparingInt()` for numeric values
+- `Collectors.partitioningBy()` and `groupingBy()`
+
+[Back to Table of Contents](#table-of-contents)
+
+### Exercise 13: Collectors Demo
 
 **Task:** Complete the `demoCollectors` test method:
 
@@ -383,7 +429,7 @@ public void demoCollectors() {
 
 ## BigDecimal Stream Operations
 
-### Exercise 13: BigDecimal Reduce Operations
+### Exercise 14: BigDecimal Reduce Operations
 
 Open the test file `src/test/java/streams/BigDecimalReduceExercises.java`
 
@@ -424,7 +470,7 @@ public void sumWithEmptyStream() {
 
 Open the test files in `src/test/java/optional/`
 
-### Exercise 14: Optional with DAO Pattern
+### Exercise 15: Optional with DAO Pattern
 
 **File:** `ProductDAOTest.java`
 
@@ -434,7 +480,7 @@ Open the test files in `src/test/java/optional/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 15: Optional Chaining
+### Exercise 16: Optional Chaining
 
 **File:** `CompanyTest.java`
 
@@ -448,7 +494,7 @@ Open the test files in `src/test/java/optional/`
 
 Open the test files in `src/test/java/concurrency/`
 
-### Exercise 16: CompletableFuture Basics
+### Exercise 17: CompletableFuture Basics
 
 **File:** `CompletableFutureTests.java`
 
@@ -461,7 +507,7 @@ Open the test files in `src/test/java/concurrency/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 17: Await Quiescence
+### Exercise 18: Await Quiescence
 
 **File:** `AwaitQuiesenceTest.java`
 
@@ -474,7 +520,7 @@ Open the test files in `src/test/java/concurrency/`
 
 ## Interface Evolution
 
-### Exercise 18: Multiple Interface Implementation
+### Exercise 19: Multiple Interface Implementation
 
 Open the test file `src/test/java/interfaces/CompanyEmployeeTest.java`
 
