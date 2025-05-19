@@ -2,6 +2,32 @@
 
 This document contains the lab exercises for the Functional Programming in Java course. Each exercise has TODO comments where you should implement the solution. Complete solutions can be found in the `solutions` branch.
 
+## Table of Contents
+
+- [Lambda Expressions and Functional Interfaces](#lambda-expressions-and-functional-interfaces)
+  - [Exercise 1: Implement Consumer](#exercise-1-implement-consumer)
+  - [Exercise 2: Implement Supplier](#exercise-2-implement-supplier)
+  - [Exercise 3: Constructor References](#exercise-3-constructor-references)
+  - [Exercise 4: Filter with Predicate](#exercise-4-filter-with-predicate)
+- [Stream Operations](#stream-operations)
+  - [Exercise 5: Sum Even and Odd Numbers](#exercise-5-sum-even-and-odd-numbers)
+  - [Exercise 6: String Sorting](#exercise-6-string-sorting)
+  - [Exercise 7: Collectors Demo](#exercise-7-collectors-demo)
+- [BigDecimal Stream Operations](#bigdecimal-stream-operations)
+- ["Optional" Exercises](#optional-exercises)
+  - [Exercise 8: Optional with DAO Pattern](#exercise-8-optional-with-dao-pattern)
+  - [Exercise 9: Optional Chaining](#exercise-9-optional-chaining)
+- [CompletableFuture Exercises](#completablefuture-exercises)
+  - [Exercise 10: CompletableFuture Basics](#exercise-10-completablefuture-basics)
+  - [Exercise 11: Await Quiescence](#exercise-11-await-quiescence)
+- [Interface Evolution](#interface-evolution)
+  - [Exercise 12: Multiple Interface Implementation](#exercise-12-multiple-interface-implementation)
+- [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
+- [Running the Tests](#running-the-tests)
+- [Solutions](#solutions)
+- [Tips](#tips)
+- [Additional Resources](#additional-resources)
+
 ## Lambda Expressions and Functional Interfaces
 
 ### Exercise 1: Implement Consumer
@@ -15,7 +41,7 @@ Open the test file `src/test/java/lambdas/FunctionalInterfacesTest.java`
 
 ```java
 @Test
-public void implementConsumerUsingLambda() throws Exception {
+public void implementConsumerUsingLambda() {
     // TODO: Implement Consumer<String> using a lambda expression
     // consumer.accept("Hello, World!");
 }
@@ -26,6 +52,8 @@ public void implementConsumerUsingMethodReference() throws Exception {
     // consumer.accept("Hello, World!");
 }
 ```
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Exercise 2: Implement Supplier
 
@@ -60,6 +88,8 @@ public void implementSupplierUsingMethodReference() throws Exception {
 }
 ```
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exercise 3: Constructor References
 
 **Task:** Complete the `constructorReference` test method:
@@ -84,19 +114,23 @@ public void constructorReference() throws Exception {
 }
 ```
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exercise 4: Filter with Predicate
 
 **Task:** Complete the predicate to accept only even numbers:
 
 ```java
 @Test
-public void filterWithPredicate() throws Exception {
+public void filterWithPredicate() {
     // TODO: Fix the filter predicate to accept even numbers only
     // IntStream.of(3, 1, 4, 1, 5, 9)
     //         .filter(n -> true)  // accept even nums only
     //         .forEach(n -> assertTrue(n % 2 == 0));
 }
 ```
+
+[Back to Table of Contents](#table-of-contents)
 
 ## Stream Operations
 
@@ -124,6 +158,8 @@ public void addOddElementsUsingStreams() {
     // assertEquals(24, sum);
 }
 ```
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Exercise 6: String Sorting
 
@@ -155,6 +191,8 @@ public void stringLengthSort_comparingInt() {
 }
 ```
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exercise 7: Collectors Demo
 
 **Task:** Complete the `demoCollectors` test method:
@@ -175,6 +213,8 @@ public void demoCollectors() {
 }
 ```
 
+[Back to Table of Contents](#table-of-contents)
+
 ## BigDecimal Stream Operations
 
 Open the test file `src/test/java/streams/SumBigDecimalsTest.java`
@@ -184,7 +224,9 @@ Open the test file `src/test/java/streams/SumBigDecimalsTest.java`
 - The difference between using reduce with and without an identity value
 - Why certain approaches are preferred for monetary calculations
 
-## Optional Exercises
+[Back to Table of Contents](#table-of-contents)
+
+## "Optional" Exercises
 
 Open the test files in `src/test/java/optional/`
 
@@ -196,6 +238,8 @@ Open the test files in `src/test/java/optional/`
 - How `Optional` is used in DAO methods
 - The difference between `findById` (returns `Optional`) and `getProductById`
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exercise 9: Optional Chaining
 
 **File:** `CompanyTest.java`
@@ -203,6 +247,8 @@ Open the test files in `src/test/java/optional/`
 **Task:** Study the test to understand:
 - How to chain `Optional` operations using `map` and `flatMap`
 - When to use `map` vs `flatMap` with nested `Optional` values
+
+[Back to Table of Contents](#table-of-contents)
 
 ## CompletableFuture Exercises
 
@@ -219,6 +265,8 @@ Open the test files in `src/test/java/concurrency/`
 - Exception handling (`handle`, `exceptionally`)
 - Using `allOf` and `anyOf`
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Exercise 11: Await Quiescence
 
 **File:** `AwaitQuiesenceTest.java`
@@ -227,6 +275,8 @@ Open the test files in `src/test/java/concurrency/`
 - `get()` - blocks and throws checked exceptions
 - `join()` - blocks and throws unchecked exceptions
 - `Thread.awaitQuiescence()` - waits for virtual threads (Java 21+)
+
+[Back to Table of Contents](#table-of-contents)
 
 ## Interface Evolution
 
@@ -246,6 +296,8 @@ public void createClass() {
 }
 ```
 
+[Back to Table of Contents](#table-of-contents)
+
 ## Game of Thrones Exercises (Advanced)
 
 Open the test file `src/test/java/got/InMemoryMemberDAOTests.java`
@@ -259,6 +311,8 @@ Open the test file `src/test/java/got/InMemoryMemberDAOTests.java`
 - Averaging and summing
 - Grouping and partitioning
 - Advanced collectors
+
+[Back to Table of Contents](#table-of-contents)
 
 ## Running the Tests
 
