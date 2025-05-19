@@ -4,7 +4,7 @@ A comprehensive training course covering modern Java features from Java 8 and be
 
 **Instructor:** Ken Kousen  
 **Created:** July 2016  
-**Last Updated:** January 2025
+**Last Updated:** May 2025
 
 ## Course Overview
 
@@ -95,7 +95,6 @@ java_upgrade/
 - Records as data carriers
 - BigDecimal operations with streams
 - Parallel processing best practices
-- JMH benchmarking (separate repository)
 
 ## Exercises
 
@@ -159,7 +158,7 @@ Most modern IDEs (IntelliJ IDEA, Eclipse, VS Code) support running JUnit tests d
 
 2. Ensure Java is installed:
    ```bash
-   java -version  # Should show Java 8 or later
+   java -version  # Should show Java 17 or later
    ```
 
 3. Build the project:
@@ -176,7 +175,7 @@ Most modern IDEs (IntelliJ IDEA, Eclipse, VS Code) support running JUnit tests d
 
 ## Additional Resources
 
-- **Course Slides**: `Java_Upgrade_Slides.pdf`
+- **Course Slides**: `Java_Upgrade_Slides.pdf` (dated, but still useful)
 - **Demo Code**: Browse `src/main/java` for working examples
 - **Solutions**: Check out the `solutions` branch to see completed exercises
 - **Java Documentation**: [Official Java Documentation](https://docs.oracle.com/en/java/)
