@@ -11,20 +11,21 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 4: Filter with Predicate](#exercise-4-filter-with-predicate)
   - [Exercise 5: Function Interface and Composition](#exercise-5-function-interface-and-composition)
   - [Exercise 6: Runnable and ExecutorService](#exercise-6-runnable-and-executorservice)
+  - [Exercise 7: FileFilter Lambda Evolution](#exercise-7-filefilter-lambda-evolution)
 - [Stream Operations](#stream-operations)
-  - [Exercise 7: FlatMap with Nested Data Structures](#exercise-7-flatmap-with-nested-data-structures)
-  - [Exercise 8: Sum Even and Odd Numbers](#exercise-8-sum-even-and-odd-numbers)
-  - [Exercise 9: String Sorting](#exercise-9-string-sorting)
-  - [Exercise 10: Collectors Demo](#exercise-10-collectors-demo)
+  - [Exercise 8: FlatMap with Nested Data Structures](#exercise-8-flatmap-with-nested-data-structures)
+  - [Exercise 9: Sum Even and Odd Numbers](#exercise-9-sum-even-and-odd-numbers)
+  - [Exercise 10: String Sorting](#exercise-10-string-sorting)
+  - [Exercise 11: Collectors Demo](#exercise-11-collectors-demo)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 11: Optional with DAO Pattern](#exercise-11-optional-with-dao-pattern)
-  - [Exercise 12: Optional Chaining](#exercise-12-optional-chaining)
+  - [Exercise 12: Optional with DAO Pattern](#exercise-12-optional-with-dao-pattern)
+  - [Exercise 13: Optional Chaining](#exercise-13-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 13: CompletableFuture Basics](#exercise-13-completablefuture-basics)
-  - [Exercise 14: Await Quiescence](#exercise-14-await-quiescence)
+  - [Exercise 14: CompletableFuture Basics](#exercise-14-completablefuture-basics)
+  - [Exercise 15: Await Quiescence](#exercise-15-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 15: Multiple Interface Implementation](#exercise-15-multiple-interface-implementation)
+  - [Exercise 16: Multiple Interface Implementation](#exercise-16-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -199,6 +200,41 @@ public void implementRunnableAsAnonymousInnerClass() throws InterruptedException
 
 [Back to Table of Contents](#table-of-contents)
 
+### Exercise 7: FileFilter Lambda Evolution
+
+Open the test file `src/test/java/lambdas/FileFilterExercises.java`
+
+**Task:** Implement the `FileFilter` interface using different approaches:
+
+1. Anonymous inner class implementation
+2. Expression lambda
+3. Block lambda with logging
+4. Method reference  
+5. Lambda assigned to variable
+6. FilenameFilter vs FileFilter
+7. Composed filters
+
+```java
+@Test
+void listDirectories_anonInnerClass() {
+    // TODO: Implement FileFilter using anonymous inner class
+    // File[] dirs = root.listFiles(new FileFilter() {
+    //     @Override
+    //     public boolean accept(File pathname) {
+    //         // Filter for directories
+    //     }
+    // });
+}
+
+@Test
+void listDirectories_methodReference() {
+    // TODO: Implement using method reference
+    // File[] dirs = root.listFiles(...);
+}
+```
+
+[Back to Table of Contents](#table-of-contents)
+
 ## Stream Operations
 
 ### Exercise 7: FlatMap with Nested Data Structures
@@ -233,7 +269,7 @@ public void combineCustomerNamesWithOrderIds() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 7: Sum Even and Odd Numbers
+### Exercise 9: Sum Even and Odd Numbers
 
 Open the test file `src/test/java/streams/SumEvens.java`
 
@@ -260,7 +296,7 @@ public void addOddElementsUsingStreams() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 8: String Sorting
+### Exercise 10: String Sorting
 
 Open the test file `src/test/java/streams/StringExercises.java`
 
@@ -292,7 +328,7 @@ public void stringLengthSort_comparingInt() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 9: Collectors Demo
+### Exercise 11: Collectors Demo
 
 **Task:** Complete the `demoCollectors` test method:
 
