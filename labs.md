@@ -19,14 +19,15 @@ This document contains the lab exercises for the Functional Programming in Java 
   - [Exercise 11: String Sorting](#exercise-11-string-sorting)
   - [Exercise 12: Collectors Demo](#exercise-12-collectors-demo)
 - [BigDecimal Stream Operations](#bigdecimal-stream-operations)
+  - [Exercise 13: BigDecimal Reduce Operations](#exercise-13-bigdecimal-reduce-operations)
 - ["Optional" Exercises](#optional-exercises)
-  - [Exercise 13: Optional with DAO Pattern](#exercise-13-optional-with-dao-pattern)
-  - [Exercise 14: Optional Chaining](#exercise-14-optional-chaining)
+  - [Exercise 14: Optional with DAO Pattern](#exercise-14-optional-with-dao-pattern)
+  - [Exercise 15: Optional Chaining](#exercise-15-optional-chaining)
 - [CompletableFuture Exercises](#completablefuture-exercises)
-  - [Exercise 15: CompletableFuture Basics](#exercise-15-completablefuture-basics)
-  - [Exercise 16: Await Quiescence](#exercise-16-await-quiescence)
+  - [Exercise 16: CompletableFuture Basics](#exercise-16-completablefuture-basics)
+  - [Exercise 17: Await Quiescence](#exercise-17-await-quiescence)
 - [Interface Evolution](#interface-evolution)
-  - [Exercise 17: Multiple Interface Implementation](#exercise-17-multiple-interface-implementation)
+  - [Exercise 18: Multiple Interface Implementation](#exercise-18-multiple-interface-implementation)
 - [Game of Thrones Exercises (Advanced)](#game-of-thrones-exercises-advanced)
 - [Running the Tests](#running-the-tests)
 - [Solutions](#solutions)
@@ -358,7 +359,7 @@ public void stringLengthSort_comparingInt() {
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 11: Collectors Demo
+### Exercise 12: Collectors Demo
 
 **Task:** Complete the `demoCollectors` test method:
 
@@ -382,12 +383,40 @@ public void demoCollectors() {
 
 ## BigDecimal Stream Operations
 
-Open the test file `src/test/java/streams/SumBigDecimalsTest.java`
+### Exercise 13: BigDecimal Reduce Operations
 
-**Task:** Study and run the existing tests to understand:
-- How to sum `BigDecimal` values using streams
-- The difference between using reduce with and without an identity value
-- Why certain approaches are preferred for monetary calculations
+Open the test file `src/test/java/streams/BigDecimalReduceExercises.java`
+
+**Task:** Implement reduce operations with BigDecimal:
+
+1. Sum first N BigDecimal values using `Stream.iterate`
+2. Sum a list of prices with and without identity
+3. Handle empty streams with reduce
+4. Apply multiple discount factors
+5. Understand non-associative operations
+6. Create custom accumulators
+
+```java
+@Test
+public void sumFirstNBigDecimals() {
+    // TODO: Use Stream.iterate and reduce to sum 1+2+...+10
+    // BigDecimal sum = Stream.iterate(BigDecimal.ONE, bd -> bd.add(BigDecimal.ONE))
+    //     .limit(10)
+    //     .reduce(...)
+}
+
+@Test
+public void sumWithEmptyStream() {
+    // TODO: Compare reduce with and without identity on empty stream
+    // What's the difference in return types?
+}
+```
+
+**Alternative Demo:** Study `AlternativeReduceDemo.java` for examples using:
+- String concatenation
+- Custom object aggregation  
+- Matrix operations
+- Parallel reduce considerations
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -395,7 +424,7 @@ Open the test file `src/test/java/streams/SumBigDecimalsTest.java`
 
 Open the test files in `src/test/java/optional/`
 
-### Exercise 11: Optional with DAO Pattern
+### Exercise 14: Optional with DAO Pattern
 
 **File:** `ProductDAOTest.java`
 
@@ -405,7 +434,7 @@ Open the test files in `src/test/java/optional/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 12: Optional Chaining
+### Exercise 15: Optional Chaining
 
 **File:** `CompanyTest.java`
 
@@ -419,7 +448,7 @@ Open the test files in `src/test/java/optional/`
 
 Open the test files in `src/test/java/concurrency/`
 
-### Exercise 13: CompletableFuture Basics
+### Exercise 16: CompletableFuture Basics
 
 **File:** `CompletableFutureTests.java`
 
@@ -432,7 +461,7 @@ Open the test files in `src/test/java/concurrency/`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exercise 14: Await Quiescence
+### Exercise 17: Await Quiescence
 
 **File:** `AwaitQuiesenceTest.java`
 
@@ -445,7 +474,7 @@ Open the test files in `src/test/java/concurrency/`
 
 ## Interface Evolution
 
-### Exercise 15: Multiple Interface Implementation
+### Exercise 18: Multiple Interface Implementation
 
 Open the test file `src/test/java/interfaces/CompanyEmployeeTest.java`
 
