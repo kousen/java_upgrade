@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -114,5 +115,13 @@ public class FileFilterExercises {
         //     assertTrue(file.getName().endsWith(".java"));
         //     assertTrue(file.length() > 1000);
         // }
+    }
+
+    @Test
+    void map() {
+        Map<String, Integer> map = Map.ofEntries(Map.entry("a", 1),
+                Map.entry("b", 2),
+                Map.entry("c", 3));
+        map.forEach((k, v) -> System.out.printf("%s = %d%n", k, v));
     }
 }
