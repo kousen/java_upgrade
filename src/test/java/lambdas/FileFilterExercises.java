@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FileFilterExercises {
     private final File root = new File("src/main/java");
@@ -20,6 +20,7 @@ public class FileFilterExercises {
         assertEquals(22, files.length);
     }
 
+    @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
     @Test
     void listDirectories_anonInnerClass() {
         // TODO: Implement FileFilter using anonymous inner class
@@ -37,6 +38,7 @@ public class FileFilterExercises {
         assertEquals(14, dirs.length);
     }
 
+    @SuppressWarnings("Convert2MethodRef")
     @Test
     void listDirectories_expressionLambda() {
         // TODO: Implement the same FileFilter using expression lambda
@@ -60,46 +62,46 @@ public class FileFilterExercises {
     }
 
     @Test
+    void forEachDirectory() {
+        var strings = List.of("this", "is", "a", "list", "of", "strings");
+        strings.forEach(string -> System.out.println("The string is " + string));
+        assertEquals(6, strings.size());
+    }
+
+    @Test
     void listDirectories_methodReference() {
         // TODO: Implement using method reference
         // Hint: Look for a method in File class that checks if it's a directory
-        // File[] dirs = root.listFiles(...);
+        File[] dirs = root.listFiles(File::isDirectory);
 
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+        assertNotNull(dirs);
+        assertEquals(14, dirs.length);
     }
 
     @Test
     void listDirectories_assignToVariable() {
         // TODO: Create a FileFilter variable and assign lambda to it
-        // FileFilter filter = ...;
-        // File[] dirs = root.listFiles(filter);
-
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+        FileFilter filter = File::isDirectory;
+        File[] dirs = root.listFiles(filter);
+        assertNotNull(dirs);
+        assertEquals(14, dirs.length);
     }
 
     @Test
     void listJavaFiles_filenameFilter() {
         // TODO: List only .java files using FilenameFilter (two parameters)
-        // File[] javaSrcFiles = root.listFiles((dir, name) -> ...);
+        File[] javaSrcFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
 
-        // assertNotNull(javaSrcFiles);
-        // Check that we found some .java files
-        // for (File file : javaSrcFiles) {
-        //     assertTrue(file.getName().endsWith(".java"));
-        // }
+        assertNotNull(javaSrcFiles);
+        assertEquals(8, javaSrcFiles.length);
     }
 
     @Test
     void listJavaFiles_fileFilter() {
         // TODO: List only .java files using FileFilter (one parameter)
-        // File[] javaSrcFiles = root.listFiles(file -> ...);
-
-        // assertNotNull(javaSrcFiles);
-        // for (File file : javaSrcFiles) {
-        //     assertTrue(file.getName().endsWith(".java"));
-        // }
+        File[] javaSrcFiles = root.listFiles(file -> file.getName().endsWith(".java"));
+        assertNotNull(javaSrcFiles);
+        assertEquals(8, javaSrcFiles.length);
     }
 
     @Test
