@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UsePerson {
+    @SuppressWarnings("Convert2MethodRef")
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = List.of("John", "Paul", "George", "Ringo");
 
         // Old-style way:
         List<Person> beatles = new ArrayList<>(); // Shared mutable state
@@ -17,6 +18,7 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
+        @SuppressWarnings("Convert2MethodRef")
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
                 .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
@@ -24,7 +26,7 @@ public class UsePerson {
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
-                // .map(Person::new) // uses the Person(Person) ctr
+                .map(Person::new) // uses the Person(Person) ctr
                 .collect(Collectors.toList());
         System.out.println(people);
 
@@ -34,7 +36,7 @@ public class UsePerson {
                 //.toArray(value -> new Person[value]);
         System.out.println(Arrays.toString(peopleArray));
 
-        List<String> fullNames = Arrays.asList(
+        List<String> fullNames = List.of(
                 "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
         people = fullNames.stream()
                 .map(name -> name.split(" "))
@@ -49,7 +51,7 @@ public class UsePerson {
         LinkedList<Person> linkedPersons = names.stream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),          // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
