@@ -12,14 +12,14 @@ public class CompletableFutureDemosTest {
     @Test
     public void testRemote() throws Exception {
         Product product = demo.getProduct(1).get();
-        assertEquals(1, product.getId());
+        assertEquals(1, product.id());
     }
 
     @Test
     public void testLocal() throws Exception {
         demo.getProduct(1).get();
         Product product = demo.getProduct(1).get();
-        assertEquals(1, product.getId());
+        assertEquals(1, product.id());
     }
 
     @Test
@@ -43,6 +43,6 @@ public class CompletableFutureDemosTest {
     @Test
     public void getProductAsync() throws Exception {
         Product product = demo.getProductAsync(1).get();
-        assertEquals(1, product.getId());
+        assertEquals(1, product.id());
     }
 }

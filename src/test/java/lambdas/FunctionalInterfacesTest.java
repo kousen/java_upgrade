@@ -2,7 +2,6 @@ package lambdas;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -53,7 +52,7 @@ public class FunctionalInterfacesTest {
 
     @Test
     public void constructorReference() throws Exception {
-        List<String> stringList = Arrays.asList("a", "b", "b", "c", "d", "d");
+        List<String> stringList = List.of("a", "b", "b", "c", "d", "d");
 //        assertEquals(6, stringList.size());
 
         // Add the strings to a Set

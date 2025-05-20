@@ -19,7 +19,7 @@ public class ProductDAOTest {
     @Test
     public void findById_doesNotExist() {
         Optional<Product> optionalProduct = dao.findById(999);
-        assertFalse(optionalProduct.isPresent());
+        assertTrue(optionalProduct.isEmpty());
     }
 
     @Test

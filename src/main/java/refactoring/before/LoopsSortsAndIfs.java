@@ -6,8 +6,8 @@ public class LoopsSortsAndIfs {
     public static void main(String[] args) {
         String[] strings = "this is an array of strings".split(" ");
 
-        List<String> evenLengths = new ArrayList<>();
-        for (String s : strings) {
+        var evenLengths = new ArrayList<String>();
+        for (var s : strings) {
             if (s.length() % 2 == 0) {
                 evenLengths.add(s.toUpperCase());
             }
@@ -20,7 +20,7 @@ public class LoopsSortsAndIfs {
             }
         });
 
-        for (String s : evenLengths) {
+        for (var s : evenLengths) {
             System.out.println(s);
         }
     }

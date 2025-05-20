@@ -2,24 +2,25 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
 public class StringExercises {
-    private final List<String> strings = Arrays.asList("this", "is", "a",
+    private final List<String> strings = List.of("this", "is", "a",
             "list", "of", "strings");
 
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
-        strings.sort(new Comparator<String>() {
+        var mutableStrings = new ArrayList<>(strings);
+        mutableStrings.sort(new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
             }
         });
-        System.out.println(strings);
+        System.out.println(mutableStrings);
     }
 
     @Test

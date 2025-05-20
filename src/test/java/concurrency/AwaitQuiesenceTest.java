@@ -14,14 +14,10 @@ public class AwaitQuiesenceTest {
     private final AwaitQuiesence aq = new AwaitQuiesence();
 
     @Test
-    public void get() {
-        try {
-            CompletableFuture<Void> cf = aq.supplyThenAccept();
-            cf.get();
-            assertTrue(cf.isDone());
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
+    public void get() throws InterruptedException, ExecutionException {
+        CompletableFuture<Void> cf = aq.supplyThenAccept();
+        cf.get();
+        assertTrue(cf.isDone());
     }
 
     @Test

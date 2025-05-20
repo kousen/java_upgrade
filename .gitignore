@@ -14,3 +14,9 @@ build/
 .idea/
 *.iml
 *.ipr
+
+# macOS system files
+.DS_Store
+
+# Claude Code configuration
+.claude/

@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -19,7 +18,7 @@ public class OptionalDemo {
         first.ifPresent(System.out::println);
 
 
-        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
         Optional<String> s = strings.stream()
                 .findFirst();
 

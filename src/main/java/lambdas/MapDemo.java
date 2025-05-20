@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class MapDemo {
     public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
+        var map = new HashMap<String, Integer>();
         map.put("c", 2);
         map.put("a", 1);
         map.put("d", 3);
