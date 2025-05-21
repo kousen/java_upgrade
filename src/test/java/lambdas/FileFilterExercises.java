@@ -18,7 +18,7 @@ public class FileFilterExercises {
         assertNotNull(files);
         // The exact count may vary based on project structure
         // But we expect at least some files/directories
-        assertEquals(22, files.length);
+        assertEquals(23, files.length);
     }
 
     @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
@@ -94,7 +94,7 @@ public class FileFilterExercises {
         File[] javaSrcFiles = root.listFiles((dir, name) -> name.endsWith(".java"));
 
         assertNotNull(javaSrcFiles);
-        assertEquals(8, javaSrcFiles.length);
+        assertEquals(9, javaSrcFiles.length);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class FileFilterExercises {
         // TODO: List only .java files using FileFilter (one parameter)
         File[] javaSrcFiles = root.listFiles(file -> file.getName().endsWith(".java"));
         assertNotNull(javaSrcFiles);
-        assertEquals(8, javaSrcFiles.length);
+        assertEquals(9, javaSrcFiles.length);
     }
 
     @Test

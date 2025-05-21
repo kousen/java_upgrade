@@ -16,7 +16,7 @@ public class StringExercises {
     @Test
     public void stringLengthSort_InnerClass() {     // Java 5, 6, 7
         var mutableStrings = new ArrayList<>(strings);
-        mutableStrings.sort(new Comparator<String>() {
+        mutableStrings.sort(new Comparator<>() {
             @Override
             public int compare(String s1, String s2) {
                 return s1.length() - s2.length();
