@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class ParallelStreamExercises {
 
     @Test
@@ -63,6 +65,36 @@ public class ParallelStreamExercises {
                 .boxed()
                 .toList();  // respects encounter order (as opposed to forEach)
         System.out.println("Ordered: " + orderedInts);
+    }
+
+    private long sumWithDelay(long a, long b) {
+        try {
+            Thread.sleep(100); // Simulate a delay
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        return (a + b);
+    }
+
+    @Test
+    void sumWithDelaySequential() {
+        long start = System.nanoTime();
+        LongStream.range(0, 10)
+                .reduce(0, this::sumWithDelay);
+        long end = System.nanoTime();
+        System.out.println("Sequential sum took: " +
+                           ((end - start)/1_000_000.0) + "ms");
+    }
+
+    @Test
+    void sumWithDelayParallel() {
+        long start = System.nanoTime();
+        LongStream.range(0, 10)
+                .parallel()
+                .reduce(0, this::sumWithDelay);
+        long end = System.nanoTime();
+        System.out.println("Parallel sum took: " +
+                           ((end - start)/1_000_000) + "ms");
     }
 
     @Test

@@ -29,7 +29,7 @@ public class ProcessDictionary {
 
     public void printTenLongestWords() {
         System.out.println("\nTen Longest Words:");
-        long max = getMaxLength() - 5;
+        long max = getMaxLength() - 10;
         try (var words = Files.lines(dictionary)) {
             words.filter(s -> s.length() > max)
                     .sorted(Comparator.comparingInt(String::length).reversed()
