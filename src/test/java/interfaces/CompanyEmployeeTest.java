@@ -13,6 +13,7 @@ public class CompanyEmployeeTest {
 
     @Test
     public void getName() {
+        // var --> LVTI (Local Variable Type Inference)
         var emp = new CompanyEmployee("Peter", "Gibbons");
         assertEquals("Peter Gibbons works for Initech", emp.getName());
     }

@@ -26,11 +26,11 @@ public class LazyEvaluationExercises {
         
         // TODO: Call assertTrue with getErrorMessage() directly
         // Notice that the message is generated even when the assertion passes
-        // assertTrue(x, getErrorMessage());
+        assertTrue(x, getErrorMessage());
         
         // TODO: Call logger.fine with getLogMessage() directly
         // Notice that the message is generated even at fine log level
-        // logger.fine(getLogMessage());
+        logger.fine(getLogMessage());
     }
 
     @Test
@@ -39,11 +39,11 @@ public class LazyEvaluationExercises {
         
         // TODO: Call assertTrue with a lambda that calls getErrorMessage()
         // The message should NOT be generated when the assertion passes
-        // assertTrue(x, () -> ...);
+        assertTrue(x, () -> getErrorMessage());
         
         // TODO: Call logger.fine with a lambda that calls getLogMessage()
         // The message should NOT be generated when fine logging is disabled
-        // logger.fine(() -> ...);
+        logger.fine(() -> getLogMessage());
     }
 
     @Test
