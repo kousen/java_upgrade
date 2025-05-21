@@ -2,10 +2,12 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class StringExercises {
     private final List<String> strings = List.of("this", "is", "a",
@@ -53,12 +55,39 @@ public class StringExercises {
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
+        LinkedList<String> evenLengths = strings.stream()
+                .filter(s -> s.length() % 2 == 0)  // even lengths
+                .collect(Collectors.toCollection(LinkedList::new));
+        System.out.println(evenLengths);
 
         // Add the strings to a map of string to length
+        var map = strings.stream()
+                .distinct()
+                //.collect(Collectors.toMap(s -> s, String::length));
+                .collect(Collectors.toMap(Function.identity(), String::length));
+        System.out.println(map);
 
         // Filter out nulls, then print even-length strings
+        var stringsWithNulls = Arrays.asList("this", null, "is", "a", null, "list", "of", "strings");
+        stringsWithNulls.stream()
+                //.filter(s -> s != null && s.length() % 2 == 0)
+                // .filter(s -> s != null ? s.length() % 2 == 0 : false)
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .forEach(System.out::println);
+
+        Logger logger = Logger.getLogger(StringExercises.class.getName());
 
         // Function composition
+        Predicate<String> evens = s -> s.length() % 2 == 0;
+        Predicate<String> nonNull = Objects::nonNull;
+
+        Consumer<String> print = System.out::println;
+        Consumer<String> log = logger::info;
+
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evens))   // composition
+                .forEach(print.andThen(log)); // print and log
 
         // Combine the two predicates and use the result to print non-null, even-length strings
 

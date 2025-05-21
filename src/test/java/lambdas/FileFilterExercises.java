@@ -108,13 +108,14 @@ public class FileFilterExercises {
     @Test
     void composedFilter() {
         // TODO: Create a filter for .java files that are larger than 1000 bytes
-        // File[] largejavaFiles = root.listFiles(file -> ...);
+         File[] largejavaFiles = root.listFiles(file ->
+                 file.getName().endsWith(".java") && file.length() > 1000);
 
-        // assertNotNull(largejavaFiles);
-        // for (File file : largejavaFiles) {
-        //     assertTrue(file.getName().endsWith(".java"));
-        //     assertTrue(file.length() > 1000);
-        // }
+         assertNotNull(largejavaFiles);
+         for (File file : largejavaFiles) {
+             assertTrue(file.getName().endsWith(".java"));
+             assertTrue(file.length() > 1000);
+         }
     }
 
     @Test

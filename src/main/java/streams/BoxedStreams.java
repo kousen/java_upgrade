@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class BoxedStreams {
     public static void main(String[] args) {
 
-//        IntStream.rangeClosed(1, 10)
+//        var values = IntStream.rangeClosed(1, 10)
 //                .collect(Collectors.toList());
 
         // Use mapToObj as an alternative to boxed
