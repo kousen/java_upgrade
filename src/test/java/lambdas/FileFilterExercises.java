@@ -18,7 +18,7 @@ public class FileFilterExercises {
         assertNotNull(files);
         // The exact count may vary based on project structure
         // But we expect at least some files/directories
-        assertEquals(23, files.length);
+        assertEquals(24, files.length);
     }
 
     @SuppressWarnings({"Convert2Lambda", "Anonymous2MethodRef"})
@@ -36,7 +36,7 @@ public class FileFilterExercises {
         });
 
         assertNotNull(dirs);
-        assertEquals(14, dirs.length);
+        assertEquals(15, dirs.length);
     }
 
     @SuppressWarnings("Convert2MethodRef")
@@ -46,7 +46,7 @@ public class FileFilterExercises {
         File[] dirs = root.listFiles(pathname -> pathname.isDirectory());
 
         assertNotNull(dirs);
-        assertEquals(14, dirs.length);
+        assertEquals(15, dirs.length);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class FileFilterExercises {
         });
 
         assertNotNull(dirs);
-        assertEquals(14, dirs.length);
+        assertEquals(15, dirs.length);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class FileFilterExercises {
         File[] dirs = root.listFiles(File::isDirectory);
 
         assertNotNull(dirs);
-        assertEquals(14, dirs.length);
+        assertEquals(15, dirs.length);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class FileFilterExercises {
         FileFilter filter = File::isDirectory;
         File[] dirs = root.listFiles(filter);
         assertNotNull(dirs);
-        assertEquals(14, dirs.length);
+        assertEquals(15, dirs.length);
     }
 
     @Test
