@@ -56,8 +56,8 @@ public class FlatMapExercises {
         // List<Order> allOrders = ...
         
         // assertEquals(5, allOrders.size());
-        // assertTrue(allOrders.stream().anyMatch(o -> o.getId() == 1));
-        // assertTrue(allOrders.stream().anyMatch(o -> o.getId() == 5));
+        // assertTrue(allOrders.stream().anyMatch(o -> o.id() == 1));
+        // assertTrue(allOrders.stream().anyMatch(o -> o.id() == 5));
     }
 
     @Test

@@ -10,7 +10,7 @@ public class UseProducts {
                 new Product("basketball", 12), new Product("baseball", 5));
 
         List<String> names = products.stream()  // Stream<Product>
-                .map(Product::getName)          // Stream<String>
+                .map(Product::name)             // Stream<String>
                 // .peek(System.out::println)
                 .collect(Collectors.toList());
 
