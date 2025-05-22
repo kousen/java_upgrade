@@ -27,7 +27,7 @@ public class BigDecimalReduceExercises {
     
     @Test
     public void sumListOfPrices() {
-        List<BigDecimal> prices = Arrays.asList(
+        List<BigDecimal> prices = List.of(
             new BigDecimal("19.99"),
             new BigDecimal("35.50"),
             new BigDecimal("12.75"),
@@ -43,7 +43,7 @@ public class BigDecimalReduceExercises {
     
     @Test
     public void sumWithEmptyStream() {
-        List<BigDecimal> emptyPrices = Arrays.asList();
+        List<BigDecimal> emptyPrices = List.of();
         
         // TODO: Sum an empty list - what happens without an identity?
         // Optional<BigDecimal> total = emptyPrices.stream()
@@ -61,7 +61,7 @@ public class BigDecimalReduceExercises {
     @Test
     public void multiplyDiscounts() {
         // Suppose we have a series of discount factors (0.9 = 10% off, 0.8 = 20% off)
-        List<BigDecimal> discountFactors = Arrays.asList(
+        List<BigDecimal> discountFactors = List.of(
             new BigDecimal("0.9"),  // 10% off
             new BigDecimal("0.85"), // 15% off
             new BigDecimal("0.95")  // 5% off
@@ -81,7 +81,7 @@ public class BigDecimalReduceExercises {
     @Test
     public void demonstrateNonAssociativeOperation() {
         // This demonstrates why reduce needs an associative operation
-        List<BigDecimal> values = Arrays.asList(
+        List<BigDecimal> values = List.of(
             new BigDecimal("10"),
             new BigDecimal("5"),
             new BigDecimal("2")
@@ -107,7 +107,7 @@ public class BigDecimalReduceExercises {
     @Test
     public void customAccumulator() {
         // Calculate both sum and count in one reduce operation
-        List<BigDecimal> values = Arrays.asList(
+        List<BigDecimal> values = List.of(
             new BigDecimal("10.5"),
             new BigDecimal("20.3"),
             new BigDecimal("15.8"),

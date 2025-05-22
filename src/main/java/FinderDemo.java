@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class FinderDemo {
     public static void main(String[] args) {
-        List<String> strings = Arrays.asList("this", "is", "a", "list", "of", "strings");
+        List<String> strings = List.of("this", "is", "a", "list", "of", "strings");
         HashSet<String> stringSet = new HashSet<>(strings);
 
         Optional<String> first = strings.stream()

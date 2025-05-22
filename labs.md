@@ -108,7 +108,7 @@ public void implementSupplierUsingMethodReference() throws Exception {
 ```java
 @Test
 public void constructorReference() throws Exception {
-    List<String> stringList = Arrays.asList("a", "b", "b", "c", "d", "d");
+    List<String> stringList = List.of("a", "b", "b", "c", "d", "d");
     // assertEquals(6, stringList.size());
     
     // TODO: Add the strings to a Set
@@ -315,14 +315,14 @@ Open the test file `src/test/java/streams/SumEvens.java`
 @Test
 public void addEvenElementsUsingStreams() {
     // TODO: Use streams to sum even elements
-    // List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5);
+    // List<Integer> integers = List.of(3, 1, 4, 1, 5, 9, 2, 6, 5);
     // assertEquals(12, sum);
 }
 
 @Test
 public void addOddElementsUsingStreams() {
     // TODO: Use streams to sum odd elements
-    // List<Integer> integers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6, 5);
+    // List<Integer> integers = List.of(3, 1, 4, 1, 5, 9, 2, 6, 5);
     // assertEquals(24, sum);
 }
 ```

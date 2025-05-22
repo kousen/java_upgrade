@@ -25,7 +25,7 @@ public class FlatMapExercises {
                 .addOrder(new Order(5));
         // garibaldi has no orders
 
-        customers = Arrays.asList(sheridan, ivanova, garibaldi);
+        customers = List.of(sheridan, ivanova, garibaldi);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class FlatMapExercises {
         // List<Integer> orderIds = ...
         
         // assertEquals(5, orderIds.size());
-        // assertEquals(Arrays.asList(1, 2, 3, 4, 5), orderIds);
+        // assertEquals(List.of(1, 2, 3, 4, 5), orderIds);
     }
 
     @Test

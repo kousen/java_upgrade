@@ -23,7 +23,7 @@ public class AlternativeReduceDemo {
     
     // Demo 1: String concatenation (shows identity and associativity)
     static void stringConcatenationDemo() {
-        List<String> words = Arrays.asList("Java", "Streams", "are", "powerful");
+        List<String> words = List.of("Java", "Streams", "are", "powerful");
         
         // Without identity - returns Optional
         Optional<String> concatenated = words.stream()
@@ -44,7 +44,7 @@ public class AlternativeReduceDemo {
     static void customObjectDemo() {
         record Order(String product, int quantity, double price) {}
         
-        List<Order> orders = Arrays.asList(
+        List<Order> orders = List.of(
             new Order("Laptop", 2, 999.99),
             new Order("Mouse", 5, 29.99),
             new Order("Keyboard", 3, 79.99)
@@ -66,7 +66,7 @@ public class AlternativeReduceDemo {
     // Demo 3: Matrix operations (advanced)
     static void matrixOperationsDemo() {
         // Representing a 2x2 matrix as a 4-element array
-        List<double[]> matrices = Arrays.asList(
+        List<double[]> matrices = List.of(
             new double[]{1, 2, 3, 4},      // Matrix A
             new double[]{5, 6, 7, 8},      // Matrix B
             new double[]{9, 10, 11, 12}    // Matrix C
@@ -89,7 +89,7 @@ public class AlternativeReduceDemo {
     // Additional demo showing parallel reduce challenges
     static void parallelReduceDemo() {
         // This shows why the combining function matters in parallel streams
-        List<String> letters = Arrays.asList("a", "b", "c", "d", "e");
+        List<String> letters = List.of("a", "b", "c", "d", "e");
         
         // Sequential - predictable order
         String sequential = letters.stream()

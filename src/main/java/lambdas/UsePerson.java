@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class UsePerson {
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("John", "Paul", "George", "Ringo");
+        List<String> names = List.of("John", "Paul", "George", "Ringo");
 
         // Old-style way:
         List<Person> beatles = new ArrayList<>(); // Shared mutable state
@@ -34,7 +34,7 @@ public class UsePerson {
                 //.toArray(value -> new Person[value]);
         System.out.println(Arrays.toString(peopleArray));
 
-        List<String> fullNames = Arrays.asList(
+        List<String> fullNames = List.of(
                 "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
         people = fullNames.stream()
                 .map(name -> name.split(" "))

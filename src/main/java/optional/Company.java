@@ -1,7 +1,7 @@
 package optional;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class Company {
         finance.setManager(mrSlate);
         accounting.setManager(janeway);
 
-        Arrays.asList(it, sales, finance, accounting).forEach(
+        List.of(it, sales, finance, accounting).forEach(
                 dept -> departmentMap.put(dept.getName(), dept)
         );
     }

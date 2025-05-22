@@ -102,7 +102,7 @@ public class FunctionExercises {
 
     @Test
     public void functionInStreams() {
-        List<String> words = Arrays.asList("lambda", "function", "java", "stream");
+        List<String> words = List.of("lambda", "function", "java", "stream");
         
         // TODO: Use Function in map operations to:
         // 1. Get lengths of all words
@@ -113,14 +113,14 @@ public class FunctionExercises {
         // List<String> upperCase = ...
         // List<Character> firstChars = ...
         
-        // assertEquals(Arrays.asList(6, 8, 4, 6), lengths);
-        // assertEquals(Arrays.asList("LAMBDA", "FUNCTION", "JAVA", "STREAM"), upperCase);
-        // assertEquals(Arrays.asList('l', 'f', 'j', 's'), firstChars);
+        // assertEquals(List.of(6, 8, 4, 6), lengths);
+        // assertEquals(List.of("LAMBDA", "FUNCTION", "JAVA", "STREAM"), upperCase);
+        // assertEquals(List.of('l', 'f', 'j', 's'), firstChars);
     }
 
     @Test
     public void customFunctionForComplexMapping() {
-        List<String> sentences = Arrays.asList(
+        List<String> sentences = List.of(
             "Hello World",
             "Java Programming",
             "Functional Interfaces"

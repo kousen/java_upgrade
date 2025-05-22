@@ -52,7 +52,7 @@ public class ParallelStreamExercises {
         //     .parallel()
         //     .forEachOrdered(parallelOrdered::add);
         
-        // assertEquals(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), parallelOrdered);
+        // assertEquals(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9), parallelOrdered);
     }
     
     @Test
@@ -87,7 +87,7 @@ public class ParallelStreamExercises {
     @Test
     public void statefulOperationProblem() {
         // This demonstrates why stateful operations can be problematic
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5);
         
         // Bad practice - don't do this!
         List<Integer> doubledWrong = new ArrayList<>();
@@ -108,7 +108,7 @@ public class ParallelStreamExercises {
         //     .map(n -> n * 2)
         //     .collect(Collectors.toList());
         
-        // assertEquals(Arrays.asList(2, 4, 6, 8, 10), doubledRight);
+        // assertEquals(List.of(2, 4, 6, 8, 10), doubledRight);
     }
     
     @Test
@@ -141,7 +141,7 @@ public class ParallelStreamExercises {
     
     @Test
     public void parallelStreamFromCollection() {
-        List<String> fruits = Arrays.asList(
+        List<String> fruits = List.of(
             "apple", "banana", "cherry", "date", "elderberry", 
             "fig", "grape", "honeydew", "kiwi", "lemon"
         );

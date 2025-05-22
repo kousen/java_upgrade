@@ -24,7 +24,7 @@ public class BookSortingExercises {
     
     @BeforeEach
     public void setUp() {
-        books = Arrays.asList(
+        books = List.of(
             new Book("The Pragmatic Programmer", "David Thomas", Year.of(1999), "978-0201616224"),
             new Book("Modern Java Recipes", "Ken Kousen", Year.of(2017), "978-1491973172"),
             new Book("Effective Java", "Joshua Bloch", Year.of(2018), "978-0134685991"),

@@ -7,7 +7,7 @@ public class UseProducts {
     private static final Logger logger = Logger.getLogger(UseProducts.class.getName());
 
     public static void main(String[] args) {
-        List<Product> products = Arrays.asList(new Product("football", 10),
+        List<Product> products = List.of(new Product("football", 10),
                 new Product("basketball", 12), new Product("baseball", 5));
 
         List<String> names = products.stream()  // Stream<Product>
