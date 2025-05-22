@@ -16,7 +16,7 @@ public class BoxedStreams {
         @SuppressWarnings("SimplifyStreamApiCallChains")
         List<Integer> list = IntStream.rangeClosed(1, 10)
                 .mapToObj(Integer::valueOf)
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(list);
 
         List<Integer> ints = IntStream.of(3, 1, 4, 1, 5, 9)
@@ -26,7 +26,7 @@ public class BoxedStreams {
 
         List<Integer> listOfInt = IntStream.of(3, 1, 4, 1, 5, 9)
                 .boxed()
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(listOfInt);
 
 //        IntStream.of(3, 1, 4, 1, 5, 9)

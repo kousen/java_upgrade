@@ -1,7 +1,6 @@
 package primes.after;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SumSqrtPrimes {
@@ -12,7 +11,7 @@ public class SumSqrtPrimes {
                         .filter(PrimeCalculator::isPrime)
                         .limit(100)
                         .map(Math::sqrt)
-                        .collect(Collectors.toList());
+                        .toList();
         System.out.println(sqrtOfFirst100Primes);
     }
 }

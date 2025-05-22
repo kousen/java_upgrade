@@ -1,6 +1,5 @@
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 public class UseProducts {
     private static final Logger logger = Logger.getLogger(UseProducts.class.getName());
@@ -12,7 +11,7 @@ public class UseProducts {
         List<String> names = products.stream()  // Stream<Product>
                 .map(Product::name)             // Stream<String>
                 // .peek(System.out::println)
-                .collect(Collectors.toList());
+                .toList();
 
         // complex string arg always gets formed!
         // Arguments to methods always get evaluated

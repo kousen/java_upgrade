@@ -2,7 +2,6 @@ package streams;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Ordering {
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class Ordering {
         List<Integer> doubles = ints.stream()
                 .map(n -> n * 2)
                 .parallel()
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(doubles);
 
         // Add doubles to the list using add inside foreach

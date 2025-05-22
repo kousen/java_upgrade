@@ -19,13 +19,13 @@ public class UsePerson {
 
         List<Person> people = names.stream()    // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
-                .collect(Collectors.toList());  // Converts Stream<Person> to List<Person>
+                .toList();                       // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
         people = names.stream()
                 .map(Person::new) // uses the Person(String) ctr
                 // .map(Person::new) // uses the Person(Person) ctr
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(people);
 
         Person[] peopleArray = names.stream()
