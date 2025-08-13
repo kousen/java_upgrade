@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Disabled("Remove this line to run tests")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class InMemoryMemberDAOTests {
-    private final MemberDAO dao = new InMemoryMemberDAO();
+    private final MemberDAO dao = InMemoryMemberDAO.getInstance();
 
     @Test
     void findById() {
