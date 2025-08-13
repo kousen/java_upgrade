@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,10 +68,10 @@ public class FileFilterExercises {
     void listDirectories_methodReference() {
         // TODO: Implement using method reference
         // Hint: Look for a method in File class that checks if it's a directory
-        // File[] dirs = root.listFiles(...);
+         File[] dirs = root.listFiles(File::isDirectory);
         
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+         assertNotNull(dirs);
+         assertEquals(14, dirs.length);
     }
 
     @Test
@@ -85,24 +87,25 @@ public class FileFilterExercises {
     @Test
     void listJavaFiles_filenameFilter() {
         // TODO: List only .java files using FilenameFilter (two parameters)
-        // File[] javaSrcFiles = root.listFiles((dir, name) -> ...);
+        FilenameFilter filter = (File dir, String name) -> name.endsWith(".java");
+        File[] javaSrcFiles = root.listFiles(filter);
         
-        // assertNotNull(javaSrcFiles);
-        // Check that we found some .java files
-        // for (File file : javaSrcFiles) {
-        //     assertTrue(file.getName().endsWith(".java"));
-        // }
+         assertNotNull(javaSrcFiles);
+         // Check that we found some .java files
+         for (File file : javaSrcFiles) {
+             assertTrue(file.getName().endsWith(".java"));
+         }
+        assertEquals(8, javaSrcFiles.length);
     }
 
     @Test
     void listJavaFiles_fileFilter() {
         // TODO: List only .java files using FileFilter (one parameter)
-        // File[] javaSrcFiles = root.listFiles(file -> ...);
+         File[] javaSrcFiles = root.listFiles(file -> file.getName().endsWith(".java"));
+        System.out.println(Arrays.toString(javaSrcFiles));
         
-        // assertNotNull(javaSrcFiles);
-        // for (File file : javaSrcFiles) {
-        //     assertTrue(file.getName().endsWith(".java"));
-        // }
+         assertNotNull(javaSrcFiles);
+         assertEquals(8, javaSrcFiles.length);
     }
 
     @Test
