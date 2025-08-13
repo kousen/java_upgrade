@@ -1,13 +1,13 @@
 package interfaces;
 
-public class CompanyEmployee implements Company, Employee {
-    private final String first;
-    private final String last;
+// Records:
+// - added in Java 16
+// - immutable data carriers
+// - automatically generate equals(), hashCode(), toString(), and "getters"
+//   -- getters match the field names, as in first(), last()
+// - primary ("canonical") constructor appears before the body
 
-    public CompanyEmployee(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+public record CompanyEmployee(String first, String last) implements Company, Employee {
 
     @Override
     public String getName() {
@@ -17,16 +17,6 @@ public class CompanyEmployee implements Company, Employee {
 
     @Override
     public void doWork() {
-        System.out.println("Working...");
-    }
-
-    @Override
-    public String getFirst() {
-        return first;
-    }
-
-    @Override
-    public String getLast() {
-        return last;
+        System.out.println("Converting caffeine into code for $$$");
     }
 }

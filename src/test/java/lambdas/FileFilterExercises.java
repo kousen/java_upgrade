@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.Arrays;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -118,5 +119,27 @@ public class FileFilterExercises {
         //     assertTrue(file.getName().endsWith(".java"));
         //     assertTrue(file.length() > 1000);
         // }
+    }
+
+    @Test
+    void mapForEach() {
+        Map<String, String> map = Map.ofEntries(
+                Map.entry("key1", "value1"),
+                Map.entry("key2", "value2"),
+                Map.entry("key3", "value3")
+        );
+
+        // Iterate over the map of entries
+        for (var entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+
+        // Iterate over the set of keys
+        for (String key : map.keySet()) {
+            System.out.println(key + " = " + map.get(key));
+        }
+
+        // Use forEach(BiConsumer) method
+        map.forEach((k,v) -> System.out.println(k + " maps to " + v));
     }
 }
