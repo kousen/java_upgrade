@@ -17,9 +17,10 @@ public class UsePerson {
         }
         System.out.println(beatles);
 
-        List<Person> people = names.stream()    // Stream<String>
+        @SuppressWarnings("Convert2MethodRef")
+        List<Person> people = names.stream()          // Stream<String>
                 .map(name -> new Person(name))  // Stream<Person>
-                .toList();                       // Converts Stream<Person> to List<Person>
+                .toList();                            // Converts Stream<Person> to List<Person>
         System.out.println(people);
 
         people = names.stream()
@@ -37,19 +38,20 @@ public class UsePerson {
         List<String> fullNames = List.of(
                 "John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr");
         people = fullNames.stream()
-                .map(name -> name.split(" "))
+                .map(name -> name.split("\\s+"))
                 .map(Person::new) // use the Person(String...) ctr
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(people);
         System.out.println(people.getClass().getName());
 
         // p1..p5 | p6..p10 | p11..p15 | p16..p20  // say you have 4 cores and run in parallel
         //   l1       l2         l3         l4
         //                 list
-        LinkedList<Person> linkedPersons = names.stream()
+        @SuppressWarnings("Convert2MethodRef")
+        LinkedList<Person> linkedPersons = names.parallelStream()
                 .map(Person::new)
                 .collect(
-                        () -> new LinkedList<Person>(),          // Supplier<LinkedList>
+                        () -> new LinkedList<>(),          // Supplier<LinkedList>
                         (list, person) -> list.add(person),      // BiConsumer<LinkedList, Person>
                         (list1, list2) -> list1.addAll(list2));  // BiConsumer<LinkedList, LinkedList>
         System.out.println(linkedPersons);
