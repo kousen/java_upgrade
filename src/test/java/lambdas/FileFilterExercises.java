@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileFilter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings({"Convert2MethodRef", "Convert2Lambda", "Anonymous2MethodRef"})
 public class FileFilterExercises {
@@ -18,7 +17,10 @@ public class FileFilterExercises {
         assertNotNull(files);
         // The exact count may vary based on project structure
         // But we expect at least some files/directories
-        assert files.length > 0;
+        for (File file : files) {
+            System.out.println(file);
+        }
+        assertTrue(files.length > 0);
     }
 
     @Test
@@ -26,36 +28,38 @@ public class FileFilterExercises {
         // TODO: Implement FileFilter using anonymous inner class
         // Filter for directories only
         
-        // File[] dirs = root.listFiles(new FileFilter() {
-        //     @Override
-        //     public boolean accept(File pathname) {
-        //         // Filter for directories
-        //     }
-        // });
+         File[] dirs = root.listFiles(new FileFilter() {
+             @Override
+             public boolean accept(File pathname) {
+                 // Filter for directories
+                 return pathname.isDirectory();
+             }
+         });
         
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+         assertNotNull(dirs);
+         assertTrue(dirs.length > 0);
     }
 
     @Test
     void listDirectories_expressionLambda() {
         // TODO: Implement the same FileFilter using expression lambda
-        // File[] dirs = root.listFiles(pathname -> ...);
+         File[] dirs = root.listFiles(pathname -> pathname.isDirectory());
         
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+         assertNotNull(dirs);
+         assertTrue(dirs.length > 0);
     }
 
     @Test
     void listDirectories_blockLambda() {
         // TODO: Implement using block lambda with logging
-        // File[] dirs = root.listFiles(pathname -> {
-        //     System.out.println("Checking " + pathname);
-        //     // Return whether it's a directory
-        // });
+         File[] dirs = root.listFiles(pathname -> {
+             System.out.println("Checking " + pathname);
+             // Return whether it's a directory
+             return pathname.isDirectory();
+         });
         
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+         assertNotNull(dirs);
+         assertEquals(14, dirs.length);
     }
 
     @Test
@@ -71,11 +75,11 @@ public class FileFilterExercises {
     @Test
     void listDirectories_assignToVariable() {
         // TODO: Create a FileFilter variable and assign lambda to it
-        // FileFilter filter = ...;
-        // File[] dirs = root.listFiles(filter);
+        FileFilter filter =pathname -> pathname.isDirectory();
+        File[] dirs = root.listFiles(filter);
         
-        // assertNotNull(dirs);
-        // assert dirs.length > 0;
+         assertNotNull(dirs);
+        assertEquals(14, dirs.length);
     }
 
     @Test
