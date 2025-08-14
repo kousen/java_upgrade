@@ -31,13 +31,12 @@ public class ProcessDictionary {
         System.out.println("\nTen Longest Words:");
         long max = getMaxLength() - 5;
         try (var words = Files.lines(dictionary)) {
-            words.filter(s -> s.length() > max)
+            words.filter(s -> s.length() >= max)
                     .sorted(Comparator.comparingInt(String::length).reversed()
                             //.thenComparing(Comparator.reverseOrder()))
                     )
                     .limit(10)
-                    .forEach(w ->
-                            System.out.printf("%s (%d)%n", w, w.length()));
+                    .forEach(w -> System.out.printf("%s (%d)%n", w, w.length()));
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
