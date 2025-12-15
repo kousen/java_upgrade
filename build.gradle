@@ -5,7 +5,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform('org.junit:junit-bom:5.13.4'))
+    testImplementation(platform('org.junit:junit-bom:6.0.1'))
     testImplementation('org.junit.jupiter:junit-jupiter')
     testImplementation 'org.assertj:assertj-core:3.27.6'
 
@@ -23,4 +23,5 @@ dependencies {
 
 tasks.named("test", Test) {
     useJUnitPlatform()
+    jvmArgs("-XX:+EnableDynamicAgentLoading", "-Xshare:off", "--enable-native-access=ALL-UNNAMED")
 }
