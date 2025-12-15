@@ -8,7 +8,7 @@ public class SortGolfers {
             new Golfer("Jack", "Nicklaus", 68),
             new Golfer("Tiger", "Woods", 70),
             new Golfer("Tom", "Watson", 70),
-            new Golfer("Ty", "Webb", 68),
+            new Golfer("Ty", "Webb", 68),  // Caddyshack
             new Golfer("Bubba", "Watson", 70),
             new Golfer("Rose", "Zhang", 71)
     );

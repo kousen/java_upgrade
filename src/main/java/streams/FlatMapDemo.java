@@ -43,7 +43,7 @@ public class FlatMapDemo {
         //      stream() on an empty collection already returns an empty stream
         customers.stream()
                 .flatMap(customer ->
-                        customer.getOrders().size() == 0 ? Stream.empty() :
+                        customer.getOrders().isEmpty() ? Stream.empty() :
                                 customer.getOrders().stream())
                 .forEach(System.out::println);
 

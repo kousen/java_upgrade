@@ -1,32 +1,15 @@
 package interfaces;
 
-public class CompanyEmployee implements Company, Employee {
-    private final String first;
-    private final String last;
-
-    public CompanyEmployee(String first, String last) {
-        this.first = first;
-        this.last = last;
-    }
+public record CompanyEmployee(String first, String last) implements Company, Employee {
 
     @Override
     public String getName() {
-        return String.format("%s works for %s",
-                Employee.super.getName(), Company.super.getName());
+        return Employee.super.getName() + " works for " +
+               Company.super.getName();
     }
 
     @Override
     public void doWork() {
-        System.out.println("Working...");
-    }
-
-    @Override
-    public String getFirst() {
-        return first;
-    }
-
-    @Override
-    public String getLast() {
-        return last;
+        System.out.println("Converting caffeine into code for $$$");
     }
 }
