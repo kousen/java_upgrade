@@ -2,10 +2,12 @@ package streams;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class StringExercises {
     private final List<String> strings = List.of("this", "is", "a",
@@ -26,41 +28,57 @@ public class StringExercises {
     @Test
     public void stringLengthSort_lambda() {
         // Use lambda for the Comparator (reverse sort)
+        var mutableStrings = new ArrayList<>(strings);
+        mutableStrings.sort((s1, s2) -> s1.length() - s2.length());
+        System.out.println(mutableStrings);
 
         // Use the "sorted" method on Stream
-    }
-
-    private int compareStrings(String s1, String s2) {
-        return s1.length() - s2.length();
-    }
-
-    @Test  // Use a lambda that calls 'compareStrings' directly
-    public void stringLengthSort_methodCall() {
-
-    }
-
-    @Test  // Use a method ref to 'compareStrings'
-    public void stringLengthSort_methodRef() {
-
-    }
-
-    @Test  // Use Comparator.comparingInt
-    public void stringLengthSort_comparingInt() {
-
+        List<String> sorted = strings.stream()
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
+                .toList();
+        System.out.println(sorted);
     }
 
     @Test
     public void demoCollectors() {
         // Get only strings of even length
         // Add them to a LinkedList
+        LinkedList<String> evenLengths = strings.stream()
+                .filter(s -> s.length() % 2 == 0)
+                .collect(Collectors.toCollection(LinkedList::new));
+        System.out.println(evenLengths);
+        System.out.println(evenLengths.getClass().getName());
 
         // Add the strings to a map of string to length
+        Map<String, Integer> map = strings.stream()
+                .collect(Collectors.toMap(Function.identity(), String::length));
+        System.out.println(map);
 
         // Filter out nulls, then print even-length strings
+        var stringsWithNulls = Arrays.asList("this", null, "is", "a", "list", null, "of", "strings");
+        List<String> evens = stringsWithNulls.stream()
+                //.filter(s -> s != null && s
+                //.length() % 2 == 0)
+                //.filter(s -> s != null)
+                .filter(Objects::nonNull)
+                .filter(s -> s.length() % 2 == 0)
+                .toList();
+        System.out.println(evens);
+
+        Logger logger = Logger.getLogger("main");
 
         // Function composition
-
         // Combine the two predicates and use the result to print non-null, even-length strings
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> evenLength = s -> s.length() % 2 == 0;
+        Consumer<String> log = logger::info;
+        Consumer<String> print = System.out::println;
+
+        stringsWithNulls.stream()
+                .filter(nonNull.and(evenLength))
+                .forEach(print.andThen(log));
+
 
         // f: A -> B, g: B -> C, (g.f)(x) = g(f(x)), A -> C
     }
